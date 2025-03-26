@@ -1,0 +1,989 @@
+
+1. for loop introduction
+2. for loop  and if condition on Number, even,odd, adding, subtraction,mult
+3. for loop and if condition on string  and its operation
+4, for loop and if condition on alphanumeric with special characters
+5. for loop and if condition on List with 5  examples
+
+
+### for loop
+
+
+for i in range(0,10,1):
+    print (i)
+
+for i in range(0,10,1):
+    j=i+5
+    print ("Orginal number is {0} and incremented number {1}".format(i,j))
+
+for i in range(0,10,1):
+    inp1=input("Enter the Number")
+    j=i+int(inp1)
+    print ("Orgina number is {0} and added the number {1} and inremented numner is {2}".format(i,inp1,j))
+
+inp1 = input("Enter the Number")
+for i in range(0,10,1):
+    j=i+int(inp1)
+    print ("Orgina number is {0} and added the number {1} and inremented numner is {2}".format(i,inp1,j))
+
+inp1 = input("Enter the Number")
+if (int(inp1) > 10) and (int(inp1) < 20):
+    for i in range(0,10,1):
+        print (i+int(inp1))
+elif (int(inp1) > 20) and (int(inp1) < 30):
+    for i in range(0,10,1):
+        print (i-int(inp1))
+elif (int(inp1) > 30) and (int(inp1) < 40):
+    for i in range(0,10,1):
+        print (i*int(inp1))
+
+inp1 = input("Enter the Number")
+if (int(inp1) == 5) or (int(inp1) == 10):
+    for i in range(0,10,1):
+        print (i+int(inp1))
+elif (int(inp1) == 15) or (int(inp1) == 20):
+    for i in range(0,10,1):
+        print (i-int(inp1))
+elif (int(inp1) ==  25) or (int(inp1) == 30):
+    for i in range(0,10,1):
+        print (i*int(inp1))
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+n3=int(input("Enter the Number3\n"))
+if (int(n1)>n2) and (int(n1)<n3):
+    op=n1+n2+n3
+    print ("Sum of {0} {1} {2} is {3}".format(n1,n2,n3,op))
+elif (int(n1)<n2) and (int(n2)>n3):
+    op=n1-n2-n3
+    print("difference of {0} {1} {2} is {3}".format(n1, n2, n3, op))
+elif (int(n1) == n2) and (n2 == n3):
+    op=n1*n2*n3
+    print ("Product of {0} {1} {2} is {3}".format(n1,n2,n3,op))
+
+for i in range(0,20,1):
+    if (i%2 == 0):
+        print ("Number {0} is even".format(i))
+    else:
+        print ("Number {0} is odd".format(i))
+
+
+for i in range(0,20,1):
+    if (i%2 == 0):
+        print ("Number {0} is even".format(i))
+    elif (i == 15):
+        inp1=int(input("Enter the number to be subtracted"))
+        op=i-inp1
+        print (op)
+    else:
+        print ("Number {0} is odd".format(i))
+
+
+for i in range(0,21,1):
+    if (i%5 == 0):
+        print ("compltely divisable by 5 is number {0} and incremented number is {1} ".format(i,i+5))
+    elif (i%5 != 0):
+        print("Not compltely divisable by 5 is number {0} and decremented number is {1} ".format(i,i-5))
+
+
+a="praveensriam"
+for i in a:
+    print (i)
+
+
+
+
+Tomorrow class
+
+a. for loop on list with index postion,chck for string using if condition, len of string, use or and and condition
+	
+b. for loop on string
+
+
+Forloop_concept.txt
+$$$$$$$$$$$$$$$$$$$$
+
+
+FOR LOOP
+
+for variable in range(startpoint,endpoint-1,jump):
+	<block of statement>
+
+for variable in <list/dictionary/string>:
+	<block of stateme>
+
+
+
+for i in range(0,9,1):
+    print (i)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+
+Process finished with exit code 0
+
+=====================================
+
+
+for i in range(0,10,2):
+    print (i)
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+0
+2
+4
+6
+8
+
+
+
+=============================================================
+for i in range(0,10,1):
+    j=i+2
+    print ("Orginal number is {0}  and incremented number is {1}".format(i,j))
+
+
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Orginal number is 0  and incremented number is 2
+Orginal number is 1  and incremented number is 3
+Orginal number is 2  and incremented number is 4
+Orginal number is 3  and incremented number is 5
+Orginal number is 4  and incremented number is 6
+Orginal number is 5  and incremented number is 7
+Orginal number is 6  and incremented number is 8
+Orginal number is 7  and incremented number is 9
+Orginal number is 8  and incremented number is 10
+Orginal number is 9  and incremented number is 11
+
+===============================================================
+
+for i in range(0,10,1):
+    j=input("Enter the Number to be added")
+    out=i+int(j)
+    print ("Input number is {0}, Userinput to be added is {1} and sum of {0} and {1} is {2}".format(i,j,out))
+
+
+
+output
+
+Enter the Number to be added10
+Input number is 0, Userinput to be added is 10 and sum of 0 and 10 is 10
+Enter the Number to be added45
+Input number is 1, Userinput to be added is 45 and sum of 1 and 45 is 46
+Enter the Number to be added67
+Input number is 2, Userinput to be added is 67 and sum of 2 and 67 is 69
+Enter the Number to be added34
+Input number is 3, Userinput to be added is 34 and sum of 3 and 34 is 37
+Enter the Number to be added88
+Input number is 4, Userinput to be added is 88 and sum of 4 and 88 is 92
+Enter the Number to be added2
+Input number is 5, Userinput to be added is 2 and sum of 5 and 2 is 7
+Enter the Number to be added7
+Input number is 6, Userinput to be added is 7 and sum of 6 and 7 is 13
+Enter the Number to be added-1
+Input number is 7, Userinput to be added is -1 and sum of 7 and -1 is 6
+Enter the Number to be added44
+Input number is 8, Userinput to be added is 44 and sum of 8 and 44 is 52
+Enter the Number to be added11
+Input number is 9, Userinput to be added is 11 and sum of 9 and 11 is 20
+
+Process finished with exit code 0
+
+
+
+=============================================
+
+j=input("Enter the Number to be added")
+for i in range(0,10,1):
+    out=i+int(j)
+    print ("Input number is {0}, Userinput to be added is {1} and sum of {0} and {1} is {2}".format(i,j,out))
+
+
+output
+
+Enter the Number to be added55
+Input number is 0, Userinput to be added is 55 and sum of 0 and 55 is 55
+Input number is 1, Userinput to be added is 55 and sum of 1 and 55 is 56
+Input number is 2, Userinput to be added is 55 and sum of 2 and 55 is 57
+Input number is 3, Userinput to be added is 55 and sum of 3 and 55 is 58
+Input number is 4, Userinput to be added is 55 and sum of 4 and 55 is 59
+Input number is 5, Userinput to be added is 55 and sum of 5 and 55 is 60
+Input number is 6, Userinput to be added is 55 and sum of 6 and 55 is 61
+Input number is 7, Userinput to be added is 55 and sum of 7 and 55 is 62
+Input number is 8, Userinput to be added is 55 and sum of 8 and 55 is 63
+Input number is 9, Userinput to be added is 55 and sum of 9 and 55 is 64
+
+Process finished with exit code 0
+
+====================================================================
+for i in range(0,10,1):
+    if (i%2 == 0):
+        print ("Number {0} is even".format(i))
+    else:
+        print ("Number {0} is odd".format(i))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Number 0 is even
+Number 1 is odd
+Number 2 is even
+Number 3 is odd
+Number 4 is even
+Number 5 is odd
+Number 6 is even
+Number 7 is odd
+Number 8 is even
+Number 9 is odd
+
+Process finished with exit code 0
+
+
+=====================================
+a=int(input("Enter the first input"))
+b=int(input("Enter the second input"))
+print ("Enter '1' for addition\nEnter '2' for subraction\n Enter '3' for multiplication\n Enter '4' for Division")
+userinput=input("Enter the user input")
+if (int(userinput)==1):
+    c=a+b
+    print ("Sum of Numbers {0} and {1} is {2}".format(a,b,c))
+elif (int(userinput)==2):
+    c=a-b
+    print("difference of Numbers {0} and {1} is {2}".format(a, b, c))
+elif (int(userinput)==3):
+    c=a*b
+    print ("Product of number {0} and {1} is {2}".format(a,b,c))
+elif (int(userinput)==4):
+    c=a/b
+    print ("Divison result of number {0} and {1} is {2}".format(a,b,c))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the first input55
+Enter the second input11
+Enter '1' for addition
+Enter '2' for subraction
+ Enter '3' for multiplication
+ Enter '4' for Division
+Enter the user input4
+Divison result of number 55 and 11 is 5.0
+
+Process finished with exit code 0
+==========================================================================
+a=int(input("Enter the first input"))
+b=int(input("Enter the second input"))
+print ("Enter '1' for addition\nEnter '2' for subraction\n Enter '3' for multiplication\n Enter '4' for Division\nEnter '5' for all operations")
+userinput=input("Enter the user input")
+if (int(userinput)==1):
+    c=a+b
+    print ("Sum of Numbers {0} and {1} is {2}".format(a,b,c))
+elif (int(userinput)==2):
+    c=a-b
+    print("difference of Numbers {0} and {1} is {2}".format(a, b, c))
+elif (int(userinput)==3):
+    c=a*b
+    print ("Product of number {0} and {1} is {2}".format(a,b,c))
+elif (int(userinput)==4):
+    c=a/b
+    print ("Divison result of number {0} and {1} is {2}".format(a,b,c))
+elif (int(userinput)==5):
+    c=a+b
+    d=a-b
+    e=a*b
+    f=a/b
+    print ("Addition of Number {0} and {1} is {2}\n Subtraction of Number {0} and {1} is {3}\n Product of Number {0} and {1} is {4}\n Division of Number {0} and {1} is {5}".format(a,b,c,d,e,f))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the first input10
+Enter the second input67
+Enter '1' for addition
+Enter '2' for subraction
+ Enter '3' for multiplication
+ Enter '4' for Division
+Enter '5' for all operations
+Enter the user input5
+Addition of Number 10 and 67 is 77
+ Subtraction of Number 10 and 67 is -57
+ Product of Number 10 and 67 is 670
+ Division of Number 10 and 67 is 0.14925373134328357
+
+Process finished with exit code 0
+
+
+
+
+================================================
+
+alist=['10','20','30','praveen','ajay','abhi']
+for i in alist:
+    print (i)
+
+otput
+
+
+10
+20
+30
+praveen
+ajay
+abhi
+
+
+=======================================================
+
+alist=['10','20','30','praveen','ajay','abhi']
+for i in range(0,len(alist),1):
+    print (alist[i])
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+10
+20
+30
+praveen
+ajay
+abhi
+
+
+
+===============================================
+
+alist=['10','20','30','praveen','ajay','abhi']
+alen=len(alist)
+
+for i in range(0,alen,1):
+    print (alist[i])
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+10
+20
+30
+praveen
+ajay
+abhi
+
+
+==========================================
+
+alist=['praveen','ajay','san','abhi']
+for i in range(0,len(alist),1):
+    print ("Content {0} is present in position {1}".format(alist[i],i))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Content praveen is present in position 0
+Content ajay is present in position 1
+Content san is present in position 2
+Content abhi is present in position 3
+
+Process finished with exit code 0
+
+================================================
+
+alist=['praveen','ajay','san','abhi']
+for i in alist:
+    if (i.strip() == "ajay"):
+            len_word=len(i)
+            print ("Content {0} is present and its length is {1}".format(i.strip(),len_word))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Content ajay is present and its length is 4
+
+Process finished with exit  code 0
+
+=============================================
+
+
+alist=['praveen','san','ajay','abhi']
+len_list=len(alist)
+for i in range(0,len_list,1):
+    if (alist[i] == "ajay"):
+        print ("Content {0} is present in  {1} and {0}".format(alist[i],i))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Content ajay is present in  2 and ajay
+
+Process finished with exit code 0
+
+
+========================================================
+
+alist=['praveen','san','ajay','abhi']
+len_list=len(alist)
+for i in range(0,len_list,1):
+    if (i==1)
+        print (alist[i])
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+san
+
+Process finished with exit code 0
+
+
+=====================================================
+alist=['praveen','san','ajay','abhi']
+len_list=len(alist)
+for i in range(0,len_list,1):
+    if (i==1) or (i == 2):
+        print ("Content {0} exsists in position {1}".format(alist[i],i))
+
+
+
+output
+
+Content san exsists in position 1
+Content ajay exsists in position 2
+
+=========================================================
+
+a=['praveen','san','ajay','abhi']
+len_list=len(a)
+for i in range(0,len_list,1):
+    if ((i==2) and (a[i]=="ajay")):
+        print ("Content ajay is present in the position {0}".format(i))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Content ajay is present in the position 2
+
+===============================================================
+
+a=['praveen','san','ajay','abhi']
+len_list=len(a)
+userinput=input("Enter the string to be checked\n")
+if (userinput in a):
+    print ("{0} is present in the list".format(userinput))
+else:
+    print ("{0} is not present in the list".format(userinput))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+abhi
+abhi is present in the list
+
+Process finished with exit code 0
+==============================================================
+
+
+a=['praveen','san','ajay','abhi']
+len_list=len(a)
+userinput=input("Enter the string to be checked\n")
+position=int(input("Enter the position\n"))
+if (a[position] == userinput):
+    print ("{0} content is presnet in position {1} in the list".format(userinput,position))
+else:
+    print("{0} not content is presnet in position {1} in the list".format(userinput, position))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+praveen
+Enter the position
+0
+praveen content is presnet in position 0 in the list
+
+Process finished with exit code 0
+
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+aveen
+Enter the position
+2
+aveen not content is presnet in position 2 in the list
+
+Process finished with exit code 0
+
+
+============================================================
+
+a=['praveen','san','ajay','abhi']
+len_list=len(a)
+userinput=input("Enter the string to be checked\n")
+if (userinput in a):
+    print ("{0} is present in the list".format(userinput))
+    position = int(input("Enter the position\n"))
+    if (userinput == a[position]):
+        print ("{0} is presnet in position {1}".format(userinput,position))
+    else:
+        print ("{0} not presnet in position {1}".format(userinput,position))
+else:
+    print ("{0} not present in the list".format(userinput))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+san
+san is present in the list
+Enter the position
+1
+san is presnet in position 1
+
+Process finished with exit code 0
+
+
+====================================================
+a=['praveen','san','ajay','abhi']
+len_list=len(a)
+userinput=input("Enter the string to be checked\n")
+if userinput in a:
+    print ("{0} present in the list".format(userinput))
+    for j in range(0,len(a),1):
+        if (a[j]==userinput):
+            print ("{0} present in the position {1}".format(userinput,j))
+else:
+    print ("{0} Not present in the list".format(userinput))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+naveen
+naveen Not present in the list
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string to be checked
+praveen
+praveen present in the list
+praveen present in the position 0
+
+Process finished with exit code 0
+
+===================================================================
+a=['praveen','san','kiran','abhi']
+userinput=input("Enter the input\n")
+if (userinput in a):
+    print ("{0} present in list".format(userinput))
+    position=int(input("Enter the position to be checked"))
+    if (userinput == a[position]):
+        print ("{0} present in position {1}".format(userinput,position))
+        need_to_update=input("Enter the string to be updated\n")
+        a[position]=need_to_update
+        print (a)
+    else:
+        print("{0} present not prsent {1} in the list".format(userinput,position))
+        a.append(userinput)
+        print (a)
+else:
+   print ("{0} not prese in list".format(userinput))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+abhi
+abhi present in list
+Enter the position to be checked3
+abhi present in position 3
+Enter the string to be updated
+hcl
+['praveen', 'san', 'kiran', 'hcl']
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+praveen
+praveen present in list
+Enter the position to be checked0
+praveen present in position 0
+Enter the string to be updated
+besant
+['besant', 'san', 'kiran', 'abhi']
+
+Process finished with exit code 0
+
+
+==================================================================
+
+for loop and if condition on dictionary
+
+dictdetails={'a':'10','b':'20','c':'30','d':'praveen','e':'ajay'}
+listdetails=['praveen','ajay','san']
+for i in dictdetails.keys():
+    print("key {0} contains value {1}".format(i, dictdetails[i]))
+
+
+
+
+dictdetails={'a':'10','b':'20','c':'30','d':'praveen','e':'ajay'}
+print (dir(dictdetails))
+listdetails=['praveen','ajay','san']
+for i in dictdetails.keys():
+    if (dictdetails[i] in listdetails):
+        listdetails.remove(dictdetails[i])
+print (listdetails)
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+
+['san']
+
+
+
+dictdetails={'a':'10','b':'20','c':'30','d':'praveen','e':'ajay'}
+print (dir(dictdetails))
+listdetails=['praveen','ajay','san']
+for i in dictdetails.keys():
+    if (dictdetails[i] in listdetails):
+        userinput=input("Enter the input to be appended\n")
+        listdetails.append(userinput)
+print (listdetails)
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+praveenajay
+Enter the input to be appended
+naveen
+Enter the input to be appended
+bhaskar
+['praveen', 'ajay', 'san', 'naveen', 'bhaskar']
+
+
+Process finished with exit code 0
+
+
+================================================
+
+
+dictdetails={'a':'10','b':'20','c':'30','d':'praveen','e':'ajay'}
+listdetails=['praveen','ajay','san']
+for i in dictdetails.keys():
+    if (dictdetails[i] in listdetails):
+        pos=listdetails.index(dictdetails[i])
+        print ("Content {0} is present in position {1}".format(dictdetails[i],pos))
+
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Content praveen is present in position 0
+Content ajay is present in position 1
+
+Process finished with exit code 0
+
+
+==============================================================
+dictdetails={'a':'10','b':'20','c':'30','d':'praveen','e':'ajay'}
+listdetails=['praveen','ajay','san']
+for i in dictdetails.keys():
+    for listran in range(0,len(listdetails),1):
+        if (dictdetails[i] == listdetails[listran]):
+            print("Content {0} is present in position {1} of list".format (dictdetails[i],listran))
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Content praveen is present in position 0 of list
+Content ajay is present in position 1 of list
+
+
+
+
+================================================
+a="praveen ----122344"
+for i in a:
+    if (i.isalpha()):
+        print ("{0} is alphabet".format(i))
+    elif (i.isdigit()):
+        print ("{0} is number".format(i))
+    elif (i.isspace()):
+        print ("{0} is space".format(i))
+    else:
+        print ("{0} is special symbol".format(i))
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+p is alphabet
+r is alphabet
+a is alphabet
+v is alphabet
+e is alphabet
+e is alphabet
+n is alphabet
+  is space
+- is special symbol
+- is special symbol
+- is special symbol
+- is special symbol
+1 is number
+2 is number
+2 is number
+3 is number
+4 is number
+4 is number
+
+Process finished with exit code 0
+
+
+=========================================================
+
+
+Forloop_list.txt
+----------+------
+#!/usr/bin/python
+
+a="praveen1234__san  "
+for i in a:
+    print (i)
+
+a="praveen1234__san  "
+for i in a:
+     if (i.isalpha()):
+         print ("{0} is alphabet".format(i))
+     elif (i.isnumeric()):
+         print ("{0} is number".format(i))
+     elif (i.isspace()):
+         print ("{0} is space".format(i))
+     else:
+         print ("{0} is special symbol".format(i))
+
+
+
+
+
+a="praveen1234__san  "
+len_a=len(a)
+print (len_a)
+for i in range(0,len_a,1):
+    if (a[i].isalpha()):
+        print ("{0} is alphabet and its in position {1}".format(a[i],i))
+    elif (a[i].isnumeric()):
+        print ("{0} is number and its in position {1}".format(a[i],i))
+    elif (a[i].isspace()):
+        print ("{0} is space and its in position {1}".format(a[i], i))
+    else:
+        print ("{0} is special symbol and its in position {1}".format(a[i],i))
+
+
+alpabhetlist=[]
+numberlist=[]
+specialist=[]
+a="praveen1234__san  "
+len_a=len(a)
+print (len_a)
+for i in range(0,len_a,1):
+    if (a[i].isalpha()):
+        print ("{0} is alphabet and its in position {1}".format(a[i],i))
+        alpabhetlist.append(a[i])
+
+    elif (a[i].isnumeric()):
+        print ("{0} is number and its in position {1}".format(a[i],i))
+        numberlist.append(a[i])
+
+    elif (a[i].isspace()):
+        print ("{0} is space and its in position {1}".format(a[i], i))
+    else:
+        print ("{0} is special symbol and its in position {1}".format(a[i],i))
+        specialist.append(a[i])
+
+print (alpabhetlist)
+print (numberlist)
+print (specialist)
+
+
+## List examples on for loop
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in alist:
+    print (i)
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),1):
+    if (alist[i].isalpha()):
+        print ("{0} is position {1}".format(alist[i],i))
+    elif (alist[i].isnumeric()):
+        print ("{0} is position {1}".format(alist[i],i))
+
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),1):
+    if (alist[i].isalpha()):
+        len_cha=len(alist[i])
+        print ("{0} is position {1} and length is {2}".format(alist[i],i,len_cha))
+    elif (alist[i].isnumeric()):
+        len_cha=len(alist[i])
+        print ("{0} is position {1} and length is {2}".format(alist[i],i,len_cha))
+
+### for loop with jump of 2
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),2):
+    print (alist[i],i)
+
+
+evenlist=[]
+oddlist=[]
+partlist=[]
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),1):
+
+    if (i%2 == 0):
+        print (alist[i])
+        evenlist.append(alist[i])
+    elif (i == 3):
+        partlist.append(alist[i])
+    elif (i%2 != 0):
+        oddlist.append(alist[i])
+print (evenlist)
+print (oddlist)
+print ("Below are the details \n evenlist: {0}\noddlist:{1}\nparticularlist: {2}".format(evenlist,oddlist,partlist))
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),1):
+    if (i==3):
+        print (alist[i])
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+for i in range(0,len(alist),1):
+    if (i==3) or (i == 4):
+        print ("Content is {0} and its index postion {1}".format(alist[i],i))
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+userinput=input("Enter the string to be checked")
+position=int(input("Enter the position to be checke"))
+if (alist[position] == userinput):
+    print ("Content {0} is present in postion {1} in list {2}".format(userinput,position,alist))
+else:
+    print("Content {0} not  present in postion {1} in list {2}".format(userinput, position, alist))
+    useri=input("Enter the string to be added to list\n")
+    alist.append(useri)
+    print (alist)
+
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+userinput=input("Enter the string to be checked")
+position=int(input("Enter the position to be checke"))
+if (alist[position] == userinput):
+    print ("Content {0} is present in postion {1} in list {2}".format(userinput,position,alist))
+else:
+    print("Content {0} not  present in postion {1} in list {2}".format(userinput, position, alist))
+    useri=input("Enter the string to be added to list\n")
+    positio=int(input("enetre te position number\n"))
+    alist[positio]=useri
+    print (alist)
+
+alist=['praveen','ajay','san','kiran','123','10','5','6']
+userin=input("Enter the string to be checked\n")
+for i in range(0,len(alist),1):
+    if (alist[i] == userin):
+        print ("{0} is present in post {1} of list {2}".format(userin,i,alist))
+#else:
+#        print("{0} not present in post {1} of list {2}".format(userin, i, alist))
+#        addcon=input("Enter the content to be added\n")
+#        alist.append(addcon)
+#        print (alist)
+
+
+
+###Tomo we need to continue from examples of position  and string input of list in for loop and condiion,multiple list comparision using for loop and condition
+alist=['praveen', 'ajay', 'san', 'kiran', '123', '10', '5', '6']
+usri=input("Enter the input to be checked\n")
+if usri in alist:
+    print (" User input {0} is present in list {1}\n In next step we are position of list".format(usri,alist))
+    for j in range(0,len(alist),1):
+        if (alist[j] == usri):
+            print ("Userinput {0} is present in pos {1} in the list {2}".format(usri,j,alist))
+else:
+    print (" User input not {0} is present in list {1}".format(usri,alist))
+    alist.append(usri)
+    print (alist)
+
+
+alist=['praveen', 'ajay', 'san', 'kiran', '123', '10', '5', '6']
+usri=input("ENTER THE INPUT\n")
+pos=int(input("Enter te pos\n"))
+for i in range(0,len(alist),1):
+    if (i==pos):
+        if (alist[i] == usri):
+            print ("Content {0} present in position {1} of the list {2}".format(alist[i],i,alist))
+
+
+alist=['praveen', 'ajay', 'san', 'kiran', '123', '10', '5', '6']
+usri=input("ENTER THE INPUT\n")
+pos=int(input("Enter te pos\n"))
+for i in range(0,len(alist),1):
+    if (i==pos) and (alist[i] == usri):
+            print ("Content {0} present in position {1} of the list {2}".format(alist[i],i,alist))
+
+
+alist = ['praveen', 'ajay', 'san', 'kiran', '123', '10', '5', '6']
+usri = input("ENTER THE INPUT\n")
+pos = int(input("Enter te pos\n"))
+if usri in alist:
+    for i in range(0, len(alist), 1):
+        if (i == pos) and (alist[i] == usri):
+            print("Content {0} present in position {1} of the list {2}".format(alist[i], i, alist))
+else:
+    alist[pos]=usri
+    print (alist)

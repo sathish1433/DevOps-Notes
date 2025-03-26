@@ -1,0 +1,414 @@
+#!/usr/bin/python
+##When user '1' it should display uname '2' uptime '3' it should display installation date of server
+
+import os
+usr=raw_input("Enter '1' for uname\n'2' for uptime '3' for Linux instalation date\n")
+if (usr == "1"):
+        os.system("uname")
+elif (usr == "2"):
+        os.system("uptime")
+elif (usr == "3"):
+        os.system("last|grep 'wtmp'")
+
+
+
+#!/usr/bin/python
+import os
+#a.script shpuld ask for user input for username
+#b. check for user present or not
+#c. if user is present it shold display details of user
+#d. if user not present it should create user
+usn=raw_input("Enter the Username\n")
+usrpre=[]
+filop=open('/etc/passwd','r')
+for usi in filop:
+        if ( usn.strip() in usi):
+                usrpre.append('present')
+print (usrpre)
+if (len(usrpre) > 0):
+        print("User {0} already present in server".format(usn))
+else:
+        print ("User {0} not present in server".format(usn))
+        cmd_option=raw_input("Enter '1' to create user")
+        if (cmd_option == "1"):
+                usr_creat_con=[]
+                print ("User Conformed to create user {0}".format(usn))
+                cmd_usercreate="useradd {0}".format(usn)
+                os.system(cmd_usercreate)
+                pos_cr=open('/etc/passwd','r')
+                for mk in pos_cr:
+                        if (usn.strip() in mk):
+                                usr_creat_con.append('present')
+                if (len(usr_creat_con) > 0):
+                        print ("User {0} Got created successfully post conformation".format(usn))
+                        cmd_age="chage -l {0}".format(usn)
+                        os.system(cmd_age)
+                else:
+                        print ("User {0} Not created successfully due to permission issue".format(usn))
+
+        else:
+                print ("User not Conformed to create user {0}".format(usn))
+
+
+
+### First check user exsists or not
+###if user exsists it should delete the user
+##if user doesnt exsists it should create user if user enters '1'
+##if user doesnt exsusrs it should create user and also add user to group if user enter '2' and also should verift group exists or not
+
+#!/usr/bin/python
+import os
+import subprocess
+#a.script shpuld ask for user input for username
+#b. check for user present or not
+#c. if user is present it shold display details of user
+#d. if user not present it should create user
+usn=raw_input("Enter the Username\n")
+usrpre=[]
+filop=open('/etc/passwd','r')
+for usi in filop:
+        if ( usn.strip() in usi):
+                usrpre.append('present')
+filop.close()
+print (usrpre)
+if (len(usrpre) > 0):
+        print("User {0} already present in server".format(usn))
+        cmd_del="userdel -r {0}".format(usn)
+        sub_del=subprocess.Popen(cmd_del,stdout=subprocess.PIPE,shell=True)
+        sub_del.communicate()
+        print(dir(sub_del))
+        if (int(sub_del.returncode) == 0):
+                print ("User {0} deleted successfully".format(usn))
+        else:
+                print ("User {0} Not deleted successfullyt".format(usn))
+else:
+        print ("User {0} not present in server".format(usn))
+        cmd_option=raw_input("Enter '1' to create user '2' to Create user and Add user to  Group")
+        if (cmd_option == "1"):
+                usr_creat_con=[]
+                print ("User Conformed to create user {0}".format(usn))
+                cmd_usercreate="useradd {0}".format(usn)
+                os.system(cmd_usercreate)
+                pos_cr=open('/etc/passwd','r')
+                for mk in pos_cr:
+                        if (usn.strip() in mk):
+                                usr_creat_con.append('present')
+                pos_cr.close()
+                if (len(usr_creat_con) > 0):
+                        print ("User {0} Got created successfully post conformation".format(usn))
+                        cmd_age="chage -l {0}".format(usn)
+                        os.system(cmd_age)
+                else:
+                        print ("User {0} Not created successfully due to permission issue".format(usn))
+        elif ( cmd_option == "2" ):
+                cmd_user_grp=[]
+                print ("User Confirmed to create user and add user to group".format(usn))
+                grpname=raw_input("Enter the Groupname\n")
+                grpcnfi=[]
+                gpopen=open('/etc/group','r')
+                for gp in gpopen:
+                        if (grpname.strip() in gp):
+                                grpcnfi.append('present')
+                gpopen.close()
+                if (len(grpcnfi) > 0):
+                        print ("Group {0} Already present in server".format(grpname))
+                        cmd_usr_grp="useradd -G {0} {1}".format(grpname,usn)
+                        os.system(cmd_usr_grp)
+                        cmd_grp_user_add_ver="groups {0}|grep {1}|wc -l".format(usn,grpname)
+
+                        out_grp_part=subprocess.Popen(cmd_grp_user_add_ver,stdout=subprocess.PIPE,shell=True)
+                        print (out_grp_part.communicate()[0])
+                        if (int(out_grp_part.communicate()[0]) > 0):                                    print ("User {0} is part of Group {1}".format(usn,grpname))
+                        os.system("groups {0}".format(usn))
+                else:
+                        print ("Group {0} not present in server".format(grpname))
+
+                        cmd_grp_create="groupadd {0}".format(grpname)
+                        os.system(cmd_grp_create)
+                        grp_conf_create_ver="getent group {0}|wc -l".format(grpname)
+                        grp_count_lin=subprocess.Popen(grp_conf_create_ver,stdout=subprocess.PIPE,shell=True).communicate()[0]
+                        print (grp_count_lin)
+                        if (int(grp_count_lin) > 0):
+                                print ("Group {0} got created successfully".format(grpname))
+                                os.system("getent group {0}".format(grpname))
+                                os.system("useradd -G {0} {1}".format(grpname,usn))
+                                cmd_grp_user_add_ver="groups {0}|grep {1}|wc -l".format(usn,grpname)
+                                out_grp_add_cre=subprocess.Popen(cmd_grp_user_add_ver,stdout=subprocess.PIPE,shell=True).communicate()[0]
+                                if (int (out_grp_add_cre) > 0):
+                                        print ("Group {0} also vcreated successfully and User {1} Got added to gROUp {0}".format(grpname,usn))
+                                        os.system("groups {0}".format(usn))
+        else:
+                print ("User not Conformed to create user {0}".format(usn))
+
+
+### Fetching All username whose user id greater than 2000
+##saving in list
+##Capturing details of all usersnanme whose user id greater than 2000 and save output to file
+
+#!/usr/bin/python
+import os
+import subprocess
+complete_usrdet=[]
+outfile=open('/tmp/outputfile_oct15','w')
+k=open('/etc/passwd','r')
+for i in k:
+        usrdet=i.split(':')
+        usrname=usrdet[0]
+        print (usrname)
+        usrid=usrdet[2]
+        if (int(usrid) > 2000):
+                print ("Username: {0} and Userid: {1}".format(usrdet[0],usrid))
+                complete_usrdet.append(usrname)
+
+print ("Below are List of user whose user id greater than 2000\n{0}".format(complete_usrdet))
+for us in complete_usrdet:
+        cmd="chage -l {0}".format(us)
+        out=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()[0]
+        print ("Below are details of user {0}\n{1}\n=====================================".format(us,out))
+        outfile.write("Below are details of user {0}\n{1}\n=============================".format(us,out))
+
+##File contains list of groups
+## First line should ne added as primary group to users
+##second to last line should be added as secondary groups
+
+#!/usr/bin/python
+import os
+import subprocess
+grp=open('testgrpname.txt','r')
+comp=grp.readlines()
+pri=comp[0].strip()
+secon=comp[1::]
+print (pri)
+print (secon)
+os.system("usermod -g {0} {1}".format(pri,'basavaraj'))
+for i in range(0,len(secon),1):
+        if (i == 0):
+                os.system("usermod -G {0} {1}".format(secon[i].strip(),'basavaraj'))
+        if (i>0):
+                os.system("usermod -a -G {0} {1}".format(secon[i].strip(),'basavaraj'))
+
+
+os.system("groups basavaraj")
+
+###File exsistence check
+
+#!/usr/bin/python
+import os
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+
+### File exsistence or not
+##if file exsistsing check for particular content and display lines where content present
+
+##Re method
+
+#!/usr/bin/python
+import os
+import re
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con))
+        filop=open(fil,'r')
+        for kl in filop:
+                if re.search(con_ve,kl):
+                        print (kl.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+##Normal way
+
+#!/usr/bin/python
+import os
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        filop=open(fil,'r')
+        for kl in filop:
+                if con in kl:
+                        print (kl.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+###
+
+### File exsistence or not
+##if file exsistsing check for particular content and display lines where content present irrespective of case
+
+#!/usr/bin/python
+import os
+import re
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con),re.IGNORECASE)
+        filop=open(fil,'r')
+        for kl in filop:
+                if re.search(con_ve,kl):
+                        print (kl.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+
+### Display all lines where praveen doesnt exsists
+
+#!/usr/bin/python
+import os
+import re
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con),re.IGNORECASE)
+        filop=open(fil,'r')
+        lin=0
+        for kl in filop:
+                lin=lin+1
+                if not re.search(con_ve,kl):
+                        print ("Content {0} not present in Line number {1} and below is the complete line content".format(con,lin))
+                        print (kl.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+### File exsistence or not
+##if file exsistsing check for particular content and display lines where content present
+## if content doesnt exsits it should add that content to file and verify
+
+#!/usr/bin/python
+import os
+import re
+contentcheck=[]
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con),re.IGNORECASE)
+        filop=open(fil,'r')
+        lin=0
+        for kl in filop:
+                lin=lin+1
+                if re.search(con_ve,kl):
+                        contentcheck.append('present')
+        if (len(contentcheck) > 0):
+                print ("Content {0} already present in file".format(con,fil))
+        else:
+                mop=open(fil,'a')
+                mop.write(con)
+                mop.write('\n')
+                mop.close()
+                print ("Opening file to verify {0} added to file {1}".format(con,fil))
+                reop=open(fil,'r')
+                for ml in reop:
+                        print (ml.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+
+#### Check for file existence
+##File doesnt exsits it should create file
+## post creating file it should ask how many lines of content user should to add
+##then it will open fle in apend mode and add content to file
+
+#!/usr/bin/python
+import os
+import re
+contentcheck=[]
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con),re.IGNORECASE)
+        filop=open(fil,'r')
+        lin=0
+        for kl in filop:
+                lin=lin+1
+                if re.search(con_ve,kl):
+                        contentcheck.append('present')
+        if (len(contentcheck) > 0):
+                print ("Content {0} already present in file".format(con,fil))
+        else:
+                mop=open(fil,'a')
+                mop.write(con)
+                mop.write('\n')
+                mop.close()
+                print ("Opening file to verify {0} added to file {1}".format(con,fil))
+                reop=open(fil,'r')
+                for ml in reop:
+                        print (ml.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+        os.system("touch {0}".format(fil))
+        if os.path.isfile(fil):
+                print ("File {0} Got created successfully".format(fil))
+                con_ran=raw_input("Enter the count of lines need to be added\n")
+                lop=open(fil,'a')
+
+                for h in range(0,int(con_ran),1):
+                        cono=raw_input("Enter the content to added\n")
+                        lop.write(cono)
+                        lop.write('\n')
+                lop.close()
+                os.system("cat {0}".format(fil))
+
+###### Check for file existence
+##File doesnt exsits it should create file
+## post creating file it should ask how many lines of content user should to add
+## user will enter content one time , same content will be added to numbe of lines as per user input line number
+
+#!/usr/bin/python
+import os
+import re
+contentcheck=[]
+fil=raw_input("Enter the Filename\n")
+print (os.path.isfile(fil))
+if (os.path.isfile(fil)):
+        print ("File {0} already exsits".format(fil))
+        con=raw_input("Enter the Content to checked\n")
+        con_ve=re.compile(r'{0}'.format(con),re.IGNORECASE)
+        filop=open(fil,'r')
+        lin=0
+        for kl in filop:
+                lin=lin+1
+                if re.search(con_ve,kl):
+                        contentcheck.append('present')
+        if (len(contentcheck) > 0):
+                print ("Content {0} already present in file".format(con,fil))
+        else:
+                mop=open(fil,'a')
+                mop.write(con)
+                mop.write('\n')
+                mop.close()
+                print ("Opening file to verify {0} added to file {1}".format(con,fil))
+                reop=open(fil,'r')
+                for ml in reop:
+                        print (ml.strip())
+else:
+        print ("File {0} doesnt exsists".format(fil))
+        os.system("touch {0}".format(fil))
+        if os.path.isfile(fil):
+                print ("File {0} Got created successfully".format(fil))
+                con_ran=raw_input("Enter the count of lines need to be added\n")
+                cono=raw_input("Enter the content to added\n")
+                with open(fil,'a') as lop:
+                        for h in range(0,int(con_ran),1):
+                                lop.write(cono)
+                                lop.write('\n')
+                os.system("cat {0}".format(fil))
+
+
+
+'''
+

@@ -1,0 +1,44 @@
+a. When user '1' it should display uname '2' uptime '3' it should display installation date of server
+
+a.script shpuld ask for user input for username
+b. check for user present or not
+c. if user is present it shold display details of user
+d. if user not present it should create user
+
+a.script shpuld ask for user input for username
+b. check for user present or not
+c. if user is present it shold display details of user
+d. if user not present it should create user
+e. if user exsists  if we enter '1' it should add user to group  and it should user is part of how many groups  and if we enter '2' it shuld dleete user
+
+a. Display all users whose user id is greater than 1000
+b. Display all files owned by each user
+
+a. Create Group name mentioned in file
+b. Verification of Group creation
+c. add user to one primary grp and rest all should be secondary Groups
+
+##file automation
+
+a. Check file exsists or not
+b. if file doesnt exsits it shpuld create file
+
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+
+a. C   heck file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+d.Display all lines where content is present in beginning of line
+
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+d.Display all lines where content is present in beginning of line and display line number where content is present
+e. DISPLAY All lines where next to praveen atleast 2 digit should be there
+f. Display all lines which contains atleast 3 digit next to praveen
+g. Display all lines which contains atleast 3 digit next to praveen
+h. Dispay all lines which contains only 2 digits next to praveen
+i. Display all lines where content is present in beginning of line
+j. if file doesnt exsists then it should create file and add multiple content to file

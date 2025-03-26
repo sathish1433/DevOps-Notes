@@ -1,0 +1,19 @@
+---
+- name: installing apache server and hosting content
+  hosts: client
+  gather_facts: yes
+  become: true
+  vars:
+    hostname: "<h1><marquee>sakthi_tech</marquee><h1>"
+  tasks:
+    - name: installing apache2 web server
+      apt: name=apache2 update_cache=yes state=present
+    - name: adding content in index.html file
+      copy: content="{{ hostname }}" dest=/var/www/html/index.html mode="0644"
+      notify:
+        - test
+  handlers:
+    - name: test
+      service: name=apache2 state=started
+...
+

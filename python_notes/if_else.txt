@@ -1,0 +1,590 @@
+IF CONDITION
+
+if (condition satisfies):
+  <execute block of statement
+elif (condituon satisfied):
+  <executer block>
+else:
+   <execute statement>
+
+
+
+
+a="praveen22"
+if (a=="praveen"):
+  print ("true")
+else:
+  print ("false")
+
+
+OUTPUT
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+false
+
+
+
+a="ajay"
+if (a=="praveen" or a == "PRAVEEN"):
+  print ("Userinput is {0}".format(a))
+elif (a=="ajay" or a == "AJAY"):
+    print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+Userinput is ajay
+
+
+a="joy"
+if (a=="praveen" or a == "PRAVEEN"):
+  print ("Userinput is {0}".format(a))
+elif (a=="ajay" or a == "AJAY"):
+    print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+
+reducing elif condition inlcuidng everything using or condition
+
+a="ajay"
+if (a=="praveen" or a == "PRAVEEN" or a == "ajay" or a == "AJAY"):
+  print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Userinput is ajay
+Wrong input
+=============================================
+
+a="PRAVEEN  "
+print (dir(a))
+conv=a.lower()
+if (conv == "ajay" or conv == "praveen"):
+    print ("user input is {0}".format(conv))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+user input is praveen
+
+
+==================================================
+script for checking whether string is upper or lowercase
+
+
+a="hcl"
+if  a.isupper():
+    conve=a.lower()
+    print ("Input is {0} in capital leter and converted into lowercase {1}".format(a,conve))
+elif a.islower():
+    conve=a.upper()
+    print ("Input is {0} in lower and converted into upprcase {1}".format(a,conve))
+    b=input("Entere the string to be added\n")
+    print ("Combining {0} and {1} is {2}".format(conve,b,conve+b))
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Input is hcl in lower and converted into upprcase HCL
+Entere the string to be added
+67
+Combining HCL and 67 is HCL67
+
+
+==============================================================
+usinput=input("Enter the string\n")
+if (usinput.islower()):
+    print ("_".join(usinput))
+elif (usinput.isupper()):
+    print (usinput[-1::-1])
+
+output1
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string
+PRAVEEN
+NEEVARP
+
+Process finished with exit code 0
+
+output2
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string
+praveen
+p_r_a_v_e_e_n
+
+Process finished with exit code 0
+
+
+
+
+=======================
+inp=input("Enter the input\n")
+if inp.isalpha():
+    print ("Userinput {0} is alphabet".format(inp))
+    if inp.islower():
+        print("/".join(inp))
+    else:
+        print (inp[-1::-1])
+elif inp.isnumeric():
+    print ("Userinput {0} is number".format(inp))
+    addnu=input("Enter the number to be added\n")
+    outnumber=int(inp)+int(addnu)
+    print ("Addition of {0} and {1} is {2}".format(inp,addnu,outnumber))
+
+elif inp.isalnum():
+    print ("User input {0} is alphanumeric".format(inp))
+    alnuser=input("Enter the input to be added\n")
+    outalpha=str(inp)+"_"+str(alnuser)
+    print ("combined string  of {0} and {1} is {2}".format(inp,alnuser,outalpha) )
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+PRAVEEN
+Userinput PRAVEEN is alphabet
+NEEVARP
+
+Process finished with exit code 0
+
+
+Enter the input
+praveen
+Userinput praveen is alphabet
+p/r/a/v/e/e/n
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+12
+Userinput 12 is number
+Enter the number to be added
+50
+Addition of 12 and 50 is 62
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+praveen123
+User input praveen123 is alphanumeric
+Enter the input to be added
+naveen
+combined string  of praveen123 and naveen is praveen123naveen
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+praveen56788
+User input praveen56788 is alphanumeric
+Enter the input to be added
+bhaskar
+combined string  of praveen56788 and bhaskar is praveen56788_bhaska
+
+
+CLASS EXAMPLES
+
+##if condition examples
+'''
+a="PRAVEEN"
+if (a == "praveen"):
+    print ("True")
+elif (a == "PRAVEEN"):
+    print ("True")
+else:
+    print ("False")
+'''
+## condition with or option
+
+a="PRAVEEN"
+if (a == "praveen") or (a == "PRAVEEN"):
+    print ("True")
+else:
+    print ("False")
+
+### condition with user input
+
+a=input("Enter the Input\n")
+if (a == "praveen") or (a == "PRAVEEN"):
+    print ("True")
+elif (a == "ajay") or (a == "AJAY"):
+    print (" Almost True")
+elif (a == "abhi") or (a == "ABHI"):
+    print ("exactly true")
+else:
+    print ("False")
+
+### userinput for check lower and upper and converting and check  whether user input is digit
+
+a=input("Enter the user input\n")
+if (a.isupper()):
+    print (a.lower())
+    print ("Userinput is {0} and post converted output is {1}".format(a,a.lower()))
+elif (a.islower()):
+    b=input("Enter the string to be added\n")
+    print (a+b)
+    print ("User input is {0} and added string is {1} and combined string is {2}".format(a,b,a+b))
+elif (a.isdigit()):
+    print (type(a))
+    if (type(a) is str):
+        a=int(a)
+    c=int(input("Enter the Number to be added\n"))
+    d=a+c
+    print (" User input is {0} and added number is {1} and sum of {0} and {1} is {2}".format(a,c,d))
+
+### check for even and odd
+
+a=int(input("Enter the Number\n"))
+if (a%2 == 0):
+    b=int(input("Enter the Numbre to be added"))
+    c=a+b
+    print ("{0} is even and addition of {0} and {1} is {2}".format(a,b,c))
+elif (a%2 != 0):
+    b=int(input("Enter the Numbre to be subtracted"))
+    c=a-b
+    print("{0} is odd and subtraction  of {0} and {1} is {2}".format(a, b, c))
+
+###check for even and odd
+
+a=int(input("Enter the Number\n"))
+b=int(input("Enter the Numbre to be added"))
+if (a%2 == 0):
+    c=a+b
+    print ("{0} is even and addition of {0} and {1} is {2}".format(a,b,c))
+elif (a%2 != 0):
+    c=a-b
+    print("{0} is odd and subtraction  of {0} and {1} is {2}".format(a, b, c))
+
+
+###addition subtraction multiplication divison
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+if (n1 > n2):
+    n3=n1+n2
+    print ("Addition of {0} and {1} is {2}".format(n1,n2,n3))
+elif (n1 == 25):
+    if (n1 < n2):
+        n3=n1*n2
+        print ("Product of {0} and {1} is {2}".format(n1,n2,n3))
+elif (n2 == 20) and (n2>n1):
+    n3=n1/n2
+    print ("Division of {0} and {1} is {2}".format(n1,n2,n3))
+
+
+###Check for user input is string or digit and take action
+n=input("Enter the input\n")
+if (n.isalpha()):
+    print ("User input {0} is alphabet".format(n))
+    if (n.islower() or n.isupper()):
+        print ("Now converting {0} to lower".format(n))
+        conv=n.lower()
+        print ("Post convering to lower is {0}".format(conv))
+        if (conv.islower()):
+            print ("{0} is lower".format(conv.islower()))
+            conu=conv.lower()[0:3]
+            print ("_".join(conu))
+elif (n.isdigit()):
+    print ("Userinput {0} is digit".format(n))
+
+    convgy=int(n)
+    if (type(convgy) is int):
+        print ("Now user input {0} is integer".format(convgy))
+        if (convgy%2 == 0):
+            print ("Number {0} is even".format(convgy))
+        elif (convgy%2 !=0):
+            print ("Number {0} is odd".format(convgy))
+
+elif (n.isalnum()):
+    print ("Userinput {0} contains both alphabet and number".format(n))
+
+If condition examples 
+----------------------
+IF CONDITION
+
+
+if (condition satisfies):
+  <execute block of statement
+elif (condituon satisfied):
+  <executer block>
+else:
+   <execute statement>
+
+
+
+
+a="praveen22"
+if (a=="praveen"):
+  print ("true")
+else:
+  print ("false")
+
+
+OUTPUT
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+false
+
+
+
+a="ajay"
+if (a=="praveen" or a == "PRAVEEN"):
+  print ("Userinput is {0}".format(a))
+elif (a=="ajay" or a == "AJAY"):
+    print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+Userinput is ajay
+
+
+a="joy"
+if (a=="praveen" or a == "PRAVEEN"):
+  print ("Userinput is {0}".format(a))
+elif (a=="ajay" or a == "AJAY"):
+    print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+
+reducing elif condition inlcuidng everything using or condition
+
+a="ajay"
+if (a=="praveen" or a == "PRAVEEN" or a == "ajay" or a == "AJAY"):
+  print ("Userinput is {0}".format(a))
+else:
+  print ("Wrong input")
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Userinput is ajay
+Wrong input
+=============================================
+
+a="PRAVEEN  "
+print (dir(a))
+conv=a.lower()
+if (conv == "ajay" or conv == "praveen"):
+    print ("user input is {0}".format(conv))
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+user input is praveen
+
+
+==================================================
+script for checking whether string is upper or lowercase
+
+
+a="hcl"
+if  a.isupper():
+    conve=a.lower()
+    print ("Input is {0} in capital leter and converted into lowercase {1}".format(a,conve))
+elif a.islower():
+    conve=a.upper()
+    print ("Input is {0} in lower and converted into upprcase {1}".format(a,conve))
+    b=input("Entere the string to be added\n")
+    print ("Combining {0} and {1} is {2}".format(conve,b,conve+b))
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Input is hcl in lower and converted into upprcase HCL
+Entere the string to be added
+67
+Combining HCL and 67 is HCL67
+
+
+==============================================================
+usinput=input("Enter the string\n")
+if (usinput.islower()):
+    print ("_".join(usinput))
+elif (usinput.isupper()):
+    print (usinput[-1::-1])
+
+output1
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string
+PRAVEEN
+NEEVARP
+
+Process finished with exit code 0
+
+output2
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the string
+praveen
+p_r_a_v_e_e_n
+
+Process finished with exit code 0
+
+
+
+
+=======================
+inp=input("Enter the input\n")
+if inp.isalpha():
+    print ("Userinput {0} is alphabet".format(inp))
+    if inp.islower():
+        print("/".join(inp))
+    else:
+        print (inp[-1::-1])
+elif inp.isnumeric():
+    print ("Userinput {0} is number".format(inp))
+    addnu=input("Enter the number to be added\n")
+    outnumber=int(inp)+int(addnu)
+    print ("Addition of {0} and {1} is {2}".format(inp,addnu,outnumber))
+
+elif inp.isalnum():
+    print ("User input {0} is alphanumeric".format(inp))
+    alnuser=input("Enter the input to be added\n")
+    outalpha=str(inp)+"_"+str(alnuser)
+    print ("combined string  of {0} and {1} is {2}".format(inp,alnuser,outalpha) )
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+PRAVEEN
+Userinput PRAVEEN is alphabet
+NEEVARP
+
+Process finished with exit code 0
+
+
+Enter the input
+praveen
+Userinput praveen is alphabet
+p/r/a/v/e/e/n
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+12
+Userinput 12 is number
+Enter the number to be added
+50
+Addition of 12 and 50 is 62
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+praveen123
+User input praveen123 is alphanumeric
+Enter the input to be added
+naveen
+combined string  of praveen123 and naveen is praveen123naveen
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the input
+praveen56788
+User input praveen56788 is alphanumeric
+Enter the input to be added
+bhaskar
+combined string  of praveen56788 and bhaskar is praveen56788_bhaska
+
+============================================================
+a=['10','20','praveen','ajay','praveen123']
+inpu=input("Enter the user input\n")
+if (inpu in a):
+    if (inpu.isalpha()):
+        print (inpu[0::2])
+    elif (inpu.isnumeric()):
+        g=input("Enter the number to be added\n")
+        out_1=int(inpu)+int(g)
+        print ("Output is {0}".format(out_1))
+    elif (inpu.isalnum()):
+        print (a)
+        str_added=input("Enter the string to be added\n")
+        a.append(str_added)
+        print (a)
+
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the user input
+praveen123
+['10', '20', 'praveen', 'ajay', 'praveen123']
+Enter the string to be added
+bhaskar
+['10', '20', 'praveen', 'ajay', 'praveen123', 'bhaskar']
+
+Process finished with exit code 0
+
+
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the user input
+10
+Enter the number to be added
+20
+Output is 30
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the user input
+praveen
+paen
+
+Process finished with exit code 0
+===========================================================
+
+
+a=['praveen','ajay','san','10','20']
+inp=input("Enter the userinput\n")
+if (inp in a):
+    print ("True")
+    if (inp.isalpha()):
+        col=a.index(inp)
+        a.remove(inp)
+        print (a)
+
+
+=============================================================
+a=['praveen','ajay','san','10','20']
+inp=input("Enter the userinput\n")
+if (inp in a):
+    print ("True")
+    if (inp.isalpha()):
+        col=a.index(inp)
+        a.remove(inp)
+        print (a)

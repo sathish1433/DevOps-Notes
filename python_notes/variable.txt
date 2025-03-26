@@ -1,0 +1,571 @@
+
+>>> print ("Hello world\n")
+
+Hello world
+
+>>> a="Praveen"
+>>> print (a)
+Praveen
+>>> print ("Value of variable a is {0}".format(a))
+Value of variable a is Praveen
+>>> b="datta"
+>>> print ("Value of a is {0} and value of b is {1}".format(a,b))
+Value of a is Praveen and value of b is datta
+>>> print ("Value of a is {0} and value of b is {1}, again value of a is {0}".format(a,b))
+Value of a is Praveen and value of b is datta, again value of a is Praveen
+>>> print ("Value of a is {1} and value of b is {0}, again value of a is {1}".format(a,b)
+
+)
+Value of a is datta and value of b is Praveen, again value of a is datta
+>>> print ("Value of a is {1} and value of b is {0}, again value of a is {1}".format(b,a))
+Value of a is Praveen and value of b is datta, again value of a is Praveen
+>>> a
+'Praveen'
+
+
+>>> len(a)  ====> Used to capture Length of input string
+7
+
+>>> print ("Value of a is {1} and value of b is {0}, Length of a is {2} and Lenghth of b is {3}".format(b,a,len(a),len(b)))
+Value of a is Praveen and value of b is datta, Length of a is 7 and Lenghth of b is 5
+>>> 
+
+
+>>> len_a=len(a)
+>>> len_b=len(b)
+>>> print (len_a,len_b)
+7 5
+>>> print ("Value of a is {1} and value of b is {0}, Length of a is {2} and Lenghth of b is {3}".format(b,a,len_a,len_b))
+Value of a is Praveen and value of b is datta, Length of a is 7 and Lenghth of b is 5
+>>> 
+
+
+Indexing 
+
+
+0123456
+Praveen
+-7-6-5-4-3-2-1
+
+
+Now we would like extract first characters of variable "a"
+
+>>> print (a[0:2])  ====> Here we will be getting only first 2 letter even thouhgh it starts with "0" index python will subtract one index at last. if required first 3 characters we need to mention till first 4 charaters.
+
+a[0:2] ===> its going to extract (end index - 1) ==> end index is 2 =will be getting till first indext starts from "0" index
+
+>>> print (a[0:2])    ====> Here we will be getting first 2 charaters starts from  "0" index
+Pr
+>>> print (a[0:3])  ==Here we will be getting first 3 charaters starts from  "0" index
+Pra
+>>> 
+>>> 
+
+
+Slicing the string format
+format
+variable[start:end:step]
+
+end  ==> endindex-1
+example
+>>> a
+'Praveen'
+>>> print (a[0::]) ===> This will print till end of the string
+Praveen
+>>> print (a[0::2]) ==> This will print till end of the string with jump of 2 charracters
+
+Paen
+>>> print (a[0:6:2]) ===>This will print till 5th index of string with jump of 2 charracters
+Pae
+
+
+>>> print (a[0::2])  ===> starts at "0" indext and end at last index of string with jump of 2 charatere
+Paen
+>>> print (a[0:6:2])
+Pae
+>>> print (a[3:])  ===>starts at "3" index(measn 4th character) till end of the string
+veen
+
+----------------------------------------------------------------------------
+##How to take user input of variable and take user input for slicing the userinput and length of variable)
+
+#!/usr/bin/python
+a="srirambalaji"
+b="ajay"
+print ("Userinput is {0} and {1}".format(a,b))
+print ("Userinput is {1} and {0}".format(a,b))
+#How to tae user input
+userinp1=input("Enter the Input\n")
+print (userinp1)
+print ("Entered user input is {0}".format(userinp1))
+print (type(userinp1))
+
+#=====> Length Option==============================#
+
+len_a=len(a)
+len_b=len(b)
+print ("Length of {0} is {1} and Length of {2} is {3}".format(a,len_a,b,len_b))
+print ("Length of {0} is {1}\nLength of {2} is {3}".format(a,len_a,b,len_b))
+
+#=============> End of Length function===================#
+
+#slicing of strings
+print (len_a)
+print (a)
+print (a[0:5])
+print (a[0::])
+print (a[3:len_a-5])
+
+userinput2=input("Enter the Userinput\n")
+print (userinput2)
+starpoint=int(input("Enter the beginning point\n"))
+endpoint=int(input("Enter the End point\n"))
+print (type(starpoint),type(endpoint))
+print (userinput2[starpoint:endpoint])
+
+----------------------------------------------------------------------------------
+
+>>> print (a[3:6:2]) ===> starts at 3rd index and ends at 5th index(endindex-1(6-1)) with jump of 2 characters
+ve
+>>> print (a[::4]) ===> starts at "0" index  till end  and jump of 4 charaters
+Pe
+>>> print (a[:4] ===> start at "0" index  and ends at 3rd index(last index (4)-1))
+Prav
+
+print (a[::-1])
+
+>>> print (a[-1:0:-1])  ===> starts at endindex(-1) and ends atindex number(1)  and jump of -1 character
+neevar
+>>> print (a[-1:0:-1])
+neevar
+>>> a
+'Praveen'
+>>> print (a[-1::-1]) ==starts at endindex(-1) and ends atindex number(0)  and jump of -1 character
+neevarP
+>>> 
+>>> print (a[::-1]) ===> starts at endindex(-1) and ends atindex number(0)  and jump of -1 character
+neevarP
+>>> print (a[::-2]) ===starts at endindex(-1) and ends atindex number(0)  and jump of -2 character
+neaP
+>>> 
+
+Concatenation of strings
+format
+
+string1+string2
+
+>>> a
+'Praveen'
+>>> a="ajay"
+>>> b="praveen"
+>>> a+b
+'ajaypraveen'
+>>> a+b+"datta" 
+'ajaypraveendatta'
+>>> d=a+b+"data"
+>>> d
+'ajaypraveendata'
+>>> 
+
+
+This week covered topics
+
+print statement use of format
+assigning variable
+slicing the strings
+slicing the string with particular jump
+merging(concatenation  of 2 strings)
+
+
+Variable_opt.txt
+################
+
+
+
+
+Next week
+addition,multiplication,division of number by manual input
+raw_input  and input for reading user input and assigning to variable
+
+write script to take userinput perform conactenation of string, mulpkication number, subtraction , modulas
+
+convert lower case to uppercase
+
+----------------------------------------------------------------
+#!/usr/bin/python
+a=input("Enter the input")
+print (a)
+print (type(a))
+print (len(a))
+print ("Entered input is {0} and type is {1} and length is {2}".format(a,type(a),len(a)))
+print ("type is {1} input is {0}  and length is {2}".format(a,type(a),len(a)))
+
+
+output
+
+Enter the inputpraveen
+praveen
+<class 'str'>
+7
+Entered input is praveen and type is <class 'str'> and length is 7
+type is <class 'str'> input is praveen  and length is 7
+
+Process finished with exit code 0
+
+#!/usr/bin/python
+a=input("Enter the input")
+tu=type(a)
+ln=len(a)
+print ("Entered input is {0} and type is {1} and length is {2}".format(a,tu,ln))
+print ("type is {1} input is {0}  and length is {2}".format(a,tu,ln))
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Enter the inputpraveen
+Entered input is praveen and type is <class 'str'> and length is 7
+type is <class 'str'> input is praveen  and length is 7
+
+-------------------------------------------
+
+#!/usr/bin/python
+a=int(input("Enter the input"))
+tu=type(a)
+print (type(a))
+print (tu)
+print ("Entered input is {0} and type is {1}".format(a,tu))
+print ("type is {1} input is {0}  and input  is {0}".format(a,tu))
+
+output
+
+Enter the input256
+<class 'int'>
+<class 'int'>
+Entered input is 256 and type is <class 'int'>
+type is <class 'int'> input is 256  and input  is 256
+
+
+Enter the inputpraveen  ------script faling since we cant convert name to int
+Traceback (most recent call last):
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py", line 2, in <module>
+    a=int(input("Enter the input"))
+ValueError: invalid literal for int() with base 10: 'praveen'
+
+Process finished with exit code 1
+
+----------------------------------------------------------------------
+
+Addition of two numbers by giving user input
+#!/usr/bin/python
+input1=int(input("Entere the number\n"))
+input2=int(input("Enter the number\n"))
+output=input1+input2
+print ("Sum of number {0} and {1} is {2}".format(input1,input2,output))
+
+
+output
+
+#!/usr/bin/python
+input1=int(input("Entere the number\n"))
+input2=int(input("Enter the number\n"))
+output=input1+input2
+print ("Sum of number {0} and {1} is {2}".format(input1,input2,output))
+-------------------------------------------------------------------
+
+
+Subtraction
+
+#!/usr/bin/python
+input1=int(input("Entere the number\n"))
+input2=int(input("Enter the number\n"))
+output=input1-input2
+print ("Subtraction of number {0} and {1} is {2}".format(input1,input2,output))
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+Entere the number
+100
+Enter the number
+20
+Subtraction of number 100 and 20 is 80
+
+----------------------------------------------------------------------------------
+class example
+
+#!/usr/bin/python
+a="praveenajay123"
+
+b="kiran"
+c=int(input("Enter the input\n"))
+d=int(c)
+len_a=len(a)
+len_b=len(b)
+len_c=len(c)
+print ("Userinput is {0}  and length is {1}\nUserinput is {2}  and length is {3}".format(a,len_a,b,len_b))
+print (type(a))
+print ("Type of {0} is {1}\nType of {2} is {3}\nType of {4} is {5}".format(a,type(a),b,type(b),c,type(c)))
+print ("Type of {0} post conversion is {1}".format(c,type(d)))
+print (len(a))
+print (len(b))
+print (len(a)>len(b))
+print (a)  
+a="praveenajay12344"
+print (a[0:4])
+print (a[0:7])
+print (a[0:-1])
+print (a[0::])
+print (a[2::])
+print (a[2:6])
+print (a[0:6])
+print (a)
+print  (a[0::3])
+print (a[-1::-1])
+print (a[-1:0:-1])
+b="besanttech"
+print (a+b)
+c=a+b
+n1=int(input("Enter the input\n"))
+n2=int(input("Enter the input\n"))
+n3=n1+n2
+n4=n1-n2
+n5=n1*n2
+n6=n1/n2
+print ("Sum of {0} and {1} is {2}".format(n1,n2,n3))
+print ("Difference of {0}  and {1} is {2}".format(n1,n2,n4))
+print ("Product of {0} and {1} is {2}".format(n1,n2,n5))
+print ("Quotient of {0} and {1} is {2}".format(n1,n2,n6))
+
+a="praveenajay12344"
+print (dir(a))
+print (len(a))
+print (a.count('e'))
+print (a.index('e'))
+print (type(a))
+print (a.isdigit())
+print (a.isalpha())
+print (a.isalnum())
+
+
+
+
+
+---------------------------------------------------------------
+
+>>> a
+'praveen'
+>>> a.islower()  ====> To check whether string contain lower case character
+True
+>>> b="PRAVEEN"
+>>> b.islower()
+False
+>>> b.lower()
+'praveen'
+>>> b
+'PRAVEEN'
+>>> c=b.lower()
+>>> c
+'praveen'
+>>> a="naveen"
+>>> a.islower()
+True
+>>> a.upper() ======================> To convert string to upper case character
+'NAVEEN'
+>>> a
+'naveen'
+>>> c=a.upper()
+>>> c
+'NAVEEN'
+>>> a
+'naveen'
+>>> c.islower() =====> To check whether string is lower case character
+False  ===> it returns false since variable c contains upper case character
+>>> c.isupper()  ======> To check whetehr string is in upper case character
+True
+>>> a
+'naveen'
+
+False ===> condition not satistied
+True ===> condition satisfied
+
+---------------------------------------------------
+
+To know what all options available under variable we use below 
+
+dir(variable name)
+
+a="praveen"
+print (dir(a))
+
+
+Below are options available  for variable "a"
+
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+
+Process finished with exit code 0
+
+Next class
+
+we are discussing on below options of input string 
+
+
+isdigit',  'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+
+
+
+
+a="praveen"
+print (dir(a))
+print (a.count('e'))
+print (a.upper())
+print (a)
+b=a.upper()
+print (b)
+print (len(a))
+print (len((a[0:4])))
+c=a[0:4]
+print (len(c))
+print (c)
+print (c.swapcase())
+print (c.isupper())
+print (c.islower())
+print (c.isalpha())
+print (c.isnumeric())
+g="praveen12"
+print (g.isalnum())
+print (g.isdecimal())
+print (g.replace('a',''))
+print (g.replace('a','10'))
+print (g)
+print (g.index('a'))
+print ("_".join(g))
+print ("\n".join(g))
+bc="praveen  "
+print (len(bc))
+print (len(bc.strip()))
+
+
+output
+
+'__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+2
+PRAVEEN
+praveen
+PRAVEEN
+7
+4
+4
+prav
+PRAV
+False
+True
+True
+False
+True
+False
+prveen12
+pr10veen12
+praveen12
+2
+p_r_a_v_e_e_n_1_2
+p
+r
+a
+v
+e
+e
+n
+1
+2
+9
+7
+
+---------------------------------------------
+
+Added in details
+
+j="10"
+print(type(j))  #Checking type whether its string or number
+u=int(j) #converting variable to integer
+print (type(u)) #checking type of varaiable u
+print (type(j)) #checking tyeof varaiable j
+a="praveen" #assigning a=praveen
+print (type(a)) #checking type of varaible a to verify its string or number
+print (dir(a)) # method available for varaibale a
+print (a.count('e')) #Checking number 'e' exsistence under variable a
+print (a.upper()) #converting varaible a to uppercase
+print (a)
+b=a.upper() #converting varaible a to uppercase and saving o/p to b
+print (b) #displaying varaibke b
+print (len(a)) #length of a
+print (len((a[0:4]))) #slicing the character from index 0 to index 3
+c=a[0:4]  #slicing the character from index 0 to index 3 and save in variable c
+print (len(c)) #length of c varaibale
+print (c)
+print (c.swapcase()) #converting case of varaibale
+print (c.isupper()) #checking variable is upper cse or not (if its upper case it print "True" else false)
+print (c.islower()) #checking varaible is lower case or not
+print (c.isalpha()) #checking  whether variable contains only alphabet
+print (c.isnumeric()) #checking whether varaible ontains only number
+g="praveen12"
+print (g.isalnum()) # checking whether variable contains alphabet and number
+print (g.isdecimal()) #checking whether variable contains decimal
+print (g.replace('a','')) #replacing 'a' with nothing
+print (g.replace('a','10')) #replacing 'a' wuth 10
+print (g)
+print (g.index('a')) #checking 'a' exsists in which index
+print ("_".join(g)) #after each character add"_"
+print ("\n".join(g))  #add new line after each character
+bc="praveen  "
+print (len(bc))
+print (len(bc.strip()))
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+<class 'str'>
+<class 'int'>
+<class 'str'>
+<class 'str'>
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+2
+PRAVEEN
+praveen
+PRAVEEN
+7
+4
+4
+prav
+PRAV
+False
+True
+True
+False
+True
+False
+prveen12
+pr10veen12
+praveen12
+2
+p_r_a_v_e_e_n_1_2
+p
+r
+a
+v
+e
+e
+n
+1
+2
+9
+7
+
+Process finished with exit code 0
+---------------------------------------------------------------------
+j="praveen ajay kiran "
+print (j.split(' ')) #Here we are spliting the string when ever space occurs
+print (j.split('a')) #here we are splitting string when ever 'a' occurs
+
+
+output
+
+['praveen', 'ajay', 'kiran', '']
+['pr', 'veen ', 'j', 'y kir', 'n ']
+

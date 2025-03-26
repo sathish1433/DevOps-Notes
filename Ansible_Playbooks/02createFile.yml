@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+   - name: Creating File
+     file:
+      path: /tmp/mithun-ansible.yaml
+      state: touch
+      owner: ec2-user
+      group: wheel
+      mode: '0777'
+...

@@ -1,0 +1,361 @@
+****************LDAP_SERVER_CONFIG********************
+
+configration_files: /etc/openldap/slapd.d/cn=config/
+service: slapd
+
+SERVER_SIDE_CONFIGRATION :
+
+## install yum pacakages
+
+yum install -y *openldap* migrationtools
+
+## set ldappasswd
+
+slappasswd
+
+{SSHA}mX/EA7r2pG/0RynZ6wpRUx0B+a2XR4n/
+
+## to configure a db files for ldap-server
+
+vim /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif
+
+
+# CRC32 7eb3ab5f
+dn: olcDatabase={2}hdb
+objectClass: olcDatabaseConfig
+objectClass: olcHdbConfig
+olcDatabase: {2}hdb
+olcDbDirectory: /var/lib/ldap
+olcSuffix: dc=linux,dc=com -------------------->edit a domain name dc=Linux,dc=com
+olcRootDN: cn=Manager,dc=linux,dc=com ------------------>edit a domain name dc=Linux,dc=com
+olcDbIndex: objectClass eq,pres
+olcDbIndex: ou,cn,mail,surname,givenname eq,pres,sub
+structuralObjectClass: olcHdbConfig
+entryUUID: 8aa680aa-e39f-103e-9797-d58f2279406c
+creatorsName: cn=config
+createTimestamp: 20240731154439Z
+entryCSN: 20240731154439.653359Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20240731154439Z
+olcRootPW: {SSHA}jj/NGo5BJ/+H+v1L99udDK3ES1PNWKn0 --------------------->to paste the slappasswd hash line
+olcTLSCertificateFile: /etc/openldap/certs/cert.pem ------------------>its a certificate file path
+olcTLSCertificateKeyFile: /etc/openldap/certs/priv.pem ----------------->its a private key file 
+
+## to edit a moniter file
+
+vim /etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif
+
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 32575e1b
+dn: olcDatabase={1}monitor
+objectClass: olcDatabaseConfig
+olcDatabase: {1}monitor
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=extern
+ al,cn=auth" read by dn.base="cn=Manager,dc=linux,dc=com" read by * none ------------------->Here to to change a dc=linux,dc=com
+structuralObjectClass: olcDatabaseConfig
+entryUUID: 8aa679f2-e39f-103e-9796-d58f2279406c
+creatorsName: cn=config
+createTimestamp: 20240731154439Z
+entryCSN: 20240731154439.653187Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20240731154439Z
+
+
+## test the files
+
+slaptest -u
+
+its show some error but show test successed
+
+## to create a tls certificate
+
+openssl req -new -x509 -nodes -out /etc/openldap/certs/cert.pem -keyout /etc/openldap/certs/priv.pem -days 365
+
+## to change a owner and permission of certification files
+
+cd /etc/openldap/certs
+
+chown ldap:ldap *
+
+chmod 600 priv.pem
+
+## to start the service of ldap
+
+systemctl start slapd
+
+systemctl enable slapd
+## Prepare the LDAP database:
+
+cp -vf /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+
+##to update the basic schema
+
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/schema/cosine.ldif
+
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/schema/nis.ldif
+
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/schema/inetorgperson.ldif
+
+## migrationtools is used to change a normal files to ldap files
+
+ls -ltr /usr/share/migrationtools
+
+vim /usr/share/migrationtools/migrate_common.ph
+
+esc :71
+"""
+# Default DNS domain
+$DEFAULT_MAIL_DOMAIN = "linux.com"; ------------------------->to hit the Linux.com or ur domain name
+
+# Default base
+$DEFAULT_BASE = "dc=linux,dc=com"; ----------------------------> here dc=Linux,dc=com
+
+# Turn this on for inetLocalMailReceipient
+# sendmail support; add the following to
+# sendmail.mc (thanks to Petr@Kristof.CZ):
+##### CUT HERE #####
+#define(`confLDAP_DEFAULT_SPEC',`-h "ldap.padl.com"')dnl
+#LDAPROUTE_DOMAIN_FILE(`/etc/mail/ldapdomains')dnl
+#FEATURE(ldap_routing)dnl
+##### CUT HERE #####
+# where /etc/mail/ldapdomains contains names of ldap_routed
+# domains (similiar to MASQUERADE_DOMAIN_FILE).
+# $DEFAULT_MAIL_HOST = "mail.padl.com";
+
+# turn this on to support more general object clases
+# such as person.
+$EXTENDED_SCHEMA = 1; -------------------->to change 0 to 1
+
+"""
+
+##  to create a /root/base.ldif file
+
+vim /root/base.ldif
+
+dn: dc=linux,dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: linux com
+dc: linux
+
+dn: cn=Manager,dc=linux,dc=com
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+dn: ou=People,dc=linux,dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=linux,dc=com
+objectClass: organizationalUnit
+ou: Group
+
+
+## to create a test user 
+
+useradd ldap1
+
+passwd ldap1
+
+useradd ldap2
+
+passwd ldap2
+
+## to save a users to another file /root/passwd
+
+getent passwd|grep ":10[0-9][1-9]" >/root/passwd
+
+## to save a group of this ldap users to /root/group
+
+getent group|grep ":10[0-9][1-9]" >/root/group
+
+
+## to change a normal passwd,group file to ldif file
+
+cd /usr/share/migrationtools/
+
+./migrate_passwd.pl /root/passwd /root/passwd.ldif
+
+./migrate_group.pl /root/group /root/group.ldif
+
+
+## to import a base,passwdand group ldif file to the database
+
+ldapadd -x -W -D "cn=Manager,dc=linux,dc=com" -f /root/base.ldif
+
+ldapadd -x -W -D "cn=Manager,dc=linux,dc=com" -f /root/passwd.ldif
+
+ldapadd -x -W -D "cn=Manager,dc=linux,dc=com" -f /root/group.ldif
+
+
+## to serach or test a user in ldap server
+
+ldapsearch -x cn=ldap1 -b dc=linux,dc=com
+
+ldapsearch -x cn=ldap2 -b dc=linux,dc=com
+
+## to stop the firewall
+
+systemctl stop firewalld
+
+## to install nfs for share home dir to other servers
+
+yum -y install rpcbind nfs-utils
+
+## to start the service
+
+systemctl start rpcbind
+
+systemctl start nfs
+
+systemctl enable rpcbind
+
+systemctl enable nfs
+
+##to check nfs mount point
+
+showmount -e
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ldap_client_configration :
+
+## to install yum packages for ldap-client
+
+yum install -y openldap-clients nss-pam-ldapd
+
+## to setup a ldap service uing gui
+
+authconfig-tui (or) setup
+
+to activate ldap services in gui then next set ip and dc=linux,dc=com
+
+## selinux permissive
+
+setenforce 0
+
+getenforce
+
+##to check the ldap-users
+
+getent passwd ldap1
+
+getent passwd ldap2 ---------->to show in database but shouldn't shown in local passwd entery
+
+"""
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+polkitd:x:999:998:User for polkitd:/:/sbin/nologin
+libstoragemgmt:x:998:997:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:997:994::/var/lib/chrony:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+sakthi:x:1000:1000:sakthi:/home/sakthi:/bin/bash
+ldap:x:55:55:OpenLDAP server:/var/lib/ldap:/sbin/nologin
+saslauth:x:996:76:Saslauthd user:/run/saslauthd:/sbin/nologin
+nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
+nslcd:x:65:55:LDAP Client User:/:/sbin/nologin
+ldap1:x:1001:1001:ldap1:/home/ldap1:/bin/bash
+ldap2:x:1002:1002:ldap2:/home/ldap2:/bin/bash
+
+"""
+
+cat /etc/passwd
+
+"""
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+polkitd:x:999:998:User for polkitd:/:/sbin/nologin
+libstoragemgmt:x:998:997:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:997:994::/var/lib/chrony:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+sakthi:x:1000:1000:sakthi:/home/sakthi:/bin/bash
+ldap:x:55:55:OpenLDAP server:/var/lib/ldap:/sbin/nologin
+saslauth:x:996:76:Saslauthd user:/run/saslauthd:/sbin/nologin
+nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
+nslcd:x:65:55:LDAP Client User:/:/sbin/nologin
+
+"""
+
+## to install nfs client packages in client server
+
+yum install -y nfs-utils
+
+## to list the mount options of thate server
+
+showmount -e 192.168.244.135
+
+## to mount the the nfs mount point
+
+mount sakthi.linux.com:/home /home
+
+then su ldap1 there is bash shell dir error
+
+## to add a entry for autofs
+
+vim /etc/auto.master
+
+/home /etc/auto.txt  --timeout=60
+
+##to create a auto.txt 
+
+vim /etc/auto.txt
+
+*  -rw,sync  192.168.244.135:/home/&
+
+## to start service for autofs
+
+systemctl start autofs
+
+systemctl enable autofs
+
+
+#####its a fstab entery if u want permanent 
+192.168.244.135:/home   /home   auto  defaults 0 0
+
+***********************************FINISHED******************************************************
+by Sakthi...........
+
+
+
+
+
+ 

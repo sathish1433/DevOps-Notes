@@ -1,0 +1,159 @@
+*************apache tomcat***************
+
+aplication servers:
+
+apache tomcat ----------->apache
+
+jboss/wildfly ------------>rhedhat------>ibm ---->enterprice applications also executable(ear,war files also)
+
+1.0 -7.0 -->jboss
+8.0-tillnow ---->wildfly
+
+was(websphere application server)---------->ibm--->war/ear
+wlp(websphere Liberty Profile) ---------->ibm------->war/ear
+
+Weblogic--------->BRA-------->oracle
+
+
+
+these are only for java
+
+if python and js using own packages 
+
+
+APACHE TOMCAT
+-------------
+apache tomcat is an os.its a java based webapp server
+
+its only for webapplications 
+
+.war files only executable
+
+TOMCAT s/w DIRECTORY STRUCTURE:
+--------------------------------
+tomcat.xxx/bin:
+---------------
+
+startup.sh ------------> linux,mac
+startup.bat------------> windows
+
+shoutdown.sh ------------>linux,mac
+shoutdown.bat-------------->windows
+
+catalina.sh start|stop -------->linux
+catalina.bat
+
+version.sh  ---------->for version
+version.bat
+
+
+tomcat.xxxx/conf:
+----------------
+
+tomcat-users.xml
+server.xml
+
+tomcat.xxxx/lib:
+----------------
+
+jar files
+
+tomcat.xxxx/logs:
+-----------------
+
+catalina.out
+manager.log
+hostmanager.log
+localhost.log
+
+tomcat.xxxx/webapps:
+--------------------
+
+host-manager
+manager
+and custom war files
+
+work:
+
+temp:
+
+
+apache tomcat installation:
+---------------------------
+prerequirements oracle-java (jdk)
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.93/bin/apache-tomcat-9.0.93.zip
+
+unzip apache-tomcat-9.0.93.zip
+
+mv -vf apache-tomcat-9.0.93 /opt/
+
+ln -s /opt/apache-tomcat-9.0.93/bin/catalina.sh /usr/bin/tomcat  #if u want remove unlink /usr/bin/tstart
+
+tomcat start|stop ------->start or stop the server
+
+roles:
+------
+manager-gui:server,manager-app
+admin-gui: host_manager
+
+****you access the manager_app in tomacat server 
+
+##to comment this line ''' <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+          allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> ''' in webapps/manager/META-INF/context.xml file
+    
+## then to add a user for autentication purpose in /conf/tomcat-users.xml file
+
+<user username="name" password="1234" role="manager-gui,admin-gui"/> ---------------->this file should edit applicable host-manager and manager_app also
+
+*****you want host_manager option in server
+
+##to comment this line ''' <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+          allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> ''' in webapps/host-manager/META-INF/context.xml file
+          
+i.e if u want to enter another credential ctrl+shift+delete to tick checkbox then delete cache and cookies
+
+*******change a port number:
+----------------------------
+
+/conf/server.xml
+
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443"
+               maxParameterCount="1000"
+               />
+               
+               ----------------->to chnge you wanted port number 880 ->90
+               
+********deploy a war file
+
+in manager app one option show deploy
+
+to choose the war file
+
+and hit deploy button
+
+the war file stored in webapps directory
+
+http://localhost:90/maven-web-application/ --------->it s test url 
+
+
+*****************web_server v/s app_servers
+
+app_servers: to deploy a dynamic and static content (like multiple pages ex login---->home>operations   )
+									      |
+									     passwd error
+          
+webservers:to deploy only static web pages like blogs,and etc..  and using load blancing purpose
+
+load blancing video reference: https://youtu.be/Oza_UlYv-ug?si=mrM0z0yMlcaaqVAb
+
+
+
+reference:https://mithuntechnologies-devops.blogspot.com/search/label/Tomcat
+
+          
+
+
+

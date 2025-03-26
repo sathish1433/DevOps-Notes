@@ -1,0 +1,1841 @@
+|----------- LINUX_COMMANDS------------|
+
+
+setup =============>to change a nmtui like
+
+uname -a (all),-r (kernal version),-m (64or32bit)
+top (taskbar manager) -b -n<no of seconds>(top -b -n(1,2,..nseconds))
+who ====>currently login user details
+whoami====>which user currently login
+date +%y-%m-%d
+     +%y-%m-%d" "%H-%M-%s
+date +%D" "%r ----------> %D is date and %r is hours,minutes,seconds and with 12 hour format 
+     +%y-%m-%d" "%H-%M-%s -d "10 days ago"===>before
+			  -d "10 days "===>show date after
+free -m(mb) (-g(gb) -k(kb))===>mem(ram) details
+df -h(human readable)T(filesystem type)====>disk  partition details
+uptime -p(pretty)s(since)=====>uptime of user switch-on
+ps -eaf ===>show all process in server
+kill -9(without parent permission or immediatly) ===>kill using process id
+pkill ===> kill process name using
+pwd ===>present working directory
+ls -l(details of eatch file/directory) t(time) r(reverse) a(show all files) ==>list of files in directory (ls -latr)
+touch <file name> ===>create a file
+cat > <file name> ====>always create a new file and with inthe file 
+   (>)single single grater than symbol for always create a new file 
+   (>>) double grater than is file existing to append the content the file cannot existing create a new file
+cd  "path"==>change directory 
+tac <file name > ==>reverse order of file
+touch .<filename> ==>create a hidden file
+cp -v (verbose) <filename> <file name> (or) cp <file name> /var (or) cp <file name> /var/<new file name> ===> copy files
+cp -f(forcable) v r(directory copy deep files) ===>copy directory (cp -vfr <dir name>  <where path>)
+mv <filename> <file name> (or )mv <file name> /var (or)  mv <file name> /var/<new file name>
+wc -l(line)
+      -w(word)
+      -c(character) ===>word count
+rm - v(verbose)r('r' use only directory delete) <file name> ===>delete a file
+
+example:
+
+rm -- "-uopend" ---> here the -- symbol indicates the end of the options
+
+echo $? ===>previous command executed or not return 0 mean executed return non-zero the command not executed
+echo "" ===> print command
+
+____concatenating two files_____
+
+cat  <file> <file2> >> <file3>
+
+___sort___
+
+sort -r(reverse)n(numbers)|uniq -c(count of duplicates ) -d(only show duplcate)
+in row and column sort using -kn  (n for number of column)(sort -k1 -rn)
+
+head ====> top of the file(default 10 lines) -5(five lines)like
+tail ====>bottom of the file(defult 10 lines)
+
+___load avarage____
+
+load avarage:  shows a cpu health status and how fast the server response for user input
+load avarage depends upon number of core processors (core-processor <time )error,(core-processor>=time)normal
+cat /proc/cpuinfo |grep processor===> to find no of core processor
+
+ps axo %cpu,s,command,pid,user|grep 'S'|sort -k1 -nr |head ====>command filter high consume cpu of sleeping process and u want get  running process remove s
+
+(or)
+ps -eo %cpu,%mem,pid,cmd,user,s --sort=-%cpu|grep 'S'|head
+more <file name> =====>scroll the content line by line ===came out command is ctrl+c====
+/less <file name> ===> same for more ===came out command is q button=====
+dmidecode -t bios or memory or processor etc===>hardware details
+
+
+=======vim=====:wq!
+vim <file name> ===>edit a file in terminal
+came out :
+esc then :q! ===>without changes
+esc then :wq! ===>with changes
+ESC then : se nu ===>display line number hz
+ESC then dd ==>delete current line
+ESC then :u ===>undo
+i ===>insert
+ESC then : $ ===> jump last line
+ESC then :<line number> ===> to jump line
+press esc then x  to delete a  particular character
+ESC than : %s/(^)oldcontent/newone/g ===>replace a content /g for all places (^) this symbol for only f:irst occurance of line content 
+ESC :%s/<content>\+/<newone> ===>\# the backward slash for regular expresion to define special characters
+
+/tmp all user can access
+/ begining of linux server
+/home/user this is for user dir theyand root only access
+
+
+====/var/log=====
+dir entries
+
+mailx -s(subject) -a(attachement) -bcc(blind carbon copy) <mailid> -c<mailid> <to mailid> (<) path of body mail====>(<)this symbol is compelsory ===>send a mail using command
+mailog===>gendral mails
+secure ===>authentication data are stored in secure file
+dmesg ===>shows hardware failure log
+boot.log ===>services started or not
+/etc ===>for all permanent changes of systems
+/proc ===>live running proccess are in proc 
+
+cat /proc/meminfo===> its a live memory information of memory
+proc/mounts ==> its a mounted disk logs
+
+
+last ===>the os installation to current login details options for |grep wtmp===>shows the date of installation
+
+
+ =====runlevel=====
+
+0 ====>shoutdown (halt)
+1=====>single usermode
+2=====>multiuser without connection 
+3===>command line
+4====>noaction
+5====>graphical
+6 ====>reboot
+
+
+who -r (or) runlevel ===>current runlevel
+ 
+change runlevel is:  vim  /etc/inittab
+
+to change the runlevel permanently
+
+sudo systemctl set-default graphical.target --->set default run-level
+
+sudo systemctl isolate graphical.target ----> set sudden change of run-level
+
+
+
+====user administration====
+
+3types of users
+
+
+root====>userid is alaways 0
+system===>userid is in rhel 6 1-499 in rhel 7 1-1000
+normal===>user id 500-60000
+
+useradd <username> ===>create a user
+
+cat /etc/passwd|grep <username> ===> find user entry
+cat /etc/shadow|grep <user name>  ==> to see password set or not (!! this symbol is not set password)
+passwd <username>===>change passwd
+passwd -d (delete)<username> ==> delete a passwd
+usermod -u <userid> <username> ===>change user id  exixting user
+usermod -c <caption> <username>  ===> caption for user
+usermod -d(diectory) <path> <username> ===> change a path of user directorythis only not login user to use mv command to move user files then only to login that user
+usermod -s(shell)  <path of shell> <username> ===>change a shell permanently by root ===usermod -s /bin/bash sakthi
+usermod -l <newusernme> <currentuser> ===>change a existing user to another user
+
+====================PATH CONFIGURATION FOR COMMAND=================
+
+echo $PATH -----> display all path of commands for which user have access.
+
+export PATH=<shortcut path  for command> -----> only path in shortcut path executes commands(temp).
+   (examplefor)export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/root/bin
+	i removed the /usr/bin path  the uptme ,clear and etc commands couldn't work u willgive full path of command should work /usr/bin/uptime should be work
+
+export PATH=$PATH:<new shortcut path for command> -----> to add new shortcut command(temp).
+    example for : export PATH=$PATH:/usr/bin ===========>to added the path to use normally uptime,clear should be work
+
+====SHELLS=====
+cat /etc/shells ===>to show types of shells
+echo $SHELL ===>permanent shell
+ps -p $$ ===>current session shell 
+in user terminal use ====>chsh===>to change shell
+  
+
+====when create a user the  creating entry store in 4 path ===
+/home
+/etc/passwd
+/etc/shadow
+/etc/skel
+
+===.bash_profile====
+edit in .bash_profile file to insert a commends the user should login diectly to execute that commands
+
+====.bashrc======
+edit in .bashrc file to insert a commends the user should login diectly or indirectly to execute that commands
+
+====.bash_history===
+list out the user executed command history
+
+=====.bash_logout====5
+to edit  command in .bash_logout file  executing the commands when logout the user
+
+echo $PATH===>the user access paths
+
+which <command> like uptime or etc===> which path this command installed
+
+====group administration========
+groupadd <gname>
+cat /etc/group===>this path to show a log entry of groups
+usermod -g <gname> <username>====>set a primary group of user
+groupmod -g <gid> <username> ===> change a groupid
+groups <username> ===>its shows a the user part of which groups 
+usermod -a<already> -G, <secondary gname> <username> ====>its also to set primary group but in situation the user
+already in another group that group without delete to set a new primary group
+gpasswd -d<delete> <username> <groupname> ==>remove a user in group
+groupdel <groupname> ===>delete a group
+userdel -r(remove) -f(force) <username> ===>delete a user permanently with their files
+passwd -l<lock> <username> ===>lock a user
+passwd -u<unlock> <username> ===>unlock a user
+chage -l<list> <username> ===> breif detail of user at begining to current
+chage -E<expire> "date" <user> ===>set a expiry date
+chage <username> ===> to set manually
+
+===zip,gz,tar======
+zip <filename>.zip filename ===>to copy into the zip
+zcat <filename.zip> ===>to see the content of zip file
+unzip -l<list> <filename.zip> ====>to list the orijinal file in zip
+unzip <filename.zip> ===>to extract a file
+gzip  <filename> ===>dirct compress the file
+zcat <filename.gz> ===>see the file in compressed zip
+gunzip <filename.gz> ====>unzip the compressed file
+'''tar -c<create>v<verbose>z<gzip>f<format> <filename.tar.gz> <folder_name> ===>to change a tar file with compressed from  directory 
+tar -t<table>vf<filenam.tar>===>to list a files in tarfile directory
+gzip <filename.tar>===>compress a tar file
+gunzip <filename.gz> ====>unzip the compressed file
+tar -x<extract>vzf <file.tar.gz>===>extract a tarfile''' .........>its directory compress and extract 
+du -sh <filename>====>file size
+du -shk<kilo bytes> <directory/*>===>its directory size( in situation to to order the files based on file size to u
+se kilobytes )
+stat -c %i_%n * ---->it shows a inodewith file name
+du --inodes ------>it shows how much i nodes consume the file 
+==================================================
+1===>output
+2 ===>error
+0 ==>input
+/dev/null ===>to give any content to nullify that file
+ex
+uptime 1>/dev/null ===>to null the uptime log 
+lll /var/log 2>test.txt  -----> the error should not show the error should stored in the test.txt
+xyz 2>/dev/null ===>to didn,t show any error the commmand should null
+ls &>new.txt ========> if the output or error should be produced by the input both stored in this file
+echo "its newtxt file"|tee -a (append) new.txt  --->it show the ouput also and append the output in new.txt file also (tee) (i.e -a is not an mandatory)
+stat <filename> ===>it's a file details  'inode' is a id of that file 
+ls -li<inode>tr=====>list with inode
+df -i<inodes> ===> list dik partition  with inodes
+
+====hardlink====
+ln <orginal file> <linkfilename> ===>same content updating one file autometically update linkfile like backup (ie the both files have same inode) not applicable for dir
+
+ln -s(softlink) <orginal file> <duplicatefile> ===>create a shortcut of file the duplicate file depents upon original file(its applicable also a directory)
+unlink <duplicate file> ===>unlink <duplicate filename>
+
+
+==========SSH========
+SSH ====>Secure Shell
+
+vim  /etc/ssh/sshd_config====>to edit a ssh file
+
+in the file 
+"AllowUsers <username>" or "DenyUsers <username>"
+`xcsave the file 
+
+service sshd restart====>restart the ssh remote then login in putty that user only login or that persont couln't login
+
+"same as for groups"
+
+=========Service command=========
+
+any application/software
+
+"/etc ===>c ==> installation path ==>/etc/application
+service ===>/etc/init.d/<service > ===>service will be created
+log ===>/var/log/application/access.log and error.log"
+
+service <servicename> start or stop ===> to start or stop  the service
+service <service name> status ==>status of  perticular service
+service --status-all
+service <service name> restart ==>restart a service
+service <service name> reload ==> without restart contiously update a service
+
+chkconfig --list ===> check the service automatically on various runlevels
+systemctl list-unit-files --type=service|grep "enabled" ----> in redhat 7 and others
+chkconfig --list |grep <servicename> ===>perticular service run automatically run or not various runlevels
+chkconfig --level 35(3&5are runlevels) <servicename> off (or) on ===>to set off or on the service on runlevels automatically
+
+alias <variable name>= "command"===> this command is to allocate another variale name for the commad
+hostname ===> hostname
+hostname <name> ==>temporaryly change hostname 
+bash ==>change hostname localhost to name
+
+
+===network process====
+
+ifconfig ===>know ur ip
+vim /etc/sysconfig/network-scripts/ifcfg-eth0===>for change  purpose
+"""DEVICE="eth0"
+BOOTPROTO="static"
+HWADDR="00:0C:29:FC:5E:30"
+IPV6INIT="yes"
+NM_CONTROLLED="yes"
+IPADDR="192.168.153.128"
+ONBOOT="yes"
+TYPE="Ethernet"
+UUID="674c7182-ddff-4373-a495-eb27bee98508" """
+
+vim /etc/sysconfig/network
+""" NETWORKING=yes
+HOSTNAME=SAKTHI
+""""
+
+vim /etc/hosts
+
+"
+192.168.153.128 SAKTHI
+"""
+to edit this type
+
+service network reload
+
+to chage permanent  hostname need change in three places
+
+/etc/sysconfig/network-scripts/ifcfg-eth0
+/etc/sysconfig/network
+/etc/hosts
+
+
+
+to check server reachable or down 
+
+ping <ip of ur server>
+
+
+
+=====permissions====
+
+read 4
+write 2
+execute 1
+
+a file ==>
+
+chmod 432(r wx w) filename
+
+chmod -R(recursive)  767  <directoryname>
+
+
+chown  <newowner> <filename> ====>
+
+
+su <username>switch only the user
+su - <username>===> to switch user to home directory
+
+""""its a permission topic """
+
+a. create directory /tmp/march25dir with multiple files under it as root user
+b. san should be the owner of the directory and he should be able to create/delete files inside the directory
+chown <userna> <direct>
+
+c. ajay and abhi should be able to create/delete files inside the directoru
+
+chgrp <grpname> <direc>
+
+d. rest all users should not be able to access the directory
+
+chmod 770 <dire>
+
+e. san should be able to create/delete files inside direct and subdirectories
+
+san should be able add/delete content in all the exsistsing files under direct/subdirectories
+
+san should be owner of all files direcoryies subdirectories which is residing /tmp/macrh25dir
+
+chown -R <user> <direct>
+
+f.ajay and abhi should be able to create/delete files inside direct and subdirectories
+
+ajay and abhi should be able add/delete content in all the exsistsing files under direct/subdirectories
+
+chgrp -R <grp> <direct>
+
+chmod -R 770 <direc>
+
+
+=========Special Permission==========
+
+sticky bit ===>1
+
+
+chmod o+t <directory> ====> it the other user only create a file shouldn't delete a file
+
+t ===>sticky bit+execute permission
+
+chmod o-t <directory> ===> it remove the sticky bit permission
+
+t ==>execute permission
+T ==>missing execute permission
+
+alternative method 
+chmod 1(sticky bit)777 <directory> 
+
+set user===>4
+
+user change passwd using (set user) permission
+
+which passwd
+
+/usr/bin/passwd
+
+-rwsr-xr-x. 1 root root 30768 Feb 17  2012 /usr/bin/passwd
+
+rws(set user)r===> set usr
+
+
+chmod u-s /usr/bin/passwd ===>remove a set user passwd permission
+
+chmod u+s /usr/bin/passwd ===> set user permission is add
+
+chmod 4777 <directory> ===>alternate for set user id
+
+ls -ltr /usr/bin|grep "^-rws"  ===>to search a set user permission files
+
+
+"""" only for the understanding
+
+set group id ===>2
+
+[root@sakthi gmar_26]# ls -ld .
+drwxrwxrwx. 2 root root 4096 Mar 26 12:48 .
+
+chmod 777 <directory>
+
+chgrp <req_grp> <directory>
+
+chmod g+s <directory>
+
+[root@praveentechnologies setgrpid_march26]# ls -ld .
+drwxrwsrwx. 2 root mar25 4096 Mar 26 12:48 .
+
+s ===> set grpid + execute permissiom""""""
+
+chmod g+s <directory> ===> for get a group access for existing file and creating a new files also
+
+
+some situations after change chmod g+s command want change a group just==> chgrp <groupname> <directory> the existing files in diectory also change this group access
+
+chmod g-s <directory> ===>to remove set grp id
+
+chmod 2777 <directory> ===>alternate set grp id 
+
+
+=====ACL======
+
+access control list
+ 
+set a access for perticular user
+
+
+setfacl -m u:<username>:rw <file> ===>special access a perticular user
+
+-rw-rw-r--+ 1 root root 13 Mar 26 16:38 mar26.txt
+saw the +symbol to know the special user 
+
+getfacl <filename>==> know the details aclfile access
+
+
+
+setfacl -m(mode) g:<groupname>:rw(read,write) <filename>===>acl for group
+
+setfacl -R -m u:<user>:rwx <dir>===>recursive permission
+
+setfacl -x u:<user> <dir>===>remove acl access
+
+setfacl -b(blind)   <dir>===>remove  all acl access
+
+
+=========chattr =========
+
+
+chattr +i (immutable) <filename>===> anyone couln't access the file 
+
+lsattr <file>===>verify the chattr applied or not
+----i--------e- 123.txt===> i is applied a chattr
+
+chattr -R (recursive) -i (immutable) <filename>===> remove chattr permission
+
+chattr +a (append) <filename>===>  access only append the conntent (vat >>file) rest all access could't do
+        -a(remove )
+
+=====umask =======
+
+umask =maximum permission of access file - required permission of file
+
+
+ex 
+
+  666
+- 600
+-------
+  066
+-------
+
+umask 066 ===> for curent session
+
+go to .bash_profile 
+
+to edit
+
+umask 066
+
+save the bash_profile to create a new duplicate session then create a file to verify the permission
+
+
+vim /etc/rc.local ===>to edit file the operation should perform on server start at first process at a time 
+
+
+==================SUDO===================================
+
+1. giving permission for specified command to specified user 
+	to give administrator permission, add command path to user in  visudo -f /etc/sudoers
+	add  user details in sudoers file -----> <user name> ALL=(ALL) <command path-1>, <command path-2>, <command path-3>  
+	("which <command name>" is used to check command path)
+2. sudo <command> -----> to apply administrative command access by user.
+3. deny permission for specified command to specified user
+ 	to deny administrator permission, add command path in  visudo -f /etc/sudoers
+	add  user details in sudoers file -----> <user name> ALL=(ALL) ALL, !<command path-1>, !<command path-2>, !<command path-3>
+	Note: in above example first giving user to access all administrator commands and then restricting/denying some commands by giving "!" symbol at begining of  
+each command path.
+4. sudo -l -----> to check user approved/allowed sudo command access details.
+5. giving permission for specified command to specified group 
+	to give administrator permission, add command path in  visudo -f /etc/sudoers
+	add  group details in sudoers file : %<group name> ALL=(ALL) <command path-1>, <command path-2>, <command path-3>  
+	("%" will be considered as a group identification symbol)
+
+
+""""<username> ALL===(ALL) NOPASSWD: ALL, !<commadpath1>...etc"""""
+
+
+============================GREP COMMAND============================
+
+1. grep -i <content to be find> <file name> -----> display content without case sensitive (like vinay & VINAY :No differentiation between capital letter and small letter)
+2. grep -ic <content to be find> <file name> -----> same as "grep -i <content to be find> <file name> | wc -l" find number of time content got repeted.
+3. grep -in <content to be find> <file name> -----> line number with repetitive content
+4. grep -iw <content to be find> <file name> -----> display specific word which mentioned.
+5. grep -v <content to be neglect> <file name> -----> display only the line where mentioned content don’t exists.
+6. grep -o <content to be find> <file name>  -----> display only the searched content present in file.
+7. egrep "praveen|sakthi|ram" <filename> ------>display multiple content from single file
+8.  grep "praveen[0-9]"  <filename> ------->display after praveen atleast one number
+9. grep "praveen[0-9]\+"  <filename> ------->display after praveen much of numbers
+10. grep "praveen[0-9]\{3\}" <file> ------>({number})display after praveen number should mentioned in curly bracket 
+11. grep "praveen[0-9]\?" <filename> ------> (?\) display after praveen the number exists should display not exists it didn't display
+12. grep -A(2)or(3)(4...) "praveen" <filename> ------> the content would finded the next two lines should be printed
+13. grep -B2 "praveen <filename>------> the content would finded the previous two lines should be printed
+14. grep -C2 "praveen" <filename> ===> Display searched content line with previous and after 2 lines
+15. grep -l "sakthi" * ----> list the file who existing the "sakthi"content in all file in the directory
+16. grep -r "sakthi" . ----> display the file with existing the "sakthi"content in all file in the directory with recursively
+===========================at =====================
+at for one time schedule a job not repetative
+
+echo "bash test.sh"|at -t(timeformat) 205003130100 ----------->to shedule a job at 2050
+(or)
+echo "bash test.sh"|at 01:00 12/01/2050 --------->this also work
+
+atq  ------> list the at jobs
+
+atrm <job_number> ---------->to remove a job
+
+===========================CRON TAB============================
+
+
+1. crontab -e -----> used to edit/add new schedule task.
+2. crontab -l -----> used to view scheduled tasks.
+	*  *  *   *  * job-name
+	* ===> min
+	   *  ==> hour
+	      *  ===> date of month
+	          *  ===> month
+	              *  ==> day of week[0 (sun) to 6(sat)]
+
+
+3. 
+	Check crond service status and start service using command "service crond start"
+
+
+Scenarion-1
+	execute a command df -h on "Sat Jul  2 03:26:32 IST 2022" in "/vinay/cron.txt" directory
+	add content using "crontab -e" command "26 03 02 07 * df -h > /vinay/cron.txt"
+
+	Scenarion-2
+	Would like to schedule job uptime command every day at 10 am and save to file /tmp/m2.txt 
+	add content using "crontab -e" command "00 10 * * * uptime > /tmp/m2.txt"
+	
+	Scenarion-3
+	Would like to schedule job uptime command on July 1 at 10:15 am and save to file /tmp/j1.txt
+	15 10 1 7 * uptime > /tmp/j1.txt
+
+	Scenarion-4
+	Would like to schedule job free command everyday at 9:10 am and save to file /tmp/free.txt
+	10 9 * * * free > /tmp/free.txt
+
+	Scenarion-5
+	Would like to schedule job df -h command on 15th and 17th of June and July at 3:00 pm and save to file /tmp/dh_f.txt
+	00 15 15,17 6,7 * df -h > /tmp/dh_f.txt
+
+	Scenarion-6
+	Would like to schedule job uptime command between date 10th to 25th on July at 10 am and save to file /tmp/uptime.txt 
+	0 10 10-25 7 * uptime > /tmp/uptime.txt
+
+	Scenarion-7
+	Would like to schedule job free command every 30 minutes once on 23rd September and save to file /tmp/free.txt
+	*/30 * 23 9 * free > /tmp/free.txt
+
+	Scenarion-8
+	Would link to schedule job who command every 5 days once at 10 am, only in December month and save to file /tmp/who.txt
+	* 10 */5 12 * > who > /tmp/who.txt
+
+Scenarion-9
+	Would like to schedule job date, uptime, free, df -h command on 1st date of every month at 9 am and save to file /tmp/uptime_free_df_h.txt
+	create a shell script as below
+	vim /tmp/uptime_free_df_h.sh
+
+	#!bin/bash
+	date >> /tmp/uptime_free_df_h.txt
+	echo "----------------------------" >> /tmp/uptime_free_df_h.txt
+	uptime >> /tmp/uptime_free_df_h.txt
+	echo "----------------------------" >> /tmp/uptime_free_df_h.txt
+	free >> /tmp/uptime_free_df_h.txt
+	echo "----------------------------" >> /tmp/uptime_free_df_h.txt
+	df -h >> /tmp/uptime_free_df_h.txt
+	echo " X X X X X X X X X X X X X X X X X X X X X X" >> /tmp/uptime_free_df_h.txt
+	save the file
+
+	add content using "crontab -e" command " * 9 1 * * sh /tmp/uptime_free_df_h.sh "
+
+4. crontab-l -u <user name> -----> to check user scheduled task.
+5. vim /etc/cron.deny -----> add user name in a cron.deny file to restrict using of cron command.
+
+
+=======================server remote connection=========================
+
+
+ssh <username>@<ipaddress> ------->connect two server remotely
+
+exit ----->to exit the the remote server
+
+ ssh root@192.168.244.129 "uptime;ifconfig;last sakthi" =========> this command to execute command another server in current server terminal with output
+
+ scp file.txt root@192.168.244.129:/tmp/==========> copy the file one server to anoter server
+    -r (recursive)======>for directory
+
+ rsync -a(all)v(verbose)z(compressed)h(hashing) file.txt root@192.168.244.129:/tmp/=======>this also copy but this command have a capable to check the file existing or not then only copy the file (is applicable for directory)
+
+
+
+====================how to recover the file========================
+
+
+only that file open condition to recover that file
+
+like vim,tail -f <filename> to open a file in open cndition the cat also close condition to view only
+
+
+lsof |grep <filename> [example filename(re.txt)]
+
+tail      3125    sakthi    3r      REG                8,3        10     142850 /tmp/re.txt
+
+cd /proc/3125/fd ===>go to this directory
+
+ls -ltr
+
+total 0
+lr-x------. 1 sakthi sakthi 64 Apr  5 00:46 4 -> inotify
+lr-x------. 1 sakthi sakthi 64 Apr  5 00:46 3 -> /tmp/re.txt
+lrwx------. 1 sakthi sakthi 64 Apr  5 00:46 2 -> /dev/pts/3
+lrwx------. 1 sakthi sakthi 64 Apr  5 00:46 1 -> /dev/pts/3
+lrwx------. 1 sakthi sakthi 64 Apr  5 00:46 0 -> /dev/pts/3
+
+cp /proc/3125/fd/3 /tmp/recovered.txt======>to copy the file to tmp directory
+
+===============================passwdless authentication using ssh-keygen=============================== 
+
+
+ssh-keygen -t rsa====>to generate a key in home .ssh folder
+ 
+ls -latr in home directory
+
+cd .ssh
+
+then cat id_rsa.pub=====>open the file to copy the public key in first server
+
+another server go home diectory
+
+mkdir .ssh=====>create a directory  .ssh 
+
+cd .ssh|vim authorized_keys
+
+paste the public key in this file then save this file
+
+chmod 700 .ssh ====>for directory permission
+
+chmod 640 autorized_keys======>for this file permission
+
+(or)
+ssh-copy-id user@ip  -------->its command to access passwd less authentication
+
+
+
+netstat -t ====>for how much server connected to this server  
+=====================find =========================
+
+1. find <directory name> -type f -----> find file inside directory recursively.
+2. find <directory name> -type f -name "<specified file name>" -----> find specified files inside directory recursively.
+3. find <directory name> -type f -iname "<specified file name>" -----> find specified files inside directory recursively ignore case sensitive.
+4. find <directory name> -type f -size 0 -----> find empty files inside directory.
+5. find <directory name> -type f ! -size 0 -----> find non-empty files inside directory.
+5. find <directory name> -type d -empty -----> find empty directory inside directory.
+6. find <directory name> -type d ! -empty -----> find non-empty directory inside directory.
+7. dd if=/dev/zero of=<destination path/file name> bs=<size of content to be in file> count=1 -----> to create empty file with specified size.
+8. find <directory name> -type f -size +1M -size -4M -----> find files between range of 1MB to 4MB
+9. find <directory name> -type f -daystart -mtime -30 -----> find files created/modified within 30 days.
+10. find <directory name> -type f -daystart -mtime +30 -----> find files created/modified after 30days.
+11. find <directory name> -type f -mtime -30 -----> find files created/modified within 30 minuets.
+12. find <directory name> -type f -mtime +30 -----> find files created/modified after 30 minuets.
+13. find <directory name> -type f -user <user name> -----> find files owned by specified user.
+14. find <directory name> -type f ! -user <user name> -----> find files other than owned by specified user. 
+15. find <directory name> -type f -group <group name> -----> find files belongs to specified group.
+16. find <directory name> -type f -user <user name> -group <group name> -----> find files owned by specified user and also files belongs to specified group.
+17. find <directory name> -type f -perm <files with permission to be find> -----> find files which are having specified permission.
+18. find <directory name> -type f -perm <files with permission to be find> -exec chmod <new permission for those files> {} \;  -----> find files which are having specified permission and changing permission for those files to new permission.
+19. find <directory name> -type f -iname <file name> -exec cp -vfr {} <destination path> \; -----> find specified files inside directory recursively ignoring case sensitive  
+and pasting to destination path.
+20. find <directory name> -type f -printf "%s %u %p\n" |sort -k1 -nr |head -----> find top 10 files which are consuming more space and display size of a file(%s), user name(%u), path(%p) and file name.
+21. find <directory name> -type f -mmin -5  -----> display all files which are created with in 5 mins
+22. find <directory name> -type f -mmin +5  -----> display all files which are older than 5 mins
+23. find <directory name> -type f -inum <i-node number data to be find> -----> display all files which having specified i-node number.
+
+========================redhat 7 commands=================================
+
+systemctl status <servicename>============================>service command in redhat7
+systemctl list-unit-files --type=service|grep <servicename>(for specfic service) -========>permanent service status active or inactive
+systemctl enable <servicename>==============>for disable or enable service
+hostnamectl set-hostname <name>============>permanent hostname set anotherway
+nmtui======>graphical way to set hostname
+nmcli general hostname
+timedatectl=======>timedate change options
+timedatectl list-timezones==========>to list timezons
+timedatectl set-timezone /India/Kolkata
+
+
+
+....continue in redhat7 commands
+
+
+
+************************************SELinux******************************
+
+selinux hae three Modes
+
+1) 1 - Enforcing =====================>not allow restricted actios
+2) 0 - Permissive =====================>to allow restricted actions but the actions should be recorda log
+3) disabled =================>to disable a selinux
+
+
+three types of  selinux
+
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+
+
+ls -lZ ===============>to list the seliux contexts 
+lrwxrwxrwx. root root system_u:object_r:bin_t:s0       bin -> usr/bin
+dr-xr-xr-x. root root system_u:object_r:boot_t:s0      boot
+drwxr-xr-x. root root system_u:object_r:device_t:s0    dev
+drwxr-xr-x. root root system_u:object_r:etc_t:s0       etc
+drwxr-xr-x. root root system_u:object_r:home_root_t:s0 home
+lrwxrwxrwx. root root system_u:object_r:lib_t:s0       lib -> usr/lib
+lrwxrwxrwx. root root system_u:object_r:lib_t:s0       lib64 -> usr/lib64
+
+sestatus ===============>to see selinux status
+
+setenforce 0 ===========>permissive to set the selinux mode
+
+getenforce =============>to display the selinux mode
+
+
+
+
+
+==========================disk partition========================================
+
+
+fdisk -l =====================>list the disk partion this also same for lsblk command but this is for theory way
+swapon -s ==================> list the swap partion size details
+lsblk ====================>(listblock) list disk in tree format
+i add the harddisk in vmware manage--->virtualmachine settings----->hardisk>>add..finish
+then without reboot to dedect the hardisk to check the path----------->cd /sys/class/scsi_host/
+having 32 hosts in this path to scan all the hosts to detuct the added new hard disk
+
+we should single host : echo "- - -" >/sys/class/scsi_host/host0/scan
+
+but having  32 host write a shell script
+
+for ((i=0;i<=32;i++))
+>do
+>echo "- - -" >/sys/class/scsi_host/host$i/scan
+>done
+
+then executed completely to detected new hardisk without restart  
+
+
+--------to create a parition in new hardisk------
+
+fdisk /dev/sdb (or) sda =====================>to go a creation editor
+
+hit n------->create a new partition
+hit d ---------->to delete a partition
+then hit  e(extended) or p(new partition)
+enter partition number 1-4
+then first cylinder nothing to do to hit enter
+the last cylinder hit +5G(5 G for Giga byte)
+to know the creted partition corect or not hit p--------------->list the created patition in that editer
+to hit save changes 'w'
+to hit undo changes 'q'
+
+then to check lsblk or fdisk -l command to listed the partition created
+ but one thing the kernel dosen't know partition created or not have two options "reboot"
+another one is "kpartex /dev/sdb or sda"
+
+to check file system created or not 
+blkid(block id) /dev/sdb1-------->got a nothing entry itt didn't have a file system
+
+create a file system
+mkfs.ext4 /dev/sdb1(mkfs stands for make file system)=========>create a file system
+
+want to create a swap 
+mkswap /dev/sdb or sba==============>create a swap memory
+
+then create a folder anyware
+
+mount /dev/sdb or sda /var/example_folder------------->to mount a partition in /var/example_folder location
+
+umount /var/example_folder --------------> to unmount the partition in that location
+note: the unmount the partition in the same directory user can access any file can't unmount the partition
+
+-------------set a permanent mount partition------------------
+
+vim /etc/fstab
+
+<partition> <path> <file system> defaults 0 or 1  0 or 1 
+
+ex
+
+/dev/sdb1 /var/apr15 ext4 defaults 0 0
+
+entery add in fstab
+
+then reboot the server to mounted the partition permanently
+
+in second time to create a partition couldn't assign kpartx command because of vmware is a low configuration virtual memory but in original server can do that
+the only way to use vm to reboot
+
+to enable a swap for sdb2
+
+swapon -v(enable) /dev/sdb2---------->to enable a swap memory of sdb2 partition
+
+then check 
+swapon -s========>list the swap partition details to updated the sdb2 swap
+
+
+to create a empty dumpfile for swap i.e in ram and swap also full and the partitions are live situation can't create a swap in this case create dumpfile and assign a swap
+
+dd(dumpfile) if=/dev/zero of=/var/apr17/swap bs=200M count=1------------------->create a dumpfile
+mkswap /var/apr17/swap------------>make a swap that swap file
+swapon -v /var/apr17/swap ------------>enable a file as swap memory
+
+then check a swapon -s
+
+swapoff /var/apr17/swap-------------->to remove a swap (or) swapoff /dev/sdb2-------->to remove a swap partition 
+
+
+
+===========(LVM)logical volume manager=================================
+
+create a partition
+
+pvcreate /dev/sdb2======================>create a pysical volume
+
+vgcreate <volumegrp name> /dev/sdb2==============>create a vggroup from pysical volume
+
+lvcreate -L 1G -n <lvmname> <volgrpname> ==========>create a lvm volume
+
+lvresize -L +1G /dev/<nameofvgrp>/<nameoflvm>==========>resize the lvm
+
+pvs=====>to display the pysical volume
+vgs======>to display the vggrp
+lvs=======>list the lvm partitions
+
+pvdisplay=======>list the detailed pysical volume
+
+vgdisplay========>list the detailed volumegrp
+
+lvdisplay==========>the detailed lvm
+
+resize in available  space in volumegrp
+
+lvresize -L +2G /dev/vg1/lv1
+
+not having speace in vg
+
+How to add new partition to existing volume group
+	a. create normal partition
+	b. convert normal partition into physical volume by type ---- pvcreate /dev/sdb3(partition want to LVM)
+		pvs -----> to check physical disk/volume details in short
+		pvdisplay -----> to check physical disk/volume complete details.
+	c. add physical volume into "existing" volume group using command -----> vgextend <existing volume group name> /dev/sdb3(partition want to 
+		vgs: to check volume group limited details.
+	d.mount <LVM file path> <existing created directory path> -----> now LVM partition got mounted to directory
+	lvresize -L +<size of volume want to attach> <physical volume directory path from which want to logical volume increase size> -----> now LVM size got increased using new partition.
+	resize <LVM partition path> -----> kurnal not aware about added partition need to run this command.
+	now LVM partition size got increased.
+
+=======================PACAGE INSTALLER USING  RPM===================================
+
+1. things need to check before installing package
+	a. need to check all supporting/dependency packages(eg: java, python) available in our server before installing new package.
+	b. need to check does available package version will support our OS or not.
+
+2. rpm -qip <package full name .rpm> -----> to check details of package before installing.(-qip: Query, Install package details, Post installation)
+3. rpm -qpR <package full name .rpm> -----> to check list of dependency package details before installation new package.(-qpR : Query, Package, Dependency)
+4. rpm -qf <command path (eg: /bin/cat)> -----> to check from which package command is running/working.(-qf : Query, File)
+5. rpm -ql <package name> -----> to check list of files related to installed packages (-ql : Query, List)
+6. rpm -Uvh <package full name .rpm> -----> used to update package with new version.(-Uvh : Update, Verbos, Hash)
+7. rpm -e <package name> -----> to uninstall/erase an installed package. (-e erase)
+
+
+*****  Steps to Installing ios file for LINUX without internet TEMPORAY.
+	a. create a directory and mount ios file to the directory using command -----> mount -o loop <iso file name> <newly created directory path>
+	b. check does iso file mounted or not using -----> df -h command
+	c. CD to the newly created file where iso file present---then CD go to Package directory
+		just like to install software in windows .exe file will be used, same as for LINUX using .rpm(RED Hat Package Manager) file.
+	d. run "rpm --checksig <any 1 package from iso file> -----> to check does we have valid package or not with this command.
+		get output -----> kernel-debug-devel-2.6.32-279.el6.x86_64.rpm: RSA sha1 ((MD5) PGP) md5 "NOT OK" (MISSING KEYS: (MD5) PGP#fd431d51)
+		package should be OK
+	e. rpm -qa -----> shows package available/already installed in server.(-qa : Query, All)
+	f. rpm -ivh <package to be install> -----> to install specific package. (-ivh: Install, Verbos, Hash(/))
+	g. rpm -qi <package name> -----> to check does package got installed successfully or not.(-qi Query, Installed package details)
+
+Note:
+	Demerits of rmp command
+	a. rpm command having lot of dependency.
+	b. to install package need to be in same directory where iso file is present.
+	c. rmp command not recognizes dependency packages, even dependency packages available in ios file.
+
+	** to overcome above difficulties yum command will be used locally.
+		yum can be configured only if rpm is present
+	
+***** Steps to Install ios file for LINUX PERMANENT repositories using yum configuration
+	a. yes | cp -rvf <rpm mounted directory path> <yum directory path> -----> copy rpm files from mounted directory to yum directory
+	b. cd /etc/yum.repos.d, make a directory with extension .repo -----> where all packages are saved.
+		repository means where all packages saved for permanent package installation.
+	c. type below content in .repo extension file using vim command.
+		[MASTER]
+		name=MASTER   
+		baseurl=file://<path of yum file>     
+		enabled=1--------------------------------- 95% of
+
+ time MASTER repository will be used
+		gpgcheck=0 
+
+		[MASTER2]
+		name=MASTER2   
+		baseurl=file://<path of yum file>     
+		enabled=0--------------------------------- for some particular cases MASTER2 repository will be used   
+		gpgcheck=0   
+	d. yum clean all -----> used to refresh repositories
+	e. yum repolist -----> Display the configured software repositories
+		
+
+08/07/2022
+1. yum list all -----> show packages available.
+2. yum list installed -----> shown installed packages.
+3. yun remove <package name> -----> removes/uninstall package.
+4. yum info <package name> -----> to know details of package.
+5. yum install <package name> -----> to install package.
+6. yum deplist <package name> -----> shows dependency packages.
+7. yum provides <application command path(output of "which <command name>"> -----> shows package name using command path.
+8. yum update <package name> -----> updates particular package
+9. yum update all -----> update all the packages.
+10. yum update all -x <package not to be update name> -----> updates all the packages except package which you mentioned in -x <package name>.
+11. yum grouplist -----> shows list of group packages available.
+12. yum groupinstall <package group name> -----> install all packages in group.
+13. yum groupremove <package group name> -----> remove/uninstall all packages belongs to particular group.
+14. yum groupupdate <package group name> -----> update list of packages belongs to group.
+15. yum repolist all -----> Displays both enabled and disabled configured software repo list.
+16. yum --enablerepo=<disabled repo name> install <package name> -----> to install package present in disabled repo list.
+
+
+***********************************File Transfer Protocol*****************************
+
+ftp port:21
+package:vsftpd
+configuration file: /etc/vsftpd/vsftpd.conf
+
+in master and clinet server to hit this three commands
+
+getenforce================>to get a mode of server
+
+******************************************************************************************************************************************
+there is three modes in the server
+
+	a. enforcing = 1---No one can access server.
+	b. permissive = 0--With some constraints others can access server.(here IP's will be monitored on regular bases, if there in any )
+	c. disabled (need to be done in configuration file)----Everyone can access server.
+*******************************************************************************************************************************************
+
+setenforce 0============>to set a mode 0 permissive
+
+service iptables stop==========> to stop the service iptables 
+
+yum install vsftpd -y============> to install the vsftpd package in master and client server(to copy the ftp package) and hit------> rpm -ivh <ftp package>
+
+cd /var/ftp/pub/=====>to default ftp folder installed by vsftpd package
+
+service vsftpd restart=============>in master server restart the sevice
+
+ftp <ipaddress>================>to connect the ftp to the master server 
+Name:anonymous
+passwd:none_passwd
+
+ftp>cd pub
+pub>ls -ltr
+
+get <filename>==========>to download the file in current directory
+mget <file name-1> <file name-2> <file name-3>.... -----> used to download multiple files from another server.
+
+to upload data the client using ftp
+
+mkdir /var/ftp/<nameof dir>=======>to create a directory
+
+chmod 777 <nameof dir>==========>permission 777 to the directory
+
+chown ftp:ftp <nameof dir> ==========>change owner to ftp:ftp
+
+to enable the upload rights to ftp in master server make configureation
+
+vim /etc/vsftpd/vsftpd.conf
+
+jump to 27 line 
+to remove the #tag begining of anon_upload_enable=YES
+
+to restart the vsftpd service
+
+then the client upload the file in ftp server
+put <filename> in the ftp <uplad_folder>
+
+***********yum client for pacaksge installation client server***********
+======= master server========
+Step for sharing complete directory in public in master server
+1. cd /etc/yum.repos.d and change content as below.
+		[MASTER]
+		name=MASTER   
+		baseurl=file:///var/ftp/pub/yum/  
+		enabled=1
+		gpgcheck=0
+2. yum clean all
+3. yum repolist -----> check available packages
+4. service iptables stop---- type this command in sender and receiver servers for firewall control
+5. service vsftpd start -----> start service vsftpd in master server
+====in client server======
+setenforce 0==========>set a permissive mode
+service iptables stop
+2. cd /etc/yum.repos.d -----> delete all .repo files from directory.
+3. create file with .repo extension in /etc/yum.repos.d directoru and enter below content.
+	[CLIENT]
+	name=[CLIENT]
+	baseurl=ftp://<master server IP address>/pub/<shared directory path>
+	enabled=1
+	gpgcheck=0
+now Directory got shared
+
+================nfs (network file system for partition)===================================
+
+1. yum install nfs*------install nfs package in master and receiver server.
+2. vim /etc/exports -----exports is configuration file for NFS(only in master server)
+	<paste complete partition path> *(rw,sync)----type in exports file.(* means partition will be shared globally who are using this network)
+3. /etc/init.d/rpcbind start -----> start backend NFS service in both sender and receiver servers.
+4. service nfs restart -----> restart NFS service in sender and receiver server, if all services not started need to execute "service nfs restart" once again.
+5. exportfs -rv -----> execute command in master server
+6. showmount -e <master server IP address> -----> execute command in receiver server.
+7. mkdir /var/<new directory name> -----> make directory in receiver server to mounted shared partition.
+8. mount <master server IP address>:<paste the shared partition path> <newly created directory name> -----> to view partition in linux, need to mount partition to receiver directory.
+9. df -h -----> used to check does shared partition able to view.
+10. chmod 777 <master server shared partition> -----> if receiver not able to upload data in partition, need to changer permission for shared partition.
+Now sender and receiver shared partition, now both can read and write on partition.
+
+
+============web server hosting====================
+yum install httpd -y ===========>to install http package
+default path creating in /var/www/html/
+edit config in vim /etc/httpd/conf/httpd.conf
+
+<VirtualHost <abhi-2.linux.com>:80>=======>here 80 is a default port for httpd
+    ServerAdmin <root@abhi-2.inux.com>=========>root@abhi-2.inux.om
+    DocumentRoot /var/www/html/index.html============>file create path index.html
+    ServerName abhi-2.linux.com============>hostname
+    ErrorLog logs/dummy-host.example.com-error_log
+    CustomLog logs/dummy-host.example.com-access_log common
+</VirtualHost>
+
+save the file then
+create a file in cat /var/www/html/index.html
+<h1>hello_world</h1>
+
+file created
+
+service httpd restart==========>to restart the service to host the localserver
+then open browser type the http://<ip of ur server> to shown that file in gui 
+
+in command line
+
+wget "http://ipaddress"========>web page properly working or not 
+200----->work properly
+400------->did't work
+
+curl "http://ipaddress"=======>to show the web page file
+
+if want create a sub-file in webserver
+
+<VirtualHost 192.168.244.129:80>
+    ServerAdmin root@localhost.localdomain
+    DocumentRoot /var/www/html
+    alias <foldername> /var/www/html/<foldername>
+    ServerName localhost.localdomain
+    ErrorLog logs/dummy-host.example.com-error_log
+    CustomLog logs/dummy-host.example.com-access_log common
+</VirtualHost>
+
+to check webpage http://ipaddress/<foldername> in browser
+
+
+======================================================================
+SSH (Secure Shell) - Port 22
+HTTP (Hypertext Transfer Protocol) - Port 80
+HTTPS (HTTP Secure) - Port 443
+FTP (File Transfer Protocol) - Port 21
+SMTP (Simple Mail Transfer Protocol) - Port 25
+DNS (Domain Name System) - Port 53
+DHCP (Dynamic Host Configuration Protocol) - Ports 67 (server) and 68 (client)
+NTP (Network Time Protocol) - Port 123
+MySQL Database Server - Port 3306
+PostgreSQL Database Server - Port 5432
+Telnet - Port 23
+POP3 (Post Office Protocol version 3) - Port 110
+
+
+
+
+EXTRA_COMMMANDS
+
+cal <year> ============>get a particular year calander
+sed "s/<old content>/<new content>/" <filename> =================>replace a content without entering a file
+
+in ubuntu
+
+useradd command work  but couldn,t create a home directory
+ to use the command ====>useradd -d /home/<username> <user_name> (or) adduser <username> 
+
+man <command name> ===============>get a user manual for this command
+
+wall ====================> to send a message current logedin users
+
+at <time> then enter
+at><type a commond > >>op.txt
+ctrl+d to exit to schedule the job at time============>its a another command alter for crontab 
+
+how to use a calculator in terminal ============>bc 
+
+type quit command to quit the calculator
+
+iostat ===============> to check moniter the disk and cpu and avg of cpu kernel version all things
+
+
+difference between crontab and at ============>crontab is repeat the schedule all times but at is a one time job schedule
+
+sed -n "<linenumber>p" <filename> (or) tail -n <number of line> <filename> |head -n 1 ======================>for only particular line should print command 
+
+
+****************SUBSCRIPTION_MANAGER(RED HAT SATILLITE)***************
+subscription-manager remove --all =================>remove the default subscriptions
+subscription-manager status ===============>check the status
+subscription-manager register --force ==============>to register the subscription using mail register on web and passwd
+subscription-manager refresh ===========>to refrech the subscriptions
+subscription-manager list --available ==========>to capture the pool id option copy the pool id 
+subscription-manager attach --pool=<poolid>
+subscription-manager list
+ls -ltr /etc/yum.repos.d/
+-rw-r--r--. 1 root root 398903 May 18 03:52 redhat.repo ------------>show this file should confiremed the setilite should be connect to this server
+to directly install yum install <package name > to install t
+he package diractly
+
+
+*********************DNS**************************
+
+package name :bind
+port_number:53
+configuration_file: /etc/named.conf
+
+
+abbrevations
+
+A        Address Record
+PTR	 Pointer record
+NS	 Name Server
+MX	 Mail Exchanger
+SOA	 state of Authority 
+IN	 INTERNET
+
+
+*two zone files are there 
+	*forward ====>name to IP Address
+	*reverse ====>IP Address to Name
+
+step 1:
+
+yum install bind* -y  ============> to install the service package
+service named start   =============>to start the service
+firewall-cmd --permanent --add-port=53/tcp
+firewall-cmd --permanent --add-port=53/udp
+
+ 
+step2:
+
+vim /etc/named.conf
+
+options {
+        listen-on port 53 { 192.168.244.134; };======================>to change the server ipaddress
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursing-file  "/var/named/data/named.recursing";
+        secroots-file   "/var/named/data/named.secroots";
+        allow-query     { any; };===================> put any because of the server to allow the all server to access the dns
+
+
+zone "example.in" IN {
+		type master;
+		file "filename.zo"; ================>this is for forward zone
+		allow-uptade {none;};
+};
+
+zone "244.168.192.in-addr.arpa" IN {
+		type master;
+		file "filename1.zo";===============>this is for reverse zone file
+		allow-uptade {none;};
+};
+
+
+to save the file.
+
+step 3:
+
+to go to ls -ltr  /var/named/
+
+total 16
+-rw-r-----. 1 root  named  152 Jun 21  2007 named.localhost
+-rw-r-----. 1 root  named  168 Dec 15  2009 named.loopback
+-rw-r-----. 1 root  named  152 Dec 15  2009 named.empty
+-rw-r-----. 1 root  named 2253 Apr  5  2018 named.ca
+drwxrwx---. 2 root  named    6 Sep  4  2019 dyndb-ldap
+drwxrwx---. 2 named named    6 Oct  3  2023 slaves
+drwxrwx---. 2 named named    6 Oct  3  2023 dynamic
+drwxrwx---. 2 named named    6 Oct  3  2023 data
+drwxr-x---. 7 root  named   61 May 18 04:04 chroot
+
+to rename this file "named.localhost" to <filename.zo>
+and "named.loopback" to <filename1.zo> mentioned  in named.conf file
+
+cp -vf named.localhost <changed.zo>===> forward file name
+cp -vf named.loopback <changed.zo>=======>reversed file name
+
+step 4:
+
+in filename.zo file to edit 
+
+
+$TTL 1D
+@       IN SOA sakthi.example.in. root.example.in. (   =============> first part "sakthi.example.in." is hostname and any domain and "root.example.in." this part is owner of this domain
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+       [ NS      @
+        A       127.0.0.1
+        AAAA    ::1]========== to remove this section to add this content
+
+@       IN      NS      sakthi.example.in.   =======>server dns
+@	IN	A	192.168.244.134
+sakthi  IN      A       192.168.244.134	 =========>server ip
+client1 IN      A       192.168.244.129		=====>client1 ip
+
+	
+step 5:
+in filename1.zo file to edit
+
+$TTL 1D
+@       IN SOA  sakthi.example.in. root.example.in. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+@       IN      NS      sakthi.example.in. ==============>this is server dns
+@	IN	PTR	example.in. ================>give the domain name
+134     IN      PTR     sakthi.example.in. ==============>subnet mask nuber with their server dns
+129     IN      PTR     client1.example.in.   =============>subnet of client with their host and this dns domain
+ 
+~
+
+to save this file
+
+chown root:named <filename.zo>
+and
+chgrp named <filename1.zo> ==============>because of the named to fetch the info from this two files
+named-checkconf -z /etc/named.conf=====================>to check thenamed.conf ok or not 
+named-checkzone forward /var/named/<filename>============>t check the forward file
+name-checkzone reverse /var/nmed/<fiename>=========>to check the reverse zone file correct  or not
+
+systemctl restart named.service or service named restart==========> to restart the service
+
+
+step 6:
+to go client server 
+
+to check hostname
+you configured in master server right or wrong
+
+syatemctl restart NetworkManager
+
+and then check
+vim /etc/resolv.conf
+
+search example.in
+nameserver <ip of master>
+
+============>is already set or not
+
+ping example.in
+
+""""""""""""""""'firewall commands""""""""""""""""""""""""
+
+sytemctl status firewalld==============>chececk the status of firewall (d for demon)
+firewall-cmd --get-active-zones =============>to check zone of firewall
+firewall-cmd --get-services =================>list the services of firewall
+yum install filewalld firewall-config ==============>to install firewall configurationfirewall-cmd --zone
+firewall-cmd --zone=public --list-all  ==============>to list all the services at public
+firewall-cmd --permanent --zone=public --add-port=800/tcp =========>to add a port number to public
+
+
+************************samba server configuration************************
+
+packages required:samba,samba-client,samba-common
+configuration file : /etc/samba/smb.conf
+service:smb and nmb
+
+
+step 1:
+to create a to directories public and private 
+
+ls -ldZ public ============>to list the selinux fcontext 
+
+drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 public
+
+ls -ldZ private
+
+drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 private
+
+to change the selinux fcontext 
+
+ {{chcon -t samba_share_t <folder_name>}}  or
+
+{{semanage fcontext -a -t  samba_share_t '/public(/.*)?'==========>to change the fcontext 
+
+restorecon -vvRF /public/==============>to change the :object_r:default_t to 
+restorecon reset /public context unconfined_u:object_r:default_t:s0->system_u:object_r:samba_share_t:s0
+
+
+semanage fcontext -a -t  samba_share_t '/private(/.*)?'==========>to change context of private
+
+restorecon -vvRF /private/==============>to restore the fcontext for private folder
+
+restorecon reset /private context unconfined_u:object_r:default_t:s0->system_u:object_r:samba_share_t:s0
+
+}}
+
+chmod 777 /public/
+chmod 777 /private/
+
+step 2:
+
+go to /etc/samba/smb.conf file
+
+[global]
+        workgroup = WORKGROUP===============>to change any to WORKGROUP 
+        security = user
+
+        passdb backend = tdbsam
+
+        printing = cups
+        printcap name = cups
+        load printers = yes
+        cups options = raw
+
+add this below lines .....................
+
+[samba-public]
+path=/public
+public=yes
+browseable=yes
+writeable=yes
+
+[samba-private]
+path=/private
+comment=Private samba share
+public=no
+valid users=user1 user2
+write list=user1
+read list=user2
+
+save this file
+
+testparm ----------->to check to edited conf file correct or not show ok is correct
+then create a user 
+
+useradd user1
+
+smbpasswd -a user1==============>to set a samba passwd
+
+useradd user2
+
+smbpasswd -a user2==============>to set a samba passwd
+
+systemctl start smb nmb==========>to start the service
+
+systemctl enable smb nmb==========>to enable the service at bootime
+
+[root@sakthi samba]# firewall-cmd --permanent --add-service=samba
+success
+[root@sakthi samba]# firewall-cmd --reload
+success
+
+
+in client server
+
+[root@abhi ~]# yum install samba-client cifs utils===========>packages
+
+[root@abhi ~]# smbclient -L 192.168.244.135
+Enter SAMBA\root's password:
+Anonymous login successful
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        print$          Disk      Printer Drivers
+        samba-public    Disk
+        samba-private   Disk      Private samba share
+        IPC$            IPC       IPC Service (Samba 4.10.16)
+Reconnecting with SMB1 for workgroup listing.
+Anonymous login successful
+
+        Server               Comment
+        ---------            -------
+
+        Workgroup            Master
+        ---------            -------
+        WORKGROUP            SAKTHI
+[root@abhi ~]# mount -o guest //192.168.244.135/<sharename> <mountlocation>===================>public samba
+
+[root@abhi ~]# mount -o username=user1 //192.168.244.135/<sharename> smb===================>private samba
+Password for user1@//192.168.244.135/samba-private:  *****
+[root@abhi ~]# df -h
+Filesystem                       Size  Used Avail Use% Mounted on
+devtmpfs                         900M     0  900M   0% /dev
+tmpfs                            910M     0  910M   0% /dev/shm
+tmpfs                            910M  9.7M  901M   2% /run
+tmpfs                            910M     0  910M   0% /sys/fs/cgroup
+/dev/sda3                         18G  6.3G   12G  36% /
+/dev/sda1                        297M  132M  166M  45% /boot
+tmpfs                            182M     0  182M   0% /run/user/0
+/dev/loop0                       4.3G  4.3G     0 100% /yum
+//192.168.244.135/samba-private   18G  6.1G   12G  35% /root/smb
+[root@abhi ~]#vim /etc/fstab
+//192.168.244.135/samba-public  /public cifs    defaults,_netdev,gusts 0 0
+
+//192.168.244.135/samba-private /private        cifs    defaults,_netdev,cred=/etc/abc.txt
+
+[root@abhi ~]#vim /etc/abc.txt
+username=username1
+password=*****
+[root@abhi ~]#chmod 600 /etc/abc.txt
+[root@abhi ~]#mount -a
+
+======================NGINX WEbserver====================================
+
+yum install nginx-y
+
+
+configuration file: /etc/nginx/nginx.conf
+fie_location: /usr/share/nginx/html/
+
+
+vim /etc/nginx/nginx.conf
+
+
+to umcomment the tls enable server for https connection
+save the file 
+
+step2:
+
+mkdir -p /etc/pki/nginx/private/
+
+ 
+openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/nginx/private/server.key -x509 -days 365 -out /etc/pki/nginx/server.crt
+
+
+country:IN
+state:TN
+locality:bargur 
+organisation
+
+
+firewall-cmd --permanent -add-service=https
+firewall-cmd --reload
+systemctl restart nginx
+
+
+=========================DHCP CONFIGRATION====================
+package name:dhcp
+configuration file: /etc/dhcp/dhcpd.conf
+
+step 1:
+yum install dhcp===========>to install dhcp package
+
+[root@abhi dhcp]# cat dhcpd.conf
+#
+# DHCP Server Configuration file.
+#   see /usr/share/doc/dhcp*/dhcpd.conf.example
+#   see dhcpd.conf(5) man page
+#
+[root@abhi dhcp]# cp -vf /usr/share/doc/dhcp*/dhcpd.conf.example /etc/dhcp/dhcpd.conf
+cp: overwrite ‘/etc/dhcp/dhcpd.conf’? y
+‘/usr/share/doc/dhcp-4.2.5/dhcpd.conf.example’ -> ‘/etc/dhcp/dhcpd.conf’
+[root@abhi dhcp]# vim dhcpd.conf
+# dhcpd.conf
+
+
+default-lease-time 600;
+max-lease-time 7200;
+
+host fantasia {
+  hardware ethernet 00:0c:29:eb:5f:91;
+  fixed-address 192.168.244.160;
+}
+
+# A slightly different configuration for an internal subnet.
+subnet 192.168.244.0  netmask 255.255.255.0 {
+  range 192.168.244.130  192.168.244.137;
+#  option domain-name-servers  <ipaddress>;
+#  option domain-name "internal.example.org";
+  option routers 192.168.244.1;
+  option broadcast-address 192.168.244.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+firewall-cmd --permanent --add-service=dhcp
+firewall-cmd --reload
+
+in client server
+
+go to vim /etc/sysconfig/network-scripts/ifcfg-ens33
+
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=dhcp
+
+to set the dhcp mode 
+and systemcyl restart network
+
+to open in master server tails /var/log/messages
+see the log messages
+
+======================SED(Steam Editer)=======================
+
+sytax:
+	sed 'np' <fil.txt> **************>here n is a number
+	
+example:
+	[root@sakthi python_automation]# sed -n(exclude) '41p' user.py
+        os.system(cmd)
+
+sed -n '$p' <file name> ----------->its printing a last line
+
+sed -n '3,6p' <file_name>------------>to printing 3 to 6 lines are printing
+
+sed -n '3,6!p' <file_name>------------>to printing exclude 3 to 6 line then  printing
+sed -n '1~4p' <file_name>==========>to print one to 4line jump to print (1,4,8,12)
+
+sed -n '/print/p' user.py------------------>'/anything/p' is a pattern to fetch the data from the file
+
+sed -n '/pattern/w <fle_name>' <original fule name> ====================>to copy the pattern matched lines should be store i a fle_name file
+
+ sed -n  -e '/print/w print.txt' -e '/sarch/w search.txt' user.py---------------->to copy the pattern to save the multiple files
+
+
+sed 's/oldcontent/newcontent/g' <file_name.txt> ------------------------------>to replace the old content
+
+sed 's/oldcontent/new/2' <file.txt> ------------------>to change a content of second occurance of file 
+
+sed '4s/old/new/g" file.txt ------------------->to change old to new _content 4line all occurance
+
+sed '4,$s/old/new/g" file.txt ------------------->to change old to new _content 4to last line all occurance
+
+sed '/ref/s/old/new/g' file.txt ------------------> if exist a line ref content only the old content to change a new content
+
+sed s/^old.*<con>/new/g'=====================>to rplace a old content with one character and one or more till <con> to replace the contents to new content
+
+sed '/<content>/d' <file_name.txt> --------------> to delete a pattern in this file
+
+sed '1,/content/d' <file_name> ---------------->to delete 1 line to till this content matched
+
+sed '1i <content>' <file>---------------------->to insert a content at line 1
+
+sed '2a <content>' <file>-------------->to insert after 2st line to insert a content
+
+in here sed -i 'p' file_name ==============>to edit a original file using -i option
+
+
+===================awk command=========================
+
+awk is used to data extraction
+
+awk--version ===========>to show the awkversion
+
+syntax :
+	ls -ltr|awk '{print $2}'  --------->to print a second cclumn
+	
+	ls -ltr|awk '{print $NF}' ----------->here NF defines last column of ls -ltr command print
+
+	echo "hello Sakthi"|awk '{$2="abhi";print $0}' ----------print 2nd column of echo command the "Sakthi" should be change abhi and the print $0 should print the command of echo
+
+anither example :
+ls -ltr |awk '{$NF="ranjitha";print $0}' =============>to change the last column nmn name shouls ranjitha and print the command 
+out put is below 
+[root@sakthi python_automation]# ls -ltr |awk '{$NF="ranjitha";print $0}'
+total ranjitha
+-rw-r--r--. 1 root root 78 Jul 5 22:27 ranjitha
+-rw-r--r--. 1 root root 335 Jul 5 22:47 ranjitha
+-rw-r--r--. 1 root root 2589 Jul 5 23:58 ranjitha
+-rw-r--r--. 1 root root 2075 Jul 6 00:49 ranjitha
+-rw-r--r--. 1 root root 2072 Jul 6 00:51 ranjitha
+-rw-r--r--. 1 root root 547 Jul 6 01:20 ranjitha
+-rw-r--r--. 1 root root 829 Jul 6 23:34 ranjitha
+-rw-r--r--. 1 root root 1088 Jul 6 23:44 ranjitha
+-rw-r--r--. 1 root root 86 Jul 6 23:47 ranjitha
+-rw-r--r--. 1 root root 1515 Jul 7 00:09 ranjitha
+-rw-r--r--. 1 root root 941 Jul 7 00:37 ranjitha
+-rw-r--r--. 1 root root 516 Jul 7 01:18 ranjitha
+-rw-r--r--. 1 root root 55 Jul 11 13:28 ranjitha
+drwxr-xr-x. 2 root root 6 Jul 11 14:35 ranjitha
+-rw-r--r--. 1 root root 2116 Jul 11 14:42 ranjitha
+-rw-r--r--. 1 root root 758 Jul 11 14:53 ranjitha
+-rw-r--r--. 1 root root 714 Jul 11 22:40 ranjitha
+-rw-r--r--. 1 root root 26 Jul 11 22:41 ranjitha
+-rw-r--r--. 1 root root 0 Jul 11 22:45 ranjitha
+-rw-r--r--. 1 root root 592 Jul 11 22:59 ranjitha
+
+awk '/password/ {print}' user.py======================> its a pattern search command in awk command in a file 
+
+ls -ltr |awk -F "." '{print $2}' ====================> to use -f option to separate a column using "." character to print a column 2
+
+output is 
+[root@sakthi python_automation]# ls -ltr |awk -F "." '{print $2}'
+
+ 1 root root   78 Jul  5 22:27 os
+ 1 root root  335 Jul  5 22:47 subtest
+ 1 root root 2589 Jul  5 23:58 sur_1
+ 1 root root 2075 Jul  6 00:49 user
+ 1 root root 2072 Jul  6 00:51 userad
+ 1 root root  547 Jul  6 01:20 me
+ 1 root root  829 Jul  6 23:34 file_handling
+ 1 root root 1088 Jul  6 23:44 file_handling_1
+ 1 root root   86 Jul  6 23:47 test
+ 1 root root 1515 Jul  7 00:09 file_handling_2
+ 1 root root  941 Jul  7 00:37 file_handle_4
+ 1 root root  516 Jul  7 01:18 test_1
+ 1 root root   55 Jul 11 13:28 jul_11
+ 2 root root    6 Jul 11 14:35 jul_12
+ 1 root root 2116 Jul 11 14:42 user_1
+ 1 root root  758 Jul 11 14:53 con
+ 1 root root  714 Jul 11 22:40 p
+ 1 root root   26 Jul 11 22:41 ragu
+ 1 root root    0 Jul 11 22:45 search
+ 1 root root  592 Jul 11 22:59 print
+
+
+[root@sakthi python_automation]# ls -ltr |awk -F "." '{print $3}'
+
+py
+py
+py
+py
+py
+py
+py
+py
+txt
+py
+py
+py
+
+
+py
+py
+txt
+txt
+txt
+txt
+
+
+here after . is column example (print.txt)
+
+
+
+ ls -ltr |awk   ' NR==1 {print }' ==============> here NR==<number> indigates a row number should print here output is 
+
+[root@sakthi python_automation]# ls -ltr |awk   ' NR==3 {print }'
+-rw-r--r--. 1 root root  335 Jul  5 22:47 subtest.py
+
+its another example :
+
+[root@sakthi python_automation]# ls -ltr |awk  -F "."  ' NR==3 {print $2}'
+ 1 root root  335 Jul  5 22:47 subtest
+
+
+********************cut_comand***********************************************
+
+ls -ltr|cut -d(delimeter) ":" -f(field)2 ====================>to display the second  column should be display here ":" is a separator to superate
+
+read -s(secure) ======================>to hide the input in shell script
+
+ 
+**********************************************************************************
+
+important _paths
+
+/etc/ssh/sshd_config
+/etc/sysconfig/network-scripts/ifcfg-eth33
+/etc/sysconfig/networks
+/etc/hosts
+/etc/vsftpd/vsftpd.conf
+/etc/yum.repos.d/repo_name
+/etc/httpd/conf/httpd.conf
+/etc/named.conf
+/etc/openldap/slapd./cn=config/olcDatabase{1}{2}
+/etc/
+
+
+ports
++++++++++++++++
+
+ftp=20,21
+ssh=22
+telnet=23
+smtp=25
+dns=53
+dhcp=67,68
+http=80
+https=443
+ntp=123
+pop3=110
+iamp=143
+samba=168
+nfs=2049
+openldap=389
+ldap over ssl=636
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 

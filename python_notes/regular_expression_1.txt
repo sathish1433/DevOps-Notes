@@ -1,0 +1,362 @@
+#Below example for searching pattern in string
+'''
+import re
+k="praveenajay_san"
+pa="p"
+sear=re.search(pa,k)
+print (dir(sear))
+print (sear.group())
+
+import re
+k="praveenajay_san"
+pa=re.compile(r'e')
+sear=re.search(pa,k)  ###Will return only first search  match
+print (sear.group())
+
+###Below example throw errro since 'z' not found in variable k
+import re
+k="praveenajay_san"
+pa=re.compile(r'z')
+sear=re.search(pa,k)  ###Will return only first search  match
+print (sear.group())
+
+##Below example we are handling error using try  and except if pattern doesnt found
+import re
+k="praveenajay_san"
+pa=re.compile(r'n')
+try:
+    sear=re.search(pa,k)  ###Will return only first search  match
+    print (sear.group())
+except Exception as e:
+
+    print ("Pattern doesnt found in string {0} and below is error\n{1} ".format(k,e))
+
+
+import re
+k=input("Enter the string\n")
+pa=input("Enter the pattern to be searched\n")
+pat_co=re.compile(r'{0}'.format(pa))
+set=re.search(pat_co,k)
+try:
+    print (set.group())
+    print ("Searched string {0} found in {1} and its first match of search".format(pa,k))
+except:
+    print ("Searched string not {0} not found in {1}".format(pat_co,k))
+
+
+
+
+import re
+k=input("Enter the string\n")
+pat_co=re.compile(r'san|ajay|sriram')
+set=re.search(pat_co,k)
+try:
+    print (set.group())
+    print ("Searched string {0} found in {1} and its first match of search and first match is {2}".format(pat_co,k,set.group()))
+except:
+    print ("Searched string not {0} not found in {1}".format(pat_co,k))
+
+###Below example search pattern using or condition from main string
+import re
+k=input("Enter the main string\n")
+st1=input("Enter the pattern1\n")
+st2=input("Enter the pattern2\n")
+st3=input("Enter the pattern3\n")
+pat_co=re.compile(r'{0}|{1}|{2}'.format(st1,st2,st3))
+set=re.search(pat_co,k)
+try:
+    print (set.group())
+    print ("Searched string {0} found in {1} and its first match of search and first match is {2}".format(pat_co,k,set.group()))
+except:
+    print ("Searched string not {0} not found in {1}".format(pat_co,k))
+
+
+## OR condition with search with pat_al or pat_num in main string
+import re
+k=input("Enter the main string\n")
+pat_al=re.compile(r'[a-zA-Z]')
+pat_num=re.compile(r'[0-9]')
+setu=re.search(pat_al,k) or re.search(pat_num,k) ##here if alpabhet or number is there it will return true
+try:
+    print (setu.group())
+except:
+    print ("searched Pattern doesnt found")
+
+
+### AND condition with search with pat_al or pat_num in main string
+import re
+import re
+k=input("Enter the main string\n")
+pat_al=re.compile(r'[a-zA-Z]')
+pat_num=re.compile(r'[0-9]')
+setu=re.search(pat_al,k) and  re.search(pat_num,k) ##here if alpabhet  and number shpld be  there it will return true
+try:
+    print (setu.group())
+except:
+    print ("searched Pattern  doesnt found")
+
+### Below example we are searching with combination of multiple alphabet  with multiple number
+
+import re
+k=input("Enter the main string\n")
+pat_al=re.compile(r'[a-z][a-z][0-9][0-9]')
+setu=re.search(pat_al,k)
+try:
+    print (setu.group())
+    print ("Pattern {0} found in string {1}".format(pat_al,k))
+except:
+    print ("searched Pattern {0}  doesnt found".format(pat_al))
+
+
+
+##regular  expression
+# .  ===> any single character
+# + ===========> one or more occurence
+# {} =====> range of occrentce
+## ^ ====> beginning
+## $ ====> end
+## ? ===> may exists or may not exsistrs
+
+## Below example using multiple occurences
+import re
+k=input("Enter the main string\n")
+pat_al=re.compile(r'[a-z]+[0-9]+_+')
+setu=re.search(pat_al,k)
+try:
+    print (setu.group())
+    print ("Pattern {0} found in string {1}".format(pat_al,k))
+except:
+    print ("searched Pattern {0}  doesnt found".format(pat_al))
+
+### Below example for searching patten with beginning and end whjch  contains alphabet number and underscore
+import re
+k=input("Enter the main string\n")
+pat=re.compile(r'^[a-zA-Z0-9_]+$')
+set=re.search(pat,k)
+try:
+    print ("Pattern  {0} found  in string {1} and first match is {2}".format(pat,k,set.group()))
+except:
+    print ("Pattern doesnt exsists and it conatins other alphabet and number")
+
+
+### search  next 2 alphabet there must be one character it can number,alphabet,special symbol, and space too
+import re
+k=input("Enter the main string\n")
+pat=re.compile(r'^[a-zA-Z]{2}.') ###search for next 2 alphabet there must be one charatdre it can num,aphnet, special symbol indlucing spave
+set=re.search(pat,k)
+try:
+    print ("Pattern  {0} found  in string {1} and first match is {2}".format(pat,k,set.group()))
+except:
+    print ("Pattern doesnt exsists")
+
+
+### Find all will return all matches (where as re.search will return only first match)
+import re
+k=input("Enter the main string\n")
+pa=input("Enter the pattern to be searched\n")
+pat=re.compile(r'{0}'.format(pa))
+fin_e=re.findall(pat,k)
+print (len(fin_e))
+if (len(fin_e)>0):
+    print ("Atleast one match found in string{0}".format(k))
+    print ("Below are the matches found in string \n{0}\ncount of matches is {1}".format(fin_e,len(fin_e)))
+else:
+    print ("No match found in string {0}".format(k))
+
+
+import re
+k=input("Enter the main string\n")
+pat=re.compile(r'[0-9]{3}[a-z]')
+fin_e=re.findall(pat,k)
+print (len(fin_e))
+if (len(fin_e)>0):
+    print ("Atleast one match found in string{0}".format(k))
+    print ("Below are the matches found in string \n{0}\ncount of matches is {1}".format(fin_e,len(fin_e)))
+else:
+    print ("No match found in string {0}".format(k))
+
+
+
+#### re.search on file
+
+##Below example for displaying line where praveen is found
+import re
+pat=re.compile(r'praveen')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+
+import re
+pat=re.compile(r'praveen')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+##Below example for displaying line where praveen or ajay is found
+import re
+pat=re.compile(r'praveen|ajay')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+
+##Below example for displaying line where praveen  and ajay is found
+
+import re
+pat=re.compile(r'praveen')
+pat1=re.compile(r'ajay')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i) and re.search(pat1,i):
+        print (i.strip())
+
+##Display lines which starys with praveen and ends with ajay
+
+import re
+pat=re.compile(r'^praveen')
+pat1=re.compile(r'ajay$')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i) and re.search(pat1,i):
+        print (i.strip())
+
+
+
+##Display lines which starts with praveen and ends with ajay
+
+import re
+pat=re.compile(r'^praveen.*ajay$')
+op=open('D:\pythontest\\test.txt','r')
+for i in op:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+##Display lines which contains  starts with praveen and ends with ajay and its line number
+import re
+pat=re.compile(r'^praveen.*ajay$')
+op=open('D:\pythontest\\test.txt','r')
+lin=0
+for i in op:
+    lin=lin+1
+    if re.search(pat,i):
+        print ()
+        print ("Line content is {0} and its line number is {1}".format(i.strip(),lin))
+
+
+
+###Display all lines where praveen is not present with line number
+import re
+pa=re.compile(r'praveen')
+fi=open('D:\pythontest\\test.txt','r')
+lin=0
+for i in fi:
+    lin=lin+1
+    if not re.search(pa,i):
+        print ("Content of line is {0} and line number is {1}".format(i.strip(),lin))
+
+
+### Display all lines where praveen is not present with line number and also writing into new file
+import re
+pa=re.compile(r'praveen')
+fi=open('D:\pythontest\\test.txt','r')
+newfile=open('D:\pythontest\\test_new.txt','w')
+lin=0
+for i in fi:
+    lin=lin+1
+    if not re.search(pa,i):
+        newfile.write(i.strip())
+        newfile.write('\n')
+        print ("Content of line is {0} and line number is {1}".format(i.strip(),lin))
+
+###OBJECT IVE IS Display only ips but below example showing wring output since "." is considered as single charecter after number
+import re
+pat=re.compile(r'[0-9].[0-9].[0-9].[0-9]')
+fi=open('D:\pythontest\\test.txt','r')
+for i in fi:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+
+###OBJECT IVE IS Display only ips
+import re
+pat=re.compile(r'[0-9]\.[0-9]\.[0-9]\.[0-9]')
+fi=open('D:\pythontest\\test.txt','r')
+for i in fi:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+##Dosplay only 3 digits ips
+import re
+pat=re.compile(r'[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3}')
+fi=open('D:\pythontest\\test.txt','r')
+for i in fi:
+    if re.search(pat,i):
+        print (i.strip())
+        
+
+
+
+##Dosplay lines which contains ips , it can contains another string  with ips also
+import re
+pat=re.compile(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+fi=open('D:\pythontest\\test.txt','r')
+for i in fi:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+
+##Display only lines which contains ips
+
+import re
+pat=re.compile(r'^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$')
+fi=open('D:\pythontest\\test.txt','r')
+for i in fi:
+    if re.search(pat,i):
+        print (i.strip())
+
+
+
+###Capturing blank line number in file
+import re
+pat=re.compile(r'^$')
+fi=open('D:\pythontest\\test.txt','r')
+lin=0
+for i in fi:
+    lin=lin+1
+    if re.search(pat,i):
+        print ("Blank line Numbers are {0}".format(lin))
+
+
+###save all contents except blank to new file.
+import re
+pat=re.compile(r'^$')
+fi=open('D:\pythontest\\test.txt','r')
+rem_blan=open('D:\pythontest\\removed_blanktest.txt','w')
+lin=0
+for i in fi:
+    lin=lin+1
+    if not re.search(pat,i):
+        rem_blan.write(i.strip())
+        rem_blan.write('\n')
+'''
+
+###How to replace(substitute) the more than 1 empty space with single space
+import re
+pa=re.compile(r'\s+')
+fi=open('D:\pythontest\\test.txt','r')
+rem_blan=open('D:\pythontest\\removed_blanktest.txt','w')
+lin=0
+for i in fi:
+    rep=re.sub(pa,' ',i)
+    print (rep)

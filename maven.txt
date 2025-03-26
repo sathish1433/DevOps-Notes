@@ -1,0 +1,200 @@
+*************maven********************
+
+maven installation
+------------------
+
+sudo apt-get update
+
+sudo apt install default-jdk
+
+java --v
+
+wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip
+
+unzip apache-maven-3.9.9-bin.zip
+
+mv /opt/
+
+to add this line "
+
+export PATH=$PATH:/opt/apache-maven-3.9.9/bin
+
+" in /etc/profile file
+
+mvn --v (or) mvn -version
+
+------------------------------------------------------
+MAVEN have three repositories
+
+local repository default in -----> ~/.m2/repository/ 
+
+central
+
+remote
+
+**************life cycles of maven****************
+
+ lc           goal
+----         ------
+
+ clean        **clean:to clean the previous build packages and etc...
+--------
+
+ site        **site:it generates a documentation but nowadays using swagger
+--------
+
+ default     ** validate:  it validates the project directory structure and resource files
+----------   
+             **compile: it compile a source code and junit test cases  [ junit is testing framework in java hello.java is a java file helloTest.java is a test file in java .
+             
+             if in .Net -->NUnit, 
+             
+             if in c --------> CUnit,
+              
+             if in c++ --->CPPUnit and 
+             
+             if in js,react,node ---------->Jasmine these are the test frameworks in serveral programming languages]
+             
+             **test: it will run the Junit test cases
+             
+             **package: it will create the build artifects/packages
+             
+             **install: it will stores the packages in maven local repo
+             
+             **deployment: it will store the packages in remote repo
+             
+             
+if i hit <mvn install> command in maven first run validate,compile,test,package then only executes a install command autometically.
+
+first thing u clone the repository git clone https://github.com/MithunTechnologiesDevOps/maven-standalone-application.git 
+
+tree ------>to list the files and dirs in tree form
+
+.
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── mt
+│   │               └── sample
+│   │                   └── HelloWorld.java
+│   └── test
+│       └── java
+│           └── com
+│               └── mt
+│                   └── sample
+│                       └── test
+│                           └── HelloWorldTest.java
+
+
+mvn clean package -----------> first to check local repo the packages existing or not then dosnt have required packages to download from central repo
+and execute validation,compile,test,package
+
+the output file have .jar extansion
+
+name is artifactid-version.jar
+
+from pom.xml
+
+<groupId>com.mt</groupId>
+	<artifactId>maven-standalone-application</artifactId>
+		    ----------------------------
+	<version>0.0.1-SNAPSHOT</version>
+		 --------------
+	<packaging>jar</packaging>
+		   ---
+		   
+its a default name but in pom.xml mentioned <finalname>name</finalname> that only created target jar/war/ear files
+		   
+***to change the default loacl repo
+
+vim /opt/apache-maven-3.9.9/conf/settings.xml 
+to add this line
+<localRepository>path_to_custom_path_for_local_repo_for_maven</localRepository>
+--------------------------------------------------------------------------------
+		   
+mvn clean ------------>to delete the previous taget files (output jar file and related packages)
+
+mvn package ---------->to execute all life cycles in default
+
+mvn  clean package -DskipTests ---------->to comile the test cases but skip the test lifecycle 
+
+mvn clean package -Dmaven.test.skip=true -------->to skip compile and test lifecyle
+
+mvn install ----------->to install jar package
+
+
+in case u have multiple modules in your project u want perticular modules only build
+
+mvn clean package -pl(project list) <module_name>
+
+i.e
+ in parent pom.xml files having modules tags
+ <modules>
+    <module>MavenEnterpriseApp-ear</module>
+    <module>MavenEnterpriseApp-web</module>
+  </modules>
+
+
+mvn clean package -pl MavenEnterpriseApp-ear---------->to build this module only u want multiple insert , and mention that module name
+
+
+
+reference: https://mithuntechnologies-devops.blogspot.com/search/label/Maven
+             
+             
+chatgpt notes:
+***************
+
+Basic Maven Commands
+----------------------
+Command	Description
+mvn clean	Deletes the target/ directory (removes compiled files and artifacts).
+mvn compile	Compiles the source code in the src/main/java directory.
+mvn test	Runs unit tests using JUnit/TestNG (tests inside src/test/java).
+mvn package	Compiles and packages the code into a JAR or WAR file inside target/.
+mvn install	Installs the built JAR/WAR into the local .m2 repository.
+mvn deploy	Deploys the built artifact to a remote repository (like Nexus).
+mvn validate	Validates if the pom.xml file and project structure are correct.
+mvn site	Generates project documentation (if configured).
+
+
+Commonly Used Combined Commands
+--------------------------------
+Command	Description
+mvn clean compile	Cleans and then compiles the project.
+mvn clean package	Cleans, compiles, runs tests, and packages the code.
+mvn clean install	Cleans, compiles, runs tests, packages, and installs in .m2.
+mvn clean deploy	Cleans, compiles, tests, packages, and deploys to a repository.
+
+
+Skipping Tests
+----------------
+Command	Description
+mvn package -DskipTests	Builds the package without running tests.
+mvn install -DskipTests	Installs the package locally without running tests.
+mvn test -Dtest=TestClassName	Runs a specific test class only.
+
+
+Dependency Management
+----------------------
+Command	Description
+mvn dependency:tree	Displays a tree view of dependencies.
+mvn dependency:resolve	Resolves dependencies and downloads them.
+mvn dependency:analyze	Analyzes dependencies to find unused or missing ones.
+
+
+Generating Project from Archetype
+---------------------------------
+Command	Description
+mvn archetype:generate	Creates a new Maven project from an archetype (template).
+Example:	mvn archetype:generate -DgroupId=com.example -DartifactId=myapp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+
+Running a Spring Boot Application
+----------------------------------s
+Command	Description
+mvn spring-boot:run	Runs a Spring Boot application.
+
+	     

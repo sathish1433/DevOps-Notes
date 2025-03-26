@@ -1,0 +1,488 @@
+Ansible_Documentation
+---------------------
+
+Why for Ansible:
+
+Provisioning----------->pre-setting up systems or applications, and your example of EC2 templates and Auto Scaling is a good illustration of how provisioning works in a cloud environment.
+
+configuration management -----> process of systematically managing and maintaining the configurations of systems, software, and IT infrastructure. 
+
+continous delivery 
+
+application deployment
+
+scripts
+
+
+Installation of Ansible:
+***********************
+
+if The ubuntu:
+
+apt-get install ansible -y
+
+or 
+
+apt-get install python3 && pip -y
+
+pip install ansible --break-system-packages
+
+
+ansible --version  
+
+
+mkdir /etc/ansible
+
+vim /etc/ansible/ansible.cfg
+
+[defaults]
+# Path to your inventory file
+inventory = ./hosts
+remote_user = ansible
+host_key_checking = False
+# Set the SSH timeout
+timeout = 30
+
+vim /etc/ansible/hosts
+
+[test-servers]
+
+<hostname> ansible_host=<ip> ansible_user=<username> ansible_connection=ssh or winrm ansible_password=<passwd_of_that_user> ansible_ssh_private_key_file=/path/to/private/key  (note:file permission should be 600 and file owner should be ansible)
+
+Ad-Hoc commands:
+
+ansible-inventory --list --->to list the inventory
+
+ansible -i hosts -m ping ------------> here -i (inventory) locate the custom inventory.
+
+ansible all -m ping  ------------>ping all servers  -m (module)
+
+ansible all -m shell -b -a "touch r1"  ------>-a (attribute), -b (become a privillaged user permission) creating a file
+
+(or)
+
+ansible all -m command -a "systemctl status ssh" --->here use shell or command 
+
+ansible all -m service -a "name=ssh state=started"  --------> to start a ssh service
+
+ansible all -m apt -a "name=apache2 state=present"  ---------->install a apache web browser
+
+ansible-doc -l  -------> list all modules built in in ansible -l (list)
+
+ansible all -m setup ------->detailed info of slave servers
+
+ansible all -m copy -b -a "src=./file.txt dest=/tmp/test.txt"  --------> copy modeule to copy file from host server to slave server
+
+
+Ansible_Playbooks:
+------------------
+YAML Ain't Markup Language (OR) Yet Another Markup Language
+
+importent_parameters in playbook:
+
+name	- Describes the play or task.
+hosts	- Defines target hosts.
+become	- Enables privilege escalation.
+vars	- Defines variables directly in the playbook.
+vars_files - Includes external variable files.
+tasks	- Defines a list of tasks to execute.
+handlers - Defines tasks triggered by events.
+when	- Sets conditions for task execution.
+with_items - Loops through lists in tasks.
+roles	- Includes predefined roles for modularity.
+environment - Sets environment variables for tasks.
+gather_facts - to collect detailed information (facts) about the target hosts
+
+---
+- name: simle ping playbook
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: ping module
+      ping:
+...
+ansible-playbook all --syntax-check ping.yaml ------>to check the yaml file syntax is correct or wrong
+
+ansible-playbook all --check ping.yaml  -----------> don't make any changes; instead, try to predict some of the changes that may occur (--check)
+
+ansible-playbook all ping.yaml -------> to run on slave or client  machines.
+
+
+---
+- name: to install apache2
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: install apache2
+      apt: update_cache=yes name=apache2 state=present
+    - name: adding a file
+      copy: content="{{ansible_hostname}}" dest=/var/www/html/index.html mode="0644"
+    - name: start the service
+      service: name=apache2 state=restarted
+...
+
+adding apache2 server,adding content and restart the service
+
+anisble-playbook apache2.yaml --list-hosts  ------>to list the file executing servers hostid
+
+vars:
+*****
+---
+- name: vars test
+  hosts: local
+  become: true
+  gather_facts: true
+  vars:
+    dns_server: "sakthi technologies"
+  tasks:
+    - name: installing apache2
+      apt: name=apache2 state=present
+    - name: copy file
+      template: src=index.html dest=/var/www/html/index.html
+...
+
+ansible-playbook var.yaml --extra-vars dns_server="abhi_tech"  ------>its passing the variable( note: it also override a vars parameter and vars_files also)
+
+vars_files and debug module:
+****************************
+
+---
+- name: installing apache2
+  hosts: local
+  become: true
+  gather_facts: true
+  vars_files:
+    - ./test.yml
+  tasks:
+    - name: installing git
+      apt: name={{package}} state=present
+    - name: check git version
+      shell: "git --version 2>&1"
+      register: gitversion
+    - name: display version
+      debug:
+        var: gitversion.stdout
+...
+
+test.yml
+
+package:git
+
+ansible-playbook vars_file.yaml 
+
+/etc/ansible/host_vars/<host>.yaml --->host_vars
+/etc/ansible/group_vars/<group>.yaml---->group_vars
+
+Ansible Variable Precedence (Low → High Priority):
+***************************************************
+
+1) vars (Defined in the playbook/task itself)
+2) vars_files (External YAML files included in playbooks via vars_files keyword)
+3) host_vars (Host-specific variables stored in host_vars/ directory)
+4) group_vars (Group-specific variables stored in group_vars/ directory)
+5) extra-vars 
+
+loops:
+***************
+ex:1
+---
+- name: to add a user
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name : adding users
+      user: name={{item}}
+        create_home: yes
+     with_items:
+       - sakthi
+       - abhi
+       - priya
+
+ex:2
+
+---
+- name: adding users
+  hosts: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: add users
+      user: name="{{item.user}}" create_home="{{item.home}}"
+      with_items:
+        - {'user':'test','home':'yes'}
+        - {'user':'new','home':'no'}
+...
+
+ex3:
+
+---
+- hosts: localhost
+become: true
+tasks:
+- name: Install list of packages
+yum:
+name: ['httpd', 'wget', 'vim', 'zip', 'unzip']
+...
+
+condition statements:
+********************
+
+ex1:
+
+---
+- name: adding user
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: adding file
+      apt: name=unzip state=present
+      when:
+        - ansible_distribution: Debian
+    - name: adding user
+      user: name=jan6 create_home=yes
+      when:
+        - ansible_distribution: ubuntu
+
+
+ex2:
+
+---
+- hosts: all
+  #gather_facts: no
+  become: yes
+  tasks:
+  - name: Install Apache HTTP server on RedHat Server
+    yum: 
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+  - name: Install Apache HTTP server on Ubuntu server
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Debian"
+  - name: Install Apache HTTP server on CentOS server
+    yum: 
+      name: httpd
+      state: present
+    when: 
+      - ansible_facts['distribution'] == "CentOS"
+      - ansible_facts['distribution_major_version'] == "6"
+  - name: Shutdown CentOS 6 and Debian 7 Servers
+    command: /sbin/shutdown -t now
+    when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6") or
+          (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "7")
+...
+
+ex3:
+
+---
+- hosts: all
+  become: true
+  tasks: 
+   - name : Get the git version
+     shell: git --version
+     register: gitVersion
+     ignore_errors: yes
+   - name : Display Git Version
+     when: gitVersion.stdout == ""
+     debug:
+      msg: "Git is not installed"
+   - name: Installing Git
+     when: gitVersion.stdout == ""
+     yum: 
+      name: git
+      state: present
+   - name : Get the git version
+     shell: git --version
+     register: gitVersion
+   - name: Display the Git Version
+     when: gitVersion.stdout != ""
+     debug: 
+       msg: "git is installed and the versions is {{gitVersion.stdout}}"
+...
+
+
+Tags:
+********
+ex1:
+---
+
+---
+- hosts: all
+  become: true
+  tasks: 
+    - name: Install Apache HTTP Server
+      tags:
+        - install
+      yum: name=httpd state=latest
+    - name: Copy the index.html file
+      tags:
+       - copy
+      copy:
+       src: index.html
+       dest: /var/www/html/index.html
+    - name: Start the HTTP Server 
+      tags: 
+       - start
+       - install
+      service: name=httpd enabled=yes state=started
+   
+...
+
+
+ansible-playbook --skip-tags install tags.yaml  --------->to skip the specfic tag
+
+ansible-playbook --list-tags tags.yaml -----> list all tags
+
+ansible-playbook --tags copy tags.yaml  ------->to run specfic tag
+
+
+
+ansible_Vault:
+**************
+ex1:
+/etc/ansible/hosts
+
+[hosts]
+test ansible_host=172.31.13.18 ansible_user=ubuntu ansible_password="{{lookup('file','/home/ansible/pass.yml')}}" --->here mention full path of pass file
+
+vim pass.yml
+
+ansible_password: <passwd>
+
+
+ansible-vault encrypt pass.yml  ----------> to encrypte the file
+
+ansible all -m ping -J ---->-J (--ask-vault-passwd)
+
+ansible all -m ping --vault-password-file /path/vault_pass_saved_file.txt--------->to locate the vault password file
+
+
+
+ansible-vault decrypt <file> -------->to decrypt the file
+
+ansible-vault view <file> -------->to view the file
+
+ansible-vault edit <file> ------> to modify the file
+
+ansible-vault encrypt_string "string" --name "ansible_passwd"  ----->to encrypt the password string use through vars parameters(ansible-playbook play.yaml -J )
+
+Ansible_Roles:
+***************
+
+ansible-galaxy init <rolename> --------> to initialize the role
+
+all.yaml    ------->you should be create
+test/
+├── roles/
+│   └── apache/
+│       ├── tasks/
+│       │   └── main.yml
+│       ├── handlers/
+│       │   └── main.yml
+│       ├── templates/
+│       ├── files/
+│       ├── vars/
+│       │   └── main.yml
+│       ├── defaults/
+│       │   └── main.yml
+│       └── meta/
+│           └── main.yml
+├── inventory
+├── ansible.cfg
+└── playbook.yml
+
+all.yaml
+
+---
+- name: testing
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - test
+
+ansible-playbook all.yaml  ---------->to run the roles 
+
+Dynamic_Inventory:
+*******************
+
+aws_ec2.yaml
+
+plugin: aws_ec2
+aws_access_key: xxxx
+aws_secret_key: xxxx
+regions:
+  - ap-south-1
+filters:
+  instance-state-name: running
+  
+  
+ansible-inventory -i aws-ec2.yaml --list ----->full detailly list
+
+ansible-inventory -i aws-ec2.yaml --graph ----->tree structured only show full hostname
+
+ansible-playbook -i aws-ec2.yaml  ping.yaml -u ubuntu --private-key=path/to/pem/key
+
+
+winrm_connection:
+*****************
+
+step 1:
+-------
+
+# Enable WinRM
+winrm quickconfig -q
+
+# Enable Basic Authentication
+winrm set winrm/config/service/Auth '@{Basic="true"}'
+
+# Allow unencrypted traffic (if using HTTP)
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
+# Configure WinRM listener on all network interfaces
+winrm set winrm/config/listener?Address=*+Transport=HTTP '@{Port="5985"}'
+
+# Enable firewall rule for WinRM
+New-NetFirewallRule -Name "WinRM HTTP" -DisplayName "WinRM HTTP" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 5985
+
+step 2:
+-------
+
+On your Ansible control node (Linux machine), install pywinrm:
+
+pip install pywinrm --break-system-packages
+
+step 3:
+-------
+
+Configure Ansible Inventory (hosts file)
+
+Edit your Ansible inventory file (e.g., /etc/ansible/hosts) and add the Windows host:
+
+[windows]
+win-host ansible_host=192.168.1.100  # Replace with actual IP
+
+[windows:vars]
+ansible_user=Administrator
+ansible_password=YourWindowsPassword
+ansible_connection=winrm
+ansible_port=5985
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
+ansible_shell_type=powershell  # Forces PowerShell instead of Python
+
+ansible windows -m win_ping   ----------->to ping the windows server
+
+ansible windows -m win_chocolatey -a "name=notepadplusplus state=present" --------> to install a software
+
+ 
+
+---------------------------xxxxxxxxxxxxxxxx------------------------------------------
+
+

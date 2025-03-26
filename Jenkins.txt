@@ -1,0 +1,59 @@
+*****************Jenkins*********************
+
+Jenkins is an Open Source ,java based CI(continous integration tool).
+
+Hudson ------>2004
+
+2011 ---->oracle 
+
+after created a jenkins community
+
+it called as Jenkins
+
+CI (continous integration):
+--------------------------
+
+CI is the process to automate the build and testing the code everytime, when the developer push the code to SCM
+
+CI benfits:
+-----------
+
+immediate bug deduction
+
+CD ( Continous Deployement) ------>end to end automation( Internal  projects like HRMS)
+CD (Continous Delivery) ------>  not a end to end automation if any issues are happen may loose the SLA (external Projects like Flipkart).
+
+What to do Jenkins?
+
+* generates a  test reports ( Junit )
+* to push the code into various artifactory
+* deploy directly to production or test environments
+* send a notification to stake holders status of build
+
+
+Installing Jenkins:
+-------------------
+
+apt update
+
+apt install openjdk-17-jdk -y
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+  
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+  
+sudo apt-get update
+
+sudo apt-get install jenkins
+
+systemctl start jenkins
+
+http://localhost:8080
+
+Free-style Projects:
+
+
+

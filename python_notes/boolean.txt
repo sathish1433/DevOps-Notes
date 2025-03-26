@@ -1,0 +1,207 @@
+OPerators and boolen and logical operator
+
+= --------->assigning
+== ----------->compare whether its equal
+> ---------> greaterthan
+>= ------->greaterthan or equal to
+< ---------->lesserthan
+<= -------->lesser than or equal to
+!= ------> Not equal too
+
+
+and  ------> both value1 and value should be exsists the only its consisdered true
+or ----> check whether value1 or value2 if any one is exsists it considered as true
+not ---> value or item not in list or variable 
+in ---> value or item exsists in list, variable, disctionart
+
+a=['praveen','ajay','san'] #Keylist
+print ('praveen' in a)
+print ('ajay' in a)
+print ('praveenz' not in a)
+print ('a' in a[0])
+print ('z' in a[0])
+print ('z' not in a[0])
+
+True
+True
+True
+True
+False
+True
+
+
+
+a=['praveen','ajay','san'] #Keylist
+b=['praveen','ajay','san','kiran','roy']
+print (len(a) == len(b))
+print (len(a) != len(b))
+print (len(a[0]) == len(b[0]))
+print ('roy' in a or 'roy' in b)
+print ('roy' in a and  'roy' in b)
+c=10
+d=20
+print (c==d)
+print (c!=d)
+print (c<d)
+print (c>d)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+False
+True
+True
+True
+False
+False
+True
+True
+False
+
+Process finished with exit code 0
+
+a=10
+b=20
+print (a==b)
+print (a>b)
+print (a<b)
+print (b>a)
+print (b<a)
+print (b!=a)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+False
+False
+True
+True
+False
+True
+
+Process finished with exit code 0
+
+
+a=10
+b=20
+c=30
+
+print (a!=b  and a<b)
+print (a>b or b<a)
+print (a>b or b>a)
+print (a<b and b<a)
+
+or condition ===> Any condition satisfied . it consisdered as true
+and condition ===> All condition should be satisfied it considered as true
+
+
+
+a=10
+b=20
+c=30
+==============================================
+print (a!=b  and a<b and a==b)
+print (a>b or b<a)
+print (a>b or b>a)
+print (a<b and b<a)
+
+
+output
+
+False
+False
+True
+False
+
+===================================================
+
+
+a=['praveen','ajay','san','zebra']
+print ('ajay' in a)
+print ('naveen' in a)
+print ('ajay' in a and 'naveen' in a)
+print ('ajay' in a or 'naveen' in a )
+print ('naveen' not in a)
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+True
+False
+False
+True
+True
+===========================================================
+a="praveenajay"
+print ("a" in a )
+print ("z" not in a)
+print ("ar" in a)
+print ("r" in a  or "z" in a)
+print ("r" in a  or "z" in a)
+print ("r" in a  and "z" in a)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+True
+True
+False
+True
+True
+False
+
+Process finished with exit code 0
+==========================================
+
+a={'10':'ajay','20':'abhi','30':'san'}
+print (a.keys())
+print (a.values())
+print (a.items())
+print ('10' in a.keys())
+print ('200' in a.keys())
+print ('300' in a.keys())
+print ('ajay' in a.values())
+print ('naveen' not in a.values())
+
+output
+
+
+:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+dict_keys(['10', '20', '30'])
+dict_values(['ajay', 'abhi', 'san'])
+dict_items([('10', 'ajay'), ('20', 'abhi'), ('30', 'san')])
+True
+False
+False
+True
+True
+
+Process finished with exit code 0
+
+
+#Boolean operators and examples
+a="praveen"
+b="ajaykiran"
+print ('e' in a)
+print ('q' in a)
+print ('q' not in a)
+print ('a' in a or 'q' in b)
+print ('a' in a and 'q' in b)
+alen=len(a)
+blen=len(b)
+print (alen == blen)
+print (alen >blen)
+print (alen<blen)
+uppcase=a.upper()
+print (uppcase)
+print (uppcase.isupper())
+print (uppcase.islower())
+print (uppcase.swapcase())
+print (a == uppcase.swapcase())
+print (a[0],b[4])
+print (a[0] == b[4])
+print (a[0] != b[4])

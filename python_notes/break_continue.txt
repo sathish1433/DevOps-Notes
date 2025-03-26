@@ -1,0 +1,375 @@
+
+break statement will take you out of the for loop when particular condition satisfies
+
+for i in range(0,10,1):
+    print (i)
+    if (i==4):
+        break
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+0
+1
+2
+3
+4
+
+Process finished with exit code 0
+
+
+for i in range(0,10,1):
+    print (i)
+    if (i==4):
+        print ("Come out of for loop")
+        break
+
+
+lisdet=['10','20','30','praveen','40','50']
+for i in lisdet:
+    print (i)
+    if(i=="30"):
+        print ("Come out of the loop")
+        break
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+20
+30
+Come out of the loop
+
+Process finished with exit code 0
+
+
+
+lisdet=['10','20','30','praveen','40','50']
+for i in lisdet:
+    print (i)
+    if (i.isalpha()):
+        break
+        print ("Come out of the loop")
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+20
+30
+praveen
+
+
+
+dicdet={'a':'10','b':'20','c':'45','d':'55'}
+print (dicdet.keys())
+print (dicdet.values())
+for i in dicdet.keys():
+    print (dicdet[i])
+    if int(dicdet[i]) >30:
+        break
+
+
+output
+
+dict_keys(['a', 'b', 'c', 'd'])
+dict_values(['10', '20', '45', '55'])
+10
+20
+45
+
+
+
+dicdet={'a':'10','b':'20','c':'45','d':'55'}
+print (dicdet.keys())
+print (dicdet.values())
+for i in dicdet.keys():
+    print (dicdet[i])
+    if (int(dicdet[i]) >=20) and (int(dicdet[i]) <30):
+        break
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+dict_keys(['a', 'b', 'c', 'd'])
+dict_values(['10', '20', '45', '55'])
+10
+20
+
+Process finished with exit code 0
+
+
+
+=========================================================================
+Continue statement
+
+Continue statement will ignore current iteraation in for loop and continue with next iteration
+
+j=['10','20','30','40','50']
+for i in j:
+
+    if (i == "20"):
+        continue
+    print(i)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+30
+40
+50
+
+Process finished with exit code 0
+
+
+a="praveen123"
+for i in a:
+    if (i == "e"):
+        continue
+    print (i)
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+p
+r
+a
+v
+n
+1
+2
+3
+
+Process finished with exit code 0
+
+
+a="praveen123"
+for i in a:
+    if (i == "e") or (i == "v"):
+        continue
+    print (i)
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+p
+r
+a
+n
+1
+2
+3
+
+Process finished with exit code 0
+
+
+
+dicde={'a':'10','b':'20','c':'30','d':'40'}
+
+for i in dicde.keys():
+    if (int(dicde[i]) >15)  and (int(dicde[i])<=20):
+        continue
+    print (dicde[i])
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+30
+40
+
+Process finished with exit code 0
+
+
+
+for i in range(0,30,1):
+    if (i%2 == 0):
+        if(i == 20):
+            continue
+        print (i)
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+22
+24
+26
+28
+
+Process finished with exit code 0
+
+
+for i in range(0,20,1):
+    ou=(i*3)
+    if (ou == 27):
+        continue
+    print (ou)
+
+
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+0
+3
+6
+9
+12
+15
+18
+21
+24
+30
+33
+36
+39
+42
+45
+48
+51
+54
+57
+
+Process finished with exit code 0
+
+
+==================================================================
+
+Break_statement.txt
+
+##Break statement
+
+'''
+a="praveen"
+for i in a:
+    print (i)
+
+##lets apply break when 'a' it should exit the for loop
+a="praveen"
+for i in a:
+    if (i == "a"):
+        break
+    print (i)
+
+
+a="praveen"
+for i in range(0,len(a),1):
+    if (i==4):
+        break
+    print (a[i])
+
+
+alist=['praveen','ajay','san','kiran','sunil']
+usr=input("Enter the string\n")
+for i in alist:
+    if (i == usr):
+        print("for loop is exiting since its found {0}".format(usr))
+        break
+    print (i)
+
+
+
+alist=['praveen','ajay','san','kiran','sunil']
+usr=input("Enter the string to bechecked\n")
+posi=int(input("Enter the Position number\n"))
+for i in range(0,len(alist),1):
+    if (usr == alist[i]) and (i == posi):
+        print ("Coming out of for loop since {0} present in {1}".format(usr,i))
+        break
+    else:
+        anoth=input("Enter the string to be added\n")
+        alist.append(anoth)
+        print (alist)
+
+alist=['10','23','34','44','55','66','78']
+for i in alist:
+    if (int(i)%2 == 0):
+        print ("Number {0} is even".format(i))
+        opt=input("Enter '1' for addition\n'2' for multiplication\n")
+        an_num=int(input("Enter another number\n"))
+        if (opt == "1"):
+            sum=int(i)+int(an_num)
+            print ("Sum of {0} and {1} is {2}".format(i,an_num,sum))
+        elif (opt == "2"):
+            prd=int(i)*int(an_num)
+            print ("Product of {0} and {1} is {2}".format(i,an_num,prd))
+    elif (int(i)%2 != 0):
+        print("Coming out of for loop since {0} is odd number".format(i))
+        break
+    print ("================================================================")
+
+####Continue statement
+##contimue statement will ignore specific condition  and continue the for loop
+##In below example when '5' is found it will ignore for next iteration
+for i in range(0,10,1):
+    if (i==5):
+        continue
+    print (i)
+
+
+##Would like print only odd number using contine in for loop
+for i in range(0,20,1):
+    if (i%2 == 0):
+        continue
+    print (i)
+
+
+a="ajaypraveen"
+usr=input("Enter the string to be acheclked\n")
+post=int(input("Enter the position number\n"))
+for i in range(0,len(a),1):
+    if (post == i) or (i == 0):
+        if (a[i] == usr):
+            continue
+    else:
+        print (a[i])
+
+
+
+alist_co=[10,22,33,44]
+for i in alist_co:
+    if (i%2 != 0 ):
+        continue
+    print (i)
+
+
+
+blistco=[22,34,44,54,64,84,94,43]
+for i in range(0,len(blistco),1):
+    if (i%2 == 0):
+        print (blistco[i])
+'''
+###Below script ignore if position of item is even and number is even, It should print only number and position of item is not even
+blistco=[22,34,44,54,64,84,94,43,45]
+for i in range(0,len(blistco),1):
+    if (i%2 == 0) and (blistco[i]%2 == 0):
+        continue
+    else:
+        print (blistco[i])

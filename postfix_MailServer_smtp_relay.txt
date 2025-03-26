@@ -1,0 +1,95 @@
+**********postfix|mailserver through gmail**********
+
+
+yum install -y postfix mailx
+
+config file:/etc/posfix/main.cf
+
+## add_lines in config_files
+
+relayhost=[smtp.gmail.com]:587
+myhostname=Sakthi.lnux.com
+mydomain=Linux.com
+
+# Enable SASL authentication
+smtp_sasl_auth_enable = yes
+smtp_sasl_security_options = noanonymous
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+
+# Enable TLS
+smtp_use_tls = yes
+smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+smtp_tls_security_level = encrypt
+
+
+## create a sasl_passwd file
+
+[smtp.gmail.com]:587 your-email@gmail.com:your-password ----------------->here the host mail and  passwd is your gmail app passwd
+
+ex: [smtp.gmail.com]:587 sathishyadav1433@gmail.com:adgckecnfcbfrsfe 
+
+to create a app passwd
+
+1) go to gmail account security setion to activate two-step verification
+2)to  serach in search bar app passwd
+3)to enter app name and to copy the app passwd to paste it here
+
+
+
+## change a permission of sasl_passwd file
+
+chmod 600 /etc/postfix/sasl_passwd
+
+postmap /etc/postfix/sasl_passwd --------------->create a postdb file
+
+rm /etc/postfix/sasl_passwd ------------>to remove a original file
+
+
+##  to restart the postfix
+
+ systemctl restart postfix
+
+ systemctl enable postfix
+
+## to stop the firewall
+
+systemctl stop firewalld
+
+## to send a mail this way
+
+echo "This is a test email" | mail -s "Test Email" recipient@example.com
+
+
+note: {{{{
+
+## to check the log of mail
+
+tail -f /var/log/maillog
+
+if any error occure not found the domain 
+these are the steps are folloe to rectify the mail server
+
+#######and the main this set in dhcp mod of ip
+
+ip route add default via 192.168.1.1 dev ens33
+
+## cat /etc/resolv.conf
+
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+## in /etc/sysconfig/network
+
+NETWORKING=yes
+
+
+sudo systemctl restart network
+
+ping google.com
+
+its ping proper response only the mail should work
+}}}}
+6/-/-
+
+
+

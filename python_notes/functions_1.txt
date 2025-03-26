@@ -1,0 +1,1469 @@
+To re-use the block of statements in same script again and again. Instead of writing the statements again.
+
+we will write block of statement in function and we will call when its required.
+
+def functionname():
+
+	<execute statements to be re-used>
+
+
+How to call function 
+
+functionname()
+
+
+example
+
+def f1():
+    print ("All good")
+
+print ("Starting of script")
+f1()
+
+
+
+def f1():
+    print ("True")
+
+for i in range(0,20,1):
+    if (i == 10):
+        f1()
+    elif (i > 10):
+        f1()
+    else:
+        print ("False")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+False
+False
+False
+False
+False
+False
+False
+False
+False
+False
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+
+Process finished with exit code 0
+
+
+
+userinput=input("Enter the Number")
+if (int(userinput) == 2):
+    print ("True")
+elif (int(userinput) == 5):
+    print ("True")
+else:
+    print ("False")
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number2
+True
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number5
+True
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number10
+False
+
+Process finished with exit code 0
+
+we can see from above code  when user input is 2 or 5 its printng  "True" instead of this we can create function mention block which is repeating again so when condition matches we can call.
+
+
+def p1():  ====> here we defining function
+    print ("True")
+
+userinput=input("Enter the Number")
+if (int(userinput) == 2):
+    p1()  ====> here we calling function
+elif (int(userinput) == 5):
+    p1()
+else:
+    print ("False")
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number10
+False
+
+Process finished with exit code 0
+
+
+def p1():
+    anuser=input("Enter the user input\n")
+    output=(int(userinput)+int(anuser))
+    print (output)
+
+userinput=input("Enter the Number")
+if (int(userinput) == 2):
+    p1()
+elif (int(userinput) == 5):
+    p1()
+else:
+    anotg=input("Enter the userinput")
+    output=(int(userinput)-int(anotg))
+    print (output)
+
+
+
+
+
+===============================================================
+
+def p1():
+    print("Now we are calling the function p1")
+    anuser=input("Enter the user input\n")
+    output=(int(userinput)+int(anuser))
+    print ("Sum of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p1")
+
+def p2():
+    print("Now we are calling the function p2")
+    anuser=input("Enter the user input\n")
+    output=(int(userinput)-int(anuser))
+    print ("difference of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p2")
+
+def p3():
+    print("Now we are calling the function p3")
+    anuser=input("Enter the user input\n")
+    output=(int(userinput)*int(anuser))
+    print ("product of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p3")
+
+userinput=input("Enter the Number")
+if (int(userinput) == 2):
+    p1()
+
+elif (int(userinput) == 5):
+    print ("")
+    p1()
+elif (int(userinput) == 7):
+    p2()
+elif (int(userinput) == 11):
+    p2()
+else:
+    p3()
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number2
+Now we are calling the function p1
+Enter the user input
+10
+Sum of 2 and 10 is 12
+end of function p1
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number7
+Now we are calling the function p2
+Enter the user input
+66
+difference of 7 and 66 is -59
+end of function p2
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number12
+Now we are calling the function p3
+Enter the user input
+67
+product of 12 and 67 is 804
+end of function p3
+
+Process finished with exit code 0
+
+
+
+==============================================
+
+def p1():
+    print("Now we are calling the function p1")
+
+    output=(int(userinput)+int(anuser))
+    print ("Sum of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p1")
+
+def p2():
+    print("Now we are calling the function p2")
+
+    output=(int(userinput)-int(anuser))
+    print ("difference of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p2")
+
+def p3():
+    print("Now we are calling the function p3")
+
+    output=(int(userinput)*int(anuser))
+    print ("product of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p3")
+
+userinput=input("Enter the Number")
+anuser=10
+if (int(userinput) == 2):
+    p1()
+
+elif (int(userinput) == 5):
+    print ("")
+    p1()
+elif (int(userinput) == 7):
+    p2()
+elif (int(userinput) == 11):
+    p2()
+elif (int(userinput) == 15):
+    p1()
+    p2()
+else:
+    p3()
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number2
+Now we are calling the function p1
+Sum of 2 and 10 is 12
+end of function p1
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number7
+Now we are calling the function p2
+difference of 7 and 10 is -3
+end of function p2
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number15
+Now we are calling the function p1
+Sum of 15 and 10 is 25
+end of function p1
+Now we are calling the function p2
+difference of 15 and 10 is 5
+end of function p2
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the Number20
+Now we are calling the function p3
+product of 20 and 10 is 200
+end of function p3
+
+Process finished with exit code 0
+==============================================================================
+
+
+def p1():
+    print("Now we are calling the function p1 and its works for number lesser than 20")
+
+    output=(int(userinput)+int(anuser))
+    print ("Sum of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p1\n================================================")
+
+def p2():
+    print("Now we are calling the function p2 and its works for number greter than 20 and lesser than 50")
+
+    output=(int(userinput)-int(anuser))
+    print ("difference of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p2\n==============================================")
+
+def p3():
+    print("Now we are calling the function p3")
+
+    output=(int(userinput)*int(anuser))
+    print ("product of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p3\n==================================================")
+
+def p4():
+    print("Now we are calling the function p4")
+
+    output=(int(userinput)/int(anuser))
+    print ("division of {0} and {1} is {2}".format(userinput,anuser,output))
+    print("end of function p4\n==================================================")
+
+anuser=10
+for userinput in range(0,100,1):
+    if (int(userinput) <= 20):
+        p1()
+
+    elif (int(userinput) > 20  and int(userinput)<50):
+
+        p2()
+    elif (int(userinput) >50 and int(userinput)<80):
+        p3()
+    elif (int(userinput) >80  and int(userinput)<90):
+        p4()
+    elif (int(userinput) >90 and int(userinput)<99):
+        p1()
+        p2()
+        p3()
+    else:
+        p3()
+        p2()
+        p4()
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 0 and 10 is 10
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 1 and 10 is 11
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 2 and 10 is 12
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 3 and 10 is 13
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 4 and 10 is 14
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 5 and 10 is 15
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 6 and 10 is 16
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 7 and 10 is 17
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 8 and 10 is 18
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 9 and 10 is 19
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 10 and 10 is 20
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 11 and 10 is 21
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 12 and 10 is 22
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 13 and 10 is 23
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 14 and 10 is 24
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 15 and 10 is 25
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 16 and 10 is 26
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 17 and 10 is 27
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 18 and 10 is 28
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 19 and 10 is 29
+end of function p1
+================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 20 and 10 is 30
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 21 and 10 is 11
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 22 and 10 is 12
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 23 and 10 is 13
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 24 and 10 is 14
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 25 and 10 is 15
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 26 and 10 is 16
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 27 and 10 is 17
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 28 and 10 is 18
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 29 and 10 is 19
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 30 and 10 is 20
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 31 and 10 is 21
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 32 and 10 is 22
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 33 and 10 is 23
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 34 and 10 is 24
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 35 and 10 is 25
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 36 and 10 is 26
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 37 and 10 is 27
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 38 and 10 is 28
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 39 and 10 is 29
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 40 and 10 is 30
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 41 and 10 is 31
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 42 and 10 is 32
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 43 and 10 is 33
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 44 and 10 is 34
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 45 and 10 is 35
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 46 and 10 is 36
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 47 and 10 is 37
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 48 and 10 is 38
+end of function p2
+==============================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 49 and 10 is 39
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 50 and 10 is 500
+end of function p3
+==================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 50 and 10 is 40
+end of function p2
+==============================================
+Now we are calling the function p4
+division of 50 and 10 is 5.0
+end of function p4
+==================================================
+Now we are calling the function p3
+product of 51 and 10 is 510
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 52 and 10 is 520
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 53 and 10 is 530
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 54 and 10 is 540
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 55 and 10 is 550
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 56 and 10 is 560
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 57 and 10 is 570
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 58 and 10 is 580
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 59 and 10 is 590
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 60 and 10 is 600
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 61 and 10 is 610
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 62 and 10 is 620
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 63 and 10 is 630
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 64 and 10 is 640
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 65 and 10 is 650
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 66 and 10 is 660
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 67 and 10 is 670
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 68 and 10 is 680
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 69 and 10 is 690
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 70 and 10 is 700
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 71 and 10 is 710
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 72 and 10 is 720
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 73 and 10 is 730
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 74 and 10 is 740
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 75 and 10 is 750
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 76 and 10 is 760
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 77 and 10 is 770
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 78 and 10 is 780
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 79 and 10 is 790
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 80 and 10 is 800
+end of function p3
+==================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 80 and 10 is 70
+end of function p2
+==============================================
+Now we are calling the function p4
+division of 80 and 10 is 8.0
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 81 and 10 is 8.1
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 82 and 10 is 8.2
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 83 and 10 is 8.3
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 84 and 10 is 8.4
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 85 and 10 is 8.5
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 86 and 10 is 8.6
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 87 and 10 is 8.7
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 88 and 10 is 8.8
+end of function p4
+==================================================
+Now we are calling the function p4
+division of 89 and 10 is 8.9
+end of function p4
+==================================================
+Now we are calling the function p3
+product of 90 and 10 is 900
+end of function p3
+==================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 90 and 10 is 80
+end of function p2
+==============================================
+Now we are calling the function p4
+division of 90 and 10 is 9.0
+end of function p4
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 91 and 10 is 101
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 91 and 10 is 81
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 91 and 10 is 910
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 92 and 10 is 102
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 92 and 10 is 82
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 92 and 10 is 920
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 93 and 10 is 103
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 93 and 10 is 83
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 93 and 10 is 930
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 94 and 10 is 104
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 94 and 10 is 84
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 94 and 10 is 940
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 95 and 10 is 105
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 95 and 10 is 85
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 95 and 10 is 950
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 96 and 10 is 106
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 96 and 10 is 86
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 96 and 10 is 960
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 97 and 10 is 107
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 97 and 10 is 87
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 97 and 10 is 970
+end of function p3
+==================================================
+Now we are calling the function p1 and its works for number lesser than 20
+Sum of 98 and 10 is 108
+end of function p1
+================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 98 and 10 is 88
+end of function p2
+==============================================
+Now we are calling the function p3
+product of 98 and 10 is 980
+end of function p3
+==================================================
+Now we are calling the function p3
+product of 99 and 10 is 990
+end of function p3
+==================================================
+Now we are calling the function p2 and its works for number greter than 20 and lesser than 50
+difference of 99 and 10 is 89
+end of function p2
+==============================================
+Now we are calling the function p4
+division of 99 and 10 is 9.9
+end of function p4
+==================================================
+
+Process finished with exit code 0
+
+
+===================================================================================
+def evenno():
+    print("Number {0} is even".format(i))
+def oddno():
+    print("Number {0} is odd".format(i))
+
+
+for i in range(0,100,1):
+    if (i%2 == 0):
+        evenno()
+
+    else:
+        oddno()
+
+
+ouput
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Number 0 is even
+Number 1 is odd
+Number 2 is even
+Number 3 is odd
+Number 4 is even
+Number 5 is odd
+Number 6 is even
+Number 7 is odd
+Number 8 is even
+Number 9 is odd
+Number 10 is even
+Number 11 is odd
+Number 12 is even
+Number 13 is odd
+Number 14 is even
+Number 15 is odd
+Number 16 is even
+Number 17 is odd
+Number 18 is even
+Number 19 is odd
+Number 20 is even
+Number 21 is odd
+Number 22 is even
+Number 23 is odd
+Number 24 is even
+Number 25 is odd
+Number 26 is even
+Number 27 is odd
+Number 28 is even
+Number 29 is odd
+Number 30 is even
+Number 31 is odd
+Number 32 is even
+Number 33 is odd
+Number 34 is even
+Number 35 is odd
+Number 36 is even
+Number 37 is odd
+Number 38 is even
+Number 39 is odd
+Number 40 is even
+Number 41 is odd
+Number 42 is even
+Number 43 is odd
+Number 44 is even
+Number 45 is odd
+Number 46 is even
+Number 47 is odd
+Number 48 is even
+Number 49 is odd
+Number 50 is even
+Number 51 is odd
+Number 52 is even
+Number 53 is odd
+Number 54 is even
+Number 55 is odd
+Number 56 is even
+Number 57 is odd
+Number 58 is even
+Number 59 is odd
+Number 60 is even
+Number 61 is odd
+Number 62 is even
+Number 63 is odd
+Number 64 is even
+Number 65 is odd
+Number 66 is even
+Number 67 is odd
+Number 68 is even
+Number 69 is odd
+Number 70 is even
+Number 71 is odd
+Number 72 is even
+Number 73 is odd
+Number 74 is even
+Number 75 is odd
+Number 76 is even
+Number 77 is odd
+Number 78 is even
+Number 79 is odd
+Number 80 is even
+Number 81 is odd
+Number 82 is even
+Number 83 is odd
+Number 84 is even
+Number 85 is odd
+Number 86 is even
+Number 87 is odd
+Number 88 is even
+Number 89 is odd
+Number 90 is even
+Number 91 is odd
+Number 92 is even
+Number 93 is odd
+Number 94 is even
+Number 95 is odd
+Number 96 is even
+Number 97 is odd
+Number 98 is even
+Number 99 is odd
+
+Process finished with exit code 0
+
+
+=========================================================================
+Passing arguments to the function
+
+
+def p1(a,b):  ====> defining function  with arguments
+    c=a+b
+    print (c)
+
+def p2(a,b):
+    d=a-b
+    print (d)
+def p3(a,b):
+    g=a*b
+    print (g)
+
+userinput=input("Enter the user option\n '1' for addition\n'2' for subtraction\n'3' for multiplication\n")
+inp1=int(input("Enter inp1\n"))
+inp2=int(input("Entere inp2\n"))
+if (userinput == "1"):
+    p1(inp1,inp2)   #Passing input arguments to function
+elif(userinput == "2"):
+    p2(inp1,inp2)
+elif (userinput == "3"):
+    p3(inp1,inp2)
+
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the user option
+ '1' for addition
+'2' for subtraction
+'3' for multiplication
+1
+Enter inp1
+10
+Entere inp2
+20
+
+Process finished with exit code 0
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the user option
+ '1' for addition
+'2' for subtraction
+'3' for multiplication
+2
+Enter inp1
+34
+Entere inp2
+10
+24
+
+Process finished with exit code 0
+
+
+
+==================================================================
+
+try and except block
+
+If we want to capture error and continue with program even if any error found then 
+
+first it will exceute try block . if any error it will execute except block
+
+format
+
+
+try:
+	statements #if any error found under try statement then it going to except block
+except:
+	print ("Enter the correct input")
+
+
+
+with out try and except
+
+def p1(a,b):
+    c=a+b
+    print (c)
+
+inp1=int(input("Enter the input1"))
+inp2=int(input("Enter he input2"))
+p1(inp1,inp2)
+
+
+print ("end of program")
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the input110
+Enter he input2praveen
+Traceback (most recent call last):
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py", line 6, in <module>
+    inp2=int(input("Enter he input2"))
+ValueError: invalid literal for int() with base 10: 'praveen'
+
+Process finished with exit code 1
+
+above program fails since inp2 we entered string cant converted ti integer so script exits to handle this only we use try and and except in next program
+
+
+
+
+
+
+def p1(a,b):
+    c=a+b
+    print (c)
+try:
+    inp1=int(input("Enter the input1"))
+    inp2=int(input("Enter he input2"))
+    p1(inp1,inp2)
+except:
+    pass
+
+print ("end of program")
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the input110
+Enter he input220
+30
+end of program
+
+
+
+============================================
+
+
+def p1(a,b):
+    c=a+b
+    print (c)
+try:
+    inp1=int(input("Enter the input1"))
+    inp2=int(input("Enter he input2"))
+    p1(inp1,inp2)
+except Exception as e:
+    pass
+    print (e)  #It capturing error if any error occured under try statement
+    inp2=int(input("Enter he input2"))
+    p1(inp1,inp2)
+
+print ("end of program")
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the input110
+Enter he input2praveen  ===> praveen is string cant be converted ti int then also program wont end since we handling error in except block
+end of program
+
+Process finished with exit code 0
+
+
+
+===================================================================
+SCRIPT will take 2 input if any type error if input is mentioned then its handled under except block and take user input once again
+
+def p1(a,b):
+    c=a+b
+    print (c)
+try:
+    inp1=int(input("Enter the input1"))
+except Exception as nav:
+    print ("Error is {0}".format(nav))
+    inp1=int(input("Enter the input1"))
+
+try:
+    inp2=int(input("Enter he input2"))
+except Exception as nav1:
+    print("Error is {0}".format(nav1))
+    inp2 = int(input("Enter the input2"))
+
+p1(inp1,inp2)
+
+print ("end of program")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the input1praveen
+Error is invalid literal for int() with base 10: 'praveen'
+Enter the input110
+Enter he input2naveen
+Error is invalid literal for int() with base 10: 'naveen'
+Enter the input230
+40
+end of program
+
+Process finished with exit code 0
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Enter the input125
+Enter he input256
+81
+end of program
+
+Process finished with exit code 0
+
+
+=======================================================================
+
+
+Function return 
+
+def function (a,b):
+	c=a+b
+	print (a,b,c)
+	return c
+out_function=function(10,20)
+
+After executing whole function function whats variable returning in the end of function . That value will be called out of function if its required
+out_function=function(10,20)====> Here we are calling function but function returing only the variable c since only variable c is called returned from whole function
+
+returned value of function will be captured in variable "out_function" from outside of the function
+
+
+
+examples
+
+def p1(a,b):
+    d=a-b
+    c=a+b
+    e=a*b
+    g=a%2
+
+    print (a,b,d,e,c,g)
+    return (a, b, d, e, c, g)
+
+
+outfunction=p1(10,20)
+print (outfunction)
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10 20 -10 200 30 0 ====> outfrom print statement
+(10, 20, -10, 200, 30, 0) ===> output from return which is called outside funct outfunction
+
+Process finished with exit code 0
+
+
+
+
+=======================================================
+
+
+def p1(a,b):
+    d=a-b
+    c=a+b
+    e=a*b
+    g=a%2
+    return (a, b, d, e, c, g)
+    print (a,b,d,e,c,g)   ======> It wont execute since return already executed when return statement is executed means function ends and returns value
+
+
+
+outfunction=p1(10,20)
+print (outfunction)
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+(10, 20, -10, 200, 30, 0)
+
+Process finished with exit code 0
+
+
+======================================
+
+
+def p1(a,b):
+    d=a-b
+    c=a+b
+    e=a*b
+    g=a%2
+    return (a, b, d, e, c, g)
+    print (a,b,d,e,c,g)
+
+
+
+outfunction=p1(10,20)
+print (outfunction)
+#Below things are used to capture individual values  into particular variable
+
+fir=outfunction[0]
+sec=outfunction[1]
+thir=outfunction[2]
+fourth=outfunction[3]
+fifth=outfunction[4]
+sxth=outfunction[5]
+
+print (fir,sec,thir,fourth,fifth,sxth)
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+(10, 20, -10, 200, 30, 0)
+10 20 -10 200 30 0
+
+Process finished with exit code 0
+=========================================================
+
+def p1(a,b):
+    d=a-b
+    c=a+b
+    e=a*b
+    g=a%2
+    return (a, b, d, e, c, g)
+    print (a,b,d,e,c,g)
+
+
+
+fir,sec,thir,fourth,fifth,sxth=p1(10,20)  # We are assigning 6 variables for all the return  values
+
+
+
+print(fir)
+print(sec)
+print(thir)
+print(fourth)
+print(fifth)
+print(sxth)
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+20
+-10
+200
+30
+0
+
+Process finished with exit code 0
+
+
+========================================================================
+
+def p1(a,b,c): #Here we defined 3 argumenents
+    print (a,b,c)
+
+
+p1(10,20) #Here we passed only 2 arguments
+
+so it wont work To resolve issue of number of arguments passed we used args
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Traceback (most recent call last):
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py", line 5, in <module>
+    p1(10,20)
+TypeError: p1() missing 1 required positional argument: 'c'
+
+Process finished with exit code 1
+
+
+def p1(*args): #  ====> Here we are defining function with multiple arguments
+    for i in args:
+        print (i)
+
+
+p1(10,20,30,40)  ====> passing multiple values to function
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+10
+20
+30
+40
+
+Process finished with exit code 0
+
+
+def p1(*args):
+    j=0
+    for i in args:
+        j=j+i
+    print (j)
+
+
+p1(10,20,30,40)
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+100
+
+Process finished with exit code 0
+
+
+================================================
+
+def p1(*args):
+    j=0
+    for i in args:
+        j=j+i
+    print (j)
+
+
+p1(10,20,30,"40pravee")
+
+output
+
+Script failing since one input is string we cant add string with number
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Traceback (most recent call last):
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py", line 8, in <module>
+    p1(10,20,30,"40pravee")
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py", line 4, in p1
+    j=j+i
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+
+To avoid any error if input is wrong we can use try and except
+
+
+
+def p1(*args):
+    j=0
+    for i in args:
+        j=j+i
+    print (j)
+
+try:
+    p1(10,20,30,"40pravee")
+except:
+    print ("One of input is invalid")
+print ("End of program")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+One of input is invalid
+End of program
+
+Process finished with exit code 0
+
+Process finished with exit code 1
+
+==================================================
+
+Local variable and global variable
+
+values defined inside the function is valid only inside the function only
+
+def f1():
+    a=100 #Value will be availble only inside the function
+    print ("Inside function value is {0}".format(a))
+
+a=10  ====> Global  and available throught out the script
+
+print ("Before calling function {0}".format(a))
+f1() #We are callig function where a value is 100
+print ("After calling function {0}".format(a))
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Before calling function 10
+Inside function value is 100
+After calling function 10
+
+Process finished with exit code 0
+
+
+
+Making function variable to be global so it can be used in future code
+
+def f1():
+    global a
+    a=100
+    print ("Inside function value is {0}".format(a))
+
+a=10
+print ("Before calling function {0}".format(a))
+f1() #We are callig function where a value is 100
+print ("After calling function {0}".format(a))
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Before calling function 10
+Inside function value is 100
+After calling function 100
+
+Process finished with exit code 0
+

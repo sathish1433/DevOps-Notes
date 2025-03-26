@@ -1,0 +1,220 @@
+File handling
+
+Here we are reading file and displaying its content
+
+f=open('D:\pythontest\\test.txt','r')
+print (f)
+for i in f:
+    print(i.strip())
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+<_io.TextIOWrapper name='D:\\pythontest\\test.txt' mode='r' encoding='cp1252'>
+praveen
+ajay
+san
+naveen
+
+Process finished with exit code 0
+
+
+How to write content to file
+
+a="Besant technology"
+f=open('D:\pythontest\\test.txt','w') #All previous content will be deleted and opening file for writing
+f.write(a)
+
+============================================================
+Here file opened in append mode so exsisting content will be there and new content also be added
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','a')
+k.write('\n')
+k.write(y)
+k.write("\n")
+k.write(e)
+k.close()
+q=open('D:\pythontest\\test.txt','r')
+for c in q:
+    print (c.strip())
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+ajay
+praveenajay
+praveen
+ajay
+praveen
+
+Process finished with exit code 0
+
+
+=================================================================
+In this script we are skipping first line and printing from second line to end of file
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r')
+k.readline()
+for i in k:
+    print (i.strip())
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveenajay
+praveen
+ajay
+praveen
+
+Process finished with exit code 0
+
+
+==================================
+Here we will be ignoring first 2 lines  and printing  from 3rd to end
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r')
+for i in range (0,2,1):
+    k.readline()
+for j in k:
+    print (j.strip())
+
+
+outpur=t
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen
+ajay
+praveen
+
+Process finished with exit code 0
+
+===================================================
+
+Alternate way of reading multiple lines and save in list
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r')
+q=k.readlines() ===> All lines of file will be read and saved in list
+print (q)
+for e in q:
+    print (e.strip())
+
+k.close()
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['ajay\n', 'praveenajay\n', 'praveen\n', 'ajay\n', 'praveen']
+ajay
+praveenajay
+praveen
+ajay
+praveen
+
+Process finished with exit code 0
+
+
+
+==============================================================================
+
+Here we are reading file content and closing file, again we are opening file for writing
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r')
+for i in k:
+    print (i.strip())
+k.close()
+q="abhi"
+k=open('D:\pythontest\\test.txt','w')
+k.write('\n')
+k.write(q)
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+
+abhi
+
+Process finished with exit code 0
+
+
+Instead of above script we can read  and write , write and read. If we open file in below mode
+
+(r+  and w+)
+
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r+')   ===> here we opening file for both read and write
+for i in k:
+    print (i.strip())
+q="abhi2"
+k.write('\n')
+k.write(q)
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+
+abhi
+
+Process finished with exit code 0
+
+
+
+y="ajay"
+e="praveen"
+k=open('D:\pythontest\\test.txt','r+') ===> opened for read,write
+for i in k:
+    print (i.strip()) ===> for reading
+q=['chetan','san','opear']
+for y in q:
+    k.write('\n') ===> for writing
+    k.write(y)
+k.close()
+k=open('D:\pythontest\\test.txt','r') ===> reading
+print ("below are the Content of file after adding new contents\n")
+for o in k:
+    print (o.strip())
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+
+abhi
+abhi2
+chetan
+san
+opear
+chetan
+san
+opear
+below are the Content of file after adding new contents
+
+
+abhi
+abhi2
+chetan
+san
+opear
+chetan
+san
+opear
+chetan
+san
+opear
+
+Process finished with exit code 0

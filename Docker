@@ -1,0 +1,1127 @@
+*************Docker***********************
+
+Docker - it is a containerization platform.using docker to build ,can ship and can run the applications as containers
+
+virtualizaion
+*************
+
+type 1 hyper visor:
+--------------------
+
+the type 1 hypervisor directly run on the hardware
+
+example:Vm ESX/ESXI,MicrosoftHyper-V,citrix Xen  (aws using citrix xen hypervisor)
+
+type 2 Hypervisor:
+-------------------
+
+it wants a operating system then only it executing the virtualization
+
+example: Vmware Workstation,Virtual Box and etc...
+
+
+
+					App			App
+					 |			 |
+					s/w Libries	   s/w libries		------------		|------------
+					 |			 |		| App	    |		|    App     |
+					 os			 os 		|  |	    |		|     |      |
+					 |			 |		s/wLibries  |		|s/w libries |
+		app			 vm----------------------vm    	|--------------^---------------------|
+		 |				      |			|	    |  |        |	     |
+	   s/w libreries			  Hypervisor			|	Containerzation (Docker)     |
+		 |				      |			|-----------|--|---------------------|
+		OS  				      OS			|	    |  os	|	     |
+		 |				      |			---------------|---------------------     here the container associated
+             Hardware				   Hardware				    Hardware				with os
+            
+             
+        Treditional method                       Virtualizaion				Containerisation
+        -------------------			-----------------			-----------------
+        
+        
+        
+virtualization:
+---------------        
+*Here virtualization is used hardware level virtualizion
+*have more cpu,memory,time
+*require hypervisor
+
+
+containerazation:
+-----------------
+*its a os level virtualization
+*it didnt have more memory and take less time 
+*it didn't want hypervisor
+
+
+ docker image:
+ -------------
+ *the s/w and libries are create as a package is called docker image
+ 
+ *docker image ------------>contains app code + software and libries
+ 
+ *container is half combained in host os
+i.e
+ using separate namespace,storagespace,networkspace and etc...
+ 
+ 
+ containeration tools:
+ ---------------------
+ *Docker
+ *Rocket(rkt)
+ *podman
+ *container-D
+ 
+ 
+ Docker--------->it have a good CLI,API to intract containers
+ 
+ 
+ docker pros:
+ ------------
+ *portable
+ *cost saving
+ *scalable
+ *quick start and stop
+ *quick deploy
+ *easy moniter
+ *secure
+ *light weight
+ 
+ docker architecture:
+ --------------------
+ 
+ docker client:
+ *************
+ 	send the instruction to the server using cli
+ 	i.e
+ 	docker push
+ 	docker pull
+ 	docker build -t <image>
+ docker daemon:
+ **************
+ to process the instructions 
+ 
+ docker registry:
+ ***************
+ docker registry is a like central repository
+ 
+ public registory:
+ ****************
+ 
+ docker hub : its public registry managed by docker
+ 
+ 
+ 
+ private registory:
+ *****************
+ nexus
+ jfrog
+ ECR-elastic container registry in aws
+ ACR-Azure container registry in azure
+ GCR-Google container registry in GCP
+ 
+ 
+ Key Docker Technologies:
+ ------------------------
+ 
+ *Docker File ------>its a file to follow in order to  create an image quickly,docker file is the source code of docker image
+ *Docker Image------->its a light-weight,stand-alone,executable-package that includes everything needed to run apiece of s/w,config files,libries and etc..
+ *Docker compose
+ *Docker Volumes
+ *Docker Swarm
+ 
+ 
+ DOCKER FLOW:
+ ------------
+ 		build			run
+ docker file ----------> docker image ----------->container
+ 			|
+ 			|---container os
+ 			|
+ 			|---application code
+ 			|
+ 			|---software
+ 			
+Docker home directory is /var/lib/docker
+
+
+what is docker registory?
+
+its a central server (storage),its have a multiple repositories
+
+what is docker repository?
+
+it having a single app resources with multiple version of that app
+ 			
+ 			
+docker hub is a default registory in docker
+
+create an account in hub.docker.com
+
+sakthi1433
+
+
+docker installation:
+--------------------
+
+apt update
+
+apt install docker.io -y
+
+docker version or docker --version or docker -v
+
+docker info ------------->complete docker information include how much containers deployed and etc...
+
+
+to build a maven web-app through docker:
+---------------------------------------
+
+git clone https://github.com/MithunTechnologiesDevOps/maven-web-application.git
+
+incase if dont have dockerfile in your repository to create and commit 
+in this repo this is a docker file
+
+FROM tomcat:8.0.21-jre8 ------------------>it is dependency or software packages
+COPY target/maven-web-application.war /usr/local/tomcat/webapps/maven-web-application.war ------------->it copy to docker container of tomcat home dir
+
+cd maven-web-application
+
+mvn clean package ------------>to create a war package
+
+
+docker build -t username_of_dockerhub/app-name:tag . ---------->to build a package here . represents current directory of u want were to build to specfiy that path
+
+docker build -t sakthi1433/maven-web-app:1 .
+
+
+docker images ------------>to list the docker images
+
+docker login -u <username> -p <passwd> ---------->to login dockerhub through cli
+
+docker push sakthi1433/maven-web-app:1 ----------->to push the local to central public registory
+
+deploy the wep-application using test server:
+
+to install docker in this test server
+
+docker run -d(detached/background) --name <any_app_name> -cpus 500m -memory 512Mi -p(portmapping/port) <hostport:containerport> <image> ----->here cpu consumption and memory consumption is seted high load also only take this limit
+
+docker run -d --name mavenapp -p 8080:8080 sakthi1433/maven-web-app ---->to deploy application
+
+docker ps/docker container ls ----------->to list the current runing containers
+
+docker inspect mavenapp --------->to view the soucre details of this  container.
+
+docker inspect --format {{
+
+here containers haveing a ipaddress but access only in that host machine only cant use outside of that host machine
+
+
+docker stop <container_name> --------->to stop the container
+
+docker ps -a ---------------->to list all containers running and idle containers also
+
+docker history <docker_image_id> ---------------->to show the layers of that image
+
+docker exec -it <container_name> /bin/bash -------->to enter the container
+
+docker exec -i <container_name> /bin/bash
+
+DOCKER BASIC COMMANDS:
+*********************
+
+docker info ---------->docker information
+
+docker --v/docker version -------------->docker version
+
+docker logs <img_id/name/cont_id_name> ----------->to check the logs
+
+
+image_commands:
+---------------
+
+#docker search <<Image Name>> --------->It will search all of the publicly available images on Docker
+Hub(https://hub.docker.com)
+
+docker images (or) docker image ls --------->to list the images
+
+docker images -f dangling=true -------->to filter only dangling images ( -f (or) --force)
+
+docker build -t <registryname>/reponame:tag <build_context>
+i.e
+docker build -t 058264088294.dkr.ecr.ap-south-1.amazonaws.com/java-web-app:1 .
+
+
+docker login -u <username> -p <passwd> <registryurl> ----------->to connect the central registry to the local machine
+i.e
+docker login -u sakthi -p 12345 058264088294.dkr.ecr.ap-south-1.amazonaws.com
+
+
+docker push <image:tag>-------------->to push the repo to the central registry (note:befor push ing the image to login to the central registry)
+i.e
+docker push 058264088294.dkr.ecr.ap-south-1.amazonaws.com/java-test:1
+
+docker pull 058264088294.dkr.ecr.ap-south-1.amazonaws.com/java-test:1 ---------->to pull the from the private registry
+
+docker inspect <image_id> ----------->to show the details of container
+(or)
+docker image inspect <image_name/image_id> 
+
+docker rmi <img_id/img_name> ---------------> to delete a image
+ note:
+  if the container is running by using that image can't delete use **docker rmi -f <image_name>**
+  in this case the the image couldn't fully delete the connections only remove this docker image called dangling image
+  
+one docker host container to another docker host container connect through overlay network in dockerswarm .here kubernetes ,docker swarm ,openshift and etc tools are use for container orhestatration
+  **dangling image: the image having any repository reference is called dangling image
+  
+(example:)
+
+root@ip-172-31-40-112:~# docker image ls
+REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
+sakthi1433/java-web-app   1         4d4f2e2c48f1   4 hours ago    499MB
+<none>                    <none>    1daba12b0479   21 hours ago   501MB ------------>this image dont have a name this image called dangling image
+
+if u want to tag the image again
+
+docker tag <image_id> <tag>
+
+(example):
+
+docker tag 1daba12b0479 sakthi1433/maven-web-application
+
+if u want delete multiple images
+
+docker rmi <img_id/img_name> <img_id/img_name> <img_id/img_name> <img_id/img_name>
+
+docker images -q -------->list images only img_id
+
+docker rmi -f $(docker images -q)--------------->to delete all images here all images by image id
+
+docker image prune ----------->to delete only dangling images
+
+docker history <docker_image_id> ---------------->to show the layers of that image
+
+docker build -t --no-cache <registry>/<tag> <build_context> ---------->it didn't use cache it pull from always pull from central registry only
+
+
+CONTAINER_COMMANDS:
+-------------------
+#docker inspect --format '{{ .State.Status }}' <<CID>> 
+
+#docker inspect --format '{{ .State.Pid }}' <<CID>> :
+
+#docker inspect --format '{{ .NetworkSettings.IPAddress }}' <<CID>>
+
+
+docker ps (or) docker container ls ----------->to list the container currently running ps stands for process
+
+
+docker stop <container_id>
+docker rm <container_id>--------->to remove only exited containers only
+
+if u want delete runnning containers using
+
+docker rm -f <dontainer_id/container_name>
+
+docker rm -f $(docker container ls -aq) or docker rm -f $(docker ps -aq) ---------->to delete a containers
+
+docker system prune --------->to remove cache,dangling images,stoped containers
+
+(example)
+root@ip-172-31-40-112:~# docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+  
+  docker container prune -------->only delete only stoped containers 
+  
+docker run -d --name <set_a _name_of cont> -p 8080:8080 --memory 200Mib --cpus 0.2 <img_name/id> ------------>to create a container set a memory and cpu limit
+  
+docker run -it(interactive) --name <any_cont_name> <img_id/img_name> <shell> -------->for os only
+
+i.e 
+ docker run -it --name centos1 centos /bin/bash ------------>here shell is an option because bash is a default shell u want sh shell u mention /bin/sh
+ 
+docker create v/s docker run:
+
+docker create --name <name_of _cnt> -p <host_port:cnt_port> <img_name> --------->it only create a container didn't start commands if u want start o run that container "docker start <cont_id>"
+
+docker run --name <name_of _cnt> -p <host_port:cnt_port> <img_name> -------->it create a container and start all commands from the base image autometically
+
+**we can't edit after created a container to change a port mapping should only done by creation of container
+
+docker rename <container_id/name> <new_name> ----------->rename of the container
+
+docker stop v/s docker kill:
+
+docker stop give a signal (sigterm) then it will take few seconds
+
+but docker kill immediatlly stop the containers
+---
+
+docker restart <cont_id/name> ----->to restart the container
+
+docker pause <cont_id/name> --------->to pause the all process running inside the container
+
+docker unpause <cont_id/name> ----------->to resume all process inside the container
+
+docker rm -f $(docker ps -aq --filter status=exited)----------->to remove only stopped 
+
+docker ps -aq -f status=exited -------------------->to filter the exited state exited
+
+docker exec <cont_id/name> /bin/bash -c "ps -aef" ----------->to execute the command directly in that container without login
+
+docker attach <cont_id/cont_name> ----> to go inside the container
+
+(or)
+
+docker exec -it <cont_id/name> /bin/bash --------->to login into that docker container
+
+docker top <cont_name/id> ----------->to show the process inside the container
+
+docker stats <cont_id/name> ---------->to list cpu and memory utilization of that container
+
+***in one container create multiple applications/process yes it technically possible but not recommended because of the containers are isolated with other containers that only purpose to create the container
+
+
+
+troubleshooting the docker container issues:
+
+1)check the docker daemon service is running or not using "systemctl status docker" or "systemctl status snap.docker.dockerd"-here installed using snap store 
+
+2)check the container status running or not
+
+3)to check locally using docker host 
+
+
+**if the process running out of cpu the process should not respond or very slowly respond 
+
+**if the process running out of memory the process should be killed automatically  
+
+docker_container_log commands:
+------------------------------
+
+docker logs <cont_id/name> ------------->shows the cont_logs it means stdout logs and std error etc...
+
+docker logs --tail 10 <cont_id/name> -------->last 10 logs only
+
+docker logs -f(floating) <cont_id/name> ---------->the logs interactive mode updating at a time
+
+docker commit <cont_id/name> <repos_name/tag> ----------->the container can create as image 
+
+docker cp <cont_id/name>:<src> <destination> ------------>to copy the file/folder from inside container to host server or host server to container
+
+
+docker save -o <fname.tar> <image_name> ---------->to save a docker image save as tar file to store in host machine
+
+scp <file.tar> root@<ip>:/path_to _store ------------->to share one server to another server 
+
+docker load -i <image name> ----------->to load a image to docker image from host server
+
+env --------->list all the environment variable 
+
+
+DOCKER_FILE:
+*************
+shell form:
+----------
+
+RUN yum install -y httpd
+CMD yum update -y
+ENTRYPOINT /bin/bash
+
+the commands executed internally shown below:
+
+/bin/bash -c yum install -y httpd
+/bin/bash -c yum update -y
+/bin/bash -c bin/bash
+
+note:if i docker stop <cont> the shell form process under the parent(bash) process the command are child process
+
+executable form:
+---------------
+
+RUN ["yum","install","-y","httpd"]
+CMD ["yum","update","-y"]
+ENTRYPOINT ["/bin/bash"]
+
+the commands executed internally shown below:
+
+/bin/yum install -y httpd
+/bin/yum update  -y
+/bin/bash
+
+note:here the the process are main process because of when u stop the container the process stopped gracefully.
+
+
+dockerfile ----->it contains a DSL instruction to create a Docker image,the docker daemon execute the dockerfile order of top to bottom
+
+DSL -->Domain Specfic Language
+
+docker file contains a customized name but you mention at time of build 
+
+docker build -f <dockerfilename> -t <registry>/tag> <build context> 
+
+docker default name : Dockerfile
+1)
+FROM ------------>it indicates pull from the base image
+
+syntax:
+
+FROM <rgistry>/<tag>
+
+i.e:
+ FROM tomcat:latest
+ 
+2)
+MAINTAINER ------> it indicate the owner of the file(dockerfiles)
+
+i.e:
+
+MAINTAINER sakthi<sathish@gmail.com>
+
+
+3)
+COPY ----------->it indicates copy from build context to inside local path of image
+
+syntax:
+COPY <source> <destination>
+
+i.e:
+COPY target/app.war /usr/local/app.war
+copy . . ---->here first dot define copy all files from build context second dot indicates to paste the all files to local path inside the image
+
+
+4)
+ADD ----------->its also copy files from build context to local path of image but here the remote files also (http/https files also) sharable
+
+syntax:
+ADD <source> <destination>
+ADD <linkof the tar file> <destination> 
+
+
+i.e:
+ADD https://www.maven.com/downloads/apache-maven-3.9.9.tar /usr/local/ ----------->here the tar file autometically decompress by daemon process only applicable for tar files
+
+5)
+RUN ------------>it executes commands and scripts files at time build of a image it executes inside the image.demon execute n number of RUN instructions at order top to bottom
+
+syntax:
+RUN <command> <args>
+
+i.e
+RUN mkdir <name>
+RUN apt update -y
+RUN bash test.sh
+RUN apt install git -y
+
+6)
+CMD -------->it executes commands and script files at time of container starting ,the commands executed inside the container.it executes applicatio process but it can be overwritten at running of container i.e (if i give CMD in dockerfile ["echo","it a command"] ---> docker run newone ls 
+									the ls command work as a command )
+
+note:here the dockerfile allows n number of CMD commands in that file but executes only last one CMD commad only 
+
+syntax:
+CMD <comd> <args>
+
+i.e:
+
+CMD ['bash','new.sh'] 
+
+7)
+ENTRYPOINT ---------> it executes commands and scriot files at time of container starting ,the commands executed inside the container.it executes applicatio process but it can't be overwritten at running of container giving command consider as argument example if in dockerfile ENTRYPOINT ["echo","its a Entry command"] runnuing of container (docker run newtwo ls ---->the output is its a Entry point ls .here the ls command consider as argument)
+
+syntax:
+
+ENTRYPOINT <command> <args>
+
+i.e:
+
+ENTRYPOINT ['echo','it a ENTRY POINT']
+note :entrypoint can't be overwritten in running of container giving command consider as args docker run newtwo ls ----->ls consider as args "it a ENTRYPOINT ls" its the output
+
+{ENTRYPOINT ["systemctl","start"]
+docker run <imagename> sshd
+--------->here service sshd started through entrypoint }
+----
+
+if in dockerfile have CMD and ENTRYPOINT the entrypoint command will execute the CMD command consider as arguments
+CMD ["ls","/"]
+ENTRYPOINT ["echo","hello ENtry point"] -->here were as placed before or after on ENTRYPOINT the output is same ENTRYPOINT have powerful
+
+docker run --enterpoint ["ls"] <imgname> --------->to mention a entrypoint at run time 
+
+output:
+hello ENtry point ls /
+
+8)
+WORKDIR ---------> workdirectory it indicates as like home directory in that container or image
+if u itntrct with the container its a default directory u drop on that container
+you entered path of the folder not exists it autometically create the workdir on the container 
+
+syntax:
+WORKDIR <path_of _folder>
+
+i.e:
+
+WORKDIR /home
+
+9)
+ENV ----------->environment variable .if the enviroment variable can access all in image and inside the container also 
+
+syntax:
+ENV <key> <value>
+
+i.e:
+
+ENV HOME /usr/local/tomcat
+ENV CATILINA_HOME /usr/local/tomcat/
+
+if you not mentioned ENV  in dockerfile use run time also
+
+**docker run -d --name <cont_name> -p <hostport:contport> --env ((or)-e) <key>=<value> <img_name>
+
+10)
+ARG ----------->ARG is similar to Env but its a refernce in dockerfile and building of image stage. the only command use the before the FROM command
+
+syntax:
+ARG <key>=<value>
+
+i.e:
+
+ARG version=1.0
+FROM maven:$version
+ARG warfile=app.war
+COPY target/$warfile /usr/local/tomact/webapps/$warfile
+
+**docker build --build-arg version=1.0 -t <registry/<name>:$version> <build context>
+
+11)
+LABEL --------> it used to identification command in docker file and docker images also
+if i deployet application wich banch and wich version i no idea after sometime because of using lable
+
+syntax:
+LABEL <key> <value>
+
+i.e:
+
+LABLE branchname master
+
+ARG branch=master
+LABEL branchname $branch
+
+if the arg have no value
+
+	ARG branch
+	LABEL branchname $branch 
+	**docker build --build-arg branch=development -t sakthi1433/<name:tag> <build_context>
+
+13)
+USER------>to set the user to the container for security purpose.it default user root however root having all permission 
+syntax:
+USER <name>
+
+i.e:
+
+USER SAKTHI 
+
+
+12)
+EXPOSE --------->its a purely for documentation purpose
+
+syntax:
+
+EXPOSE <content>
+
+i.e:
+
+EXPOSE 9090
+
+if u dont aware of the ports to inspect the image using docker inspect image_id to show
+
+
+
+14)
+VOLUME---------->mount points
+
+syntax:
+VOLUME <path>
+
+i.e:
+VOLUME /var/lib/
+
+what is alpine?
+
+Alpine is a light weight Linux Distribution.in here use apk package manager
+
+best practices:
+--------------
+1)use Official base images,and use alpine images because of the size of packages is low comparing other linux distributions
+2) don't install unwanted softwares and files.
+3) try to reduce the number of layers of images
+4)try to start a container process as a non root user
+5)to use multistage dockerile wherever is applicable.
+6)scan your docker images to detect vulnerables(using sonarqube) or using clair github opensource scannar tool for docker images
+
+Multistage DockerFile:
+----------------------
+its a normal docker file:
+
+FROM ubuntu
+RUN apt-get update -y && apt-get upgrade -y && apt install wget openjdk-8-jdk maven -y
+WORKDIR /maven
+COPY . .
+RUN mvn clean package
+ADD https://downloads.apache.org/tomcat/tomcat-9/v9.0.93/bin/apache-tomcat-9.0.93.tar.gz /usr/local/
+RUN cd /usr/local/ && tar -xvzf apache-tomcat-9.0.93.tar.gz / && rm -f apache-tomcat-9.0.93.tar.gz
+RUN cp /maven/target/*.war ./webapps/
+EXPOSE 8080
+ENTRYPOINT [ "/usr/local/apache-tomcat-9.0.93/bin/startup.sh","run"]
+
+here the unwanted files are there like maven build files and ubuntu is a weight because of using multi stage doker files
+
+sample multistage docker files:
+-----------------------------
+FROM maven:3.5-jdk-8-alpine as create
+WORKDIR /app
+COPY . .
+RUN mvn clean package
+
+FROM tomcat:8.0.20-jre8
+COPY --from=create /app/target/*.war /usr/local/tomcat/webapps/
+
+DOCKER_IGNAORE FILES:
+---------------------
+
+.dockerignore
+
+cat .dockerignore
+
+dockerfile
+jenkinsfile
+*.txt
+
+to ignore these file wile to using COPY OR ADD commands
+
+
+DOCKER SAMPLE JENKINS FILE:
+---------------------------
+
+FROM ubuntu
+RUN apt-get update -y && apt install openjdk-8-jdk -y
+WORKDIR /var/jenkins_home
+ADD https://get.jenkins.io/war-stable/2.462.1/jenkins.war ./
+ENTRYPOINT ["java","-jar","jenkins.war"]
+
+
+PRIVATE REGISTRY USING AWS ECR(ELASTIC CONTAINER REGISTRY):
+**********************************************************
+
+1)to build the image using private registory:
+
+docker build -t 058264088294.dkr.ecr.ap-south-1.amazonaws.com/python-test:1 .
+
+2)in aws create a repository with the name of python-test in ECR
+
+3)to install aws-cli in your server and create a cross service role in aws iam roles:
+	a)create role
+	b)give ec2
+	c)give ec2containerfullaccess policy and name it
+	d)got the ec2 instance to select that server tap on actions select security option then click modify iam roles to select that role
+	
+4)aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 058264088294.dkr.ecr.ap-south-1.amazonaws.com ------>its a command to authenticate to the ecr
+
+5)docker push 058264088294.dkr.ecr.ap-south-1.amazonaws.com/python-test:1
+
+6)configure as well as aws role and cli the deployment server also
+
+7)aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 058264088294.dkr.ecr.ap-south-1.amazonaws.com ------>again login to the ecr in deployment server
+
+8) docker run -d --name pythontest1 -p 5001:5000 058264088294.dkr.ecr.ap-south-1.amazonaws.com/python-test:1 --------->directly run the container using private docker image 
+
+DOCKER_NETWORKS:
+****************
+
+By default docker has 3 networks
+
+bridge(default network)
+host
+none  
+
+docker network ls --------->default network
+
+* while createating a container if we dont mention nework explicitly containers will be created in default bridge network
+*if the containers in bridge network they communicate only through ip address(containers don't have dns only ip address)
+
+
+docker network create -d(detached mode) bridge <nameofnew network> ----------->here bridge is a driver -d for detached 
+
+docker network inspect <network_name/id> or docker inspect <network_name/id> --------->to inspect the network
+
+docker run -d --name <name_cont> -p <hport:cport> --network <network_name/id> <imagenamewithtag/img_id> ---------->to add a network while creating or running a container 
+
+***the custom bridge network having a networkname you communicate between two container through the cont_name(cont_host_name) in the network.
+
+
+		  ---------------------------			-------------------------------
+		 |172.18.0.3-pynettest 5000 |-------------------|  172.18.0.2-nettest1 8080   |
+		 |__________________________|			|			      |
+								-------------------------------
+		      ping nettest1					ping pynettest
+
+here the container name working as dns in this network(subnet:172.18.0.0./16)
+
+[note: the default bridge can't support the Dns in ther network because using the custom bridge network]
+
+**docker network connect <network_name_want_to_connect> <cont_name> --------->to connect the container to the other network  
+
+**docker network disconnect <network_name_want_to_dissconnect> <cont_name> --------->to disconnect the other network from the container
+
+
+host ---->using the host network to create a container it dosn't have any ipaddress it connected to docker host network(daemon/node/host/docker server) and it don't need to mention the port because of the host network having all open ports 
+
+[note: the same number ports of two containers in the host network became a port conflict the recent container should be goes to exited state autometically]
+
+DOCKER_VOLUMES:
+***************
+here two types of apllications using in docker
+
+stateless appplications:
+the apllication couldn't expose data 
+
+statefull applications:
+this application expose their store the data in the containers
+    
+
+docker_volumes is a mount points.using docker volumes we can mount some storage with container directory
+
+Bind Mounts:
+-----------
+
+it basically any files/directory which get mounted from docker host server to docker container is called bind mounts
+
+
+[note: in the host server directory having files also show in that container path]
+
+
+docker run -d --name <name_to_set _cont> -v <bind_mount_path(or)docker_volume:container_dir_path> <rgistry:tag> ---------> v stands for volume
+
+i.e:
+docker run -d --name test -v /home/test/test1:/usr/local/ sakthi1433:1 ---------->its bind mounts
+
+mongodb exmple:
+---------------
+docker run -d --network testnetwork -v /root/mongo:/data/db --name mongodb -e MONGO_INITDB_ROOT_USERNAME=devdb	 -e MONGO_INITDB_ROOT_PASSWORD=devdb@123 mongo  ------>here the -v is bind mount and pull mongo from registry 
+
+docker run -d --network testnetwork -p 8080:8080 --name mongoapp -e MONGO_DB_HOSTNAME=mongodb2 -e MONGO_DB_USERNAME=devdb -e MONGO_DB_PASSWORD=devdb@123 sakthi1433/mongo:1 ------------->its a web application to store the data through mongo
+
+docker volumes:
+--------------
+docker volumes info maintained and created by /var/lib/docker/volumes
+local volumes
+external volumes
+
+docker volume create -d <driver> <volume_name> ---------->to create a volume
+
+note: the docker volume stores  inside the container process data should store at /var/lib/docker/volumes/<vol_name>/_data/ howver is onlyfor local volumes
+
+**the default volume driver is local
+
+DOCKER_PLUGINS:
+****************
+
+docker plugin ls ---------------->to list the plugins
+
+docker plugin enable <plugin_name> ------>to enable the disabled plugin
+
+docker plugin disable <plugin_name> ----------->to disable the plugin
+
+docker plugin rm -f <plugin_name> ---------->-f for force to remove the plugin
+
+external volumes:S
+
+	the external volumes like nfs.ebs.efs and etc...
+	First thing to install the external volume driver(for aws REX-Ray plugin)
+	
+	** docker plugin install rexray/ebs EBS_ACCESSKEY=access_key EBS_SECRETKEY=secret_key ------------>mention the aws access key and secret key
+	AKIAWMFUPDCOW5C3WIY5
+	itGcTbS7TxfojnxlZ30NsJ+s79Pbxwi8DnalT/rv
+	
+    docker plugin install rexray/ebs \
+    --alias rexray-ebs \
+    EBS_ACCESSKEY=AKIAWMFUPDCOW5C3WIY5 \
+    EBS_SECRETKEY=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 \
+    LOG_LEVEL=debug
+
+
+	** docker volume create -d rexray/ebs <volumename> ---------->it automatoically create the volume at aws ebs
+
+	access_key:AKIAQ3EGPN3TKXOYPNX3 secrect:ry1nh2NMOjkVUNFqDFaypR9+A7AacDchuo12tYgR
+
+	docker run -d --network testnetwork -v <volname>:path <image_name>----->to deploye the statefull container with aws ebs
+
+
+DOCKER-COMPOSE:
+**************
+
+docker -compose :
+	 tool for defining and running multi container applications we can deploy single container also
+
+
+i.e: example for if consider two containers the containers the containers are depends upon interconnected one container couldn't start the another will start
+
+
+its written yaml file 
+++
+the default file for doccker compose is docker-compose.yml or docker-compose.yaml
+
+dockerfile vs docker-compose :
+
+docker file to creating  a docker image
+
+docker compose file to create a single and multiple container
+
+docker-compose yaml attributes:
+
+version: "3"
+services:
+  <serviceName>:
+    image:<img name>
+    depends_on:
+    -<servicename>
+    port:
+    - <host port:containerport>
+    network:
+    - <network_name>
+    environment:
+    - <key>=<value>
+  <serviceName>:
+    image:<img_name>
+    port:
+    - <host port:containerport>
+    volumes:
+    - <volumepath:containerpath>
+volumes:
+  <volumeName>:
+    driver:local
+networks:
+  <networkname>:
+    driver:bridge
+    
+example:
+
+version:"3"
+services:
+  mongoapp:
+    image: sakthi1433/mongo:1
+    depends_on:
+    - mongodb
+    ports:
+    - 8080:8080
+    environment:
+    - MONGO_DB_HOSTNAME=mongodb
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb@123
+    networks:
+    - testnetwork
+  mongodb:
+    image: mongo:latest
+    
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=devdb
+    - MONGO_INITDB_ROOT_PASSWORD=devdb@123
+    volumes:
+    - testvol:/data/db
+    networks:
+    - testnetwork
+networks:
+  testnetwork:
+    driver: bridge
+    external: true ---------->its defines it not be create if alredy exist it works properly not exists show error network not found
+volumes:
+  testvol:
+    driver: local
+  
+  
+docker-compose config ------------>to check the docker-compose file is right or wrong
+
+docker-compose -f <custom-compose-file-name> config -----------> to check the custom docker-compose file is right or wrong
+
+docker-compose up -d(detach) ----->to run the containers through compose file
+
+docker-compose logs ------------>to disply only that relavent to the compose file
+
+docker-compose create -------> to only create a containers and services you to start manually that container
+
+docker-compose start ---------->to start the compose containers
+
+docker-compose stop --------->to stop the compose containers
+
+docker-compose down ---------> to stop a compose containers and delete that container and created networks through compose file but created volumes are not delete (data is important)
+
+docker-compose images  ----------> to list the compose file images
+
+docker-compose up --scale mongoapp=2 --scale mongodb=2 -d  ------------>to create a each service have two containers
+
+DOCKER_SWARM
+*************
+
+container orchestration tools----->docker swarm,kubernetes(k8s),openshift,NoMad and etc...
+
+to scale the containers its mean to managing and coordinating the containers using container orchestration tools
+
+docker swarm clusters ---------->a group of docker servers/nodes/daemons/hosts
+
+in docker swarm have one or more masters/nodes in that cluster and rest of all nodes /servers are worker nodes
+
+
+
+docer_server1    docker-server2   docker-server3  ------|
+						        |
+   |			|		|		|
+   |			|		|		|
+   |			|		|		|
+   |			|		|		|
+   |____________________|_______________|		|---------cluster
+   			|				|
+   			|				|
+   		  docker swarm manager			|
+   			|				|
+   			|				|
+   			|				|
+   		       cli				|
+   		       				________|
+   	
+docker swarm init ------------>to start docker swarm
+
+docker node ls -------->to list the node servers list 
+
+docker swarm join-token manager ----------->to generates a token to add another docker machine to add as master docker machine
+
+docker swarm join-token worker ------------>to generate a tocken for worker docker machine to copy and paster that worker node as worker
+
+what is docker swarm service?
+
+it represents a group of one or more containers(replicas)of same image 
+
+overlay driver is the default network driver for docker swarm
+
+docker service create --name <servicename> -p <hport:cport> --replicas 2 <image> ------------>to create a service
+
+i.e
+docker service create --name web-app -p 8090:8080 --replicas 2 sakthi1433/java-web-app:1
+
+
+(default replica is one)
+
+docker service ls ---->to list the services(containers)
+
+docker service ps <service name> ------->to list the service where is running in the master or slave1 or slave2 like this.(the replica containers where is running details are shown)
+
+
+docker service rm <servicename> ------>to remove service
+
+i.e :
+ if i already started a service however i increase my replicas (sclable)
+ 
+ docker service scale <service_name>=<how_much_replicas>
+ like this ------->docker service scale web-app=3 #its a manual scalling
+ 
+ **docker swarm not support auto scaling**
+ 
+ ***if i accidently entered image is wrong use
+	 docker service update <name_of_service> --image <proper_img_name:tag>---------->to update a image name
+ (ex)
+ 
+ docker service update py --image dockerhandson/python-flask-app:1
+ 
+ 
+ ***the default overlay network driver can't support dns or ip ping because to use  custom overlay driver network
+ 
+ 
+ docker swarm services modes:
+ 
+ there are two types of service modes in docker swarm
+ 
+ 1)replica mode (default) and recommended
+ 
+ 2)global mode
+ 
+ 
+ capacity of my cluser :
+ 
+ 3 nodes(1 master and two slaves)
+ 
+ each node 1 cpu 1gb mem
+ 
+ 3 --->3cpu 3gb mem
+ 
+ docker service create --name nginx --network testswarm -p 80:80 --mode global nginx
+ 
+ docker node update --availability drain <node_name> -------------->the node should be drain
+ 
+ docker node uptate --availability active <node_name> --------->to activate the node again
+ 
+ i.e
+  if u drain the master node that node containers only remove or none of containers create in master  however master node to manage their nodes.it manages the nodes but not accept containers to store in master
+  
+what is docker stack?
+group of services is called stack
+
+i.e
+   if consider tomcat server communicates with database server if here to create two services but using stack create as stack is deploy as a stack
+   
+   example:
+   
+   version: "3"
+services:
+  mongoapp:
+    image: sakthi1433/mongo:1
+    depends_on:
+    - mongo
+    ports:
+    - 8080:8080
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=devdb@123
+    networks:
+    - testnetwork				----------------|
+    deploy:  # This will be considered only in docker swarm. 	|
+      replicas: 2						|
+      update_config:						|
+        parallelism: 1						|--------->its docker swarm stack compose part
+        delay: 20s						|
+      restart_policy:						|
+        condition: on-failure					|
+        delay: 10s						|
+        max_attempts: 5				  ______________|
+  mongo:
+    image: mongo:latest
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=devdb
+    - MONGO_INITDB_ROOT_PASSWORD=devdb@123
+    volumes:
+    - testvol:/data/db
+    networks:
+    - testnetwork
+networks:
+  testnetwork:
+    external: true ------------>here the network is already had been create manually then only work
+volumes:
+  testvol:
+
+   
+docker stack deploy --compose-file docker-compose.yml <name_of_stack> ----------->to create a multiple services as stack
+
+docker stack ls -------->list the stacks
+ 
+docker swarm files are stored in /var/lib/docker/swarm
+
+
+*********************************************************END_OF_DOCKER***************************************************************
+ 

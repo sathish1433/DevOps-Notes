@@ -1,0 +1,252 @@
+Tuple
+
+Tuple is immutable and it cant be changed
+
+variablename=('praveen','ajay')
+
+
+a=('praveen','ajay')
+print (dir(a))
+print (len(a))
+print (a.index('praveen'))
+print (a[0])
+a[0]="bhaskera"  #WE CANT CHANGE THE VALUE OF TUPLE
+print (a)
+print (a.count('praveen'))
+
+
+output
+
+
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+2
+0
+1
+
+
+a=('praveen','ajay','san','praveen')
+print (type(a)) 
+print (dir(a))
+print (len(a))
+print (a.index('praveen'))
+print (a.index('ajay'))
+print (a.index('san'))
+print (a.count('praveen'))
+
+
+output
+
+
+<class 'tuple'>
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+4
+0
+1
+2
+2
+
+
+--------------------------------------------------------------------------
+sets
+
+set syntax
+
+variablename={'value','value2','value3'}
+
+a={'praveen','ajay','san','kiran'}
+print  (type(a))
+print (dir(a))
+print (len(a))
+a.remove('ajay')
+print (a)
+a.pop()
+print (a)
+b=a.copy()
+print (b)
+a.add('datat')
+print (a)
+
+output
+
+<class 'set'>
+['__and__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', '__init_subclass__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 'union', 'update']
+4
+{'kiran', 'san', 'praveen'}
+{'san', 'praveen'}
+{'san', 'praveen'}
+{'datat', 'san', 'praveen'}
+
+Process finished with exit code 0
+
+
+a={'praveen','ajay','san'} 
+a1={'ajay','kiran','datta','besant'}
+print (a.intersection(a1))
+b=a.intersection(a1)
+print (b)
+print (a1.union(a))
+a.clear()
+print (a)
+
+
+output
+
+{'ajay'}
+{'ajay'}
+{'san', 'datta', 'ajay', 'besant', 'kiran', 'praveen'}
+set()
+
+Process finished with exit code 0
+===============================================================================
+
+CLASS EXAMPLES
+
+##Tuple explaination
+a=('ajay','kiran','sunil','sriram','balaji','besant')
+print (len(a))
+print (a.count('ajay'))
+print (a[0])
+print (a[1:5])
+#a[0]="besantoooo"
+#a.remove('ajay')
+#print (a)
+print (a)
+print (a[0][0:2])
+print (a[2][1:3])
+f=a[0][0:2]+a[2][1:3]
+print (f)
+print (dir(a))
+print (a.index('kiran'))
+'''inp=input("Enter the input")
+inp_s=a.index(inp)
+print ("String {0} is in position {1} in the Tuple {2}".format(inp,inp_s,a))
+'''
+print (a[-1::-1])
+testlist=[]
+print (a)
+inp1=a[0]
+inp2=a[2]
+inp3=a[3]
+testlist.append(inp1)
+testlist.append(inp2)
+testlist.append(inp3)
+print (testlist)
+print (type(a))
+
+###SETS EXPLAINATION
+
+
+aset={'praveen','ajay','kiran','san','besant','sunil','fun','joy'}
+print (type(aset))
+print (len(aset))
+print (dir(aset))
+aset.add('sriram')
+print (aset)
+aset.remove('kiran')
+print (aset)
+bset={'ajay','abhi','sunil','hemanth'}
+print("here we are updating {0} using {1}".format(aset,bset))
+aset.update(bset)
+print(aset)
+print (bset)
+print ("Below are difference output\n{0}".format(aset.difference(bset)))
+commonelements=aset.intersection(bset)
+print ("Below are common elements in {0} and {1} is \n{2}".format(aset,bset,commonelements))
+print (bset)
+cset={'sunil','abhi','ajay','aug15'}
+print (cset.issubset(bset))
+print (bset)
+bset.pop()
+print (bset)
+
+
+C:\Users\praveenkumar\PycharmProjects\Python_July_batch\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\Python_July_batch\Tuple_sets_class_examples.py 
+6
+1
+ajay
+('kiran', 'sunil', 'sriram', 'balaji')
+('ajay', 'kiran', 'sunil', 'sriram', 'balaji', 'besant')
+aj
+un
+ajun
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+1
+('besant', 'balaji', 'sriram', 'sunil', 'kiran', 'ajay')
+('ajay', 'kiran', 'sunil', 'sriram', 'balaji', 'besant')
+['ajay', 'sunil', 'sriram']
+<class 'tuple'>
+<class 'set'>
+8
+['__and__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', '__init_subclass__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 'union', 'update']
+{'praveen', 'besant', 'kiran', 'fun', 'sunil', 'san', 'ajay', 'joy', 'sriram'}
+{'praveen', 'besant', 'fun', 'sunil', 'san', 'ajay', 'joy', 'sriram'}
+here we are updating {'praveen', 'besant', 'fun', 'sunil', 'san', 'ajay', 'joy', 'sriram'} using {'sunil', 'abhi', 'hemanth', 'ajay'}
+{'abhi', 'praveen', 'besant', 'fun', 'sunil', 'san', 'ajay', 'joy', 'sriram', 'hemanth'}
+{'sunil', 'abhi', 'hemanth', 'ajay'}
+Below are difference output
+{'praveen', 'besant', 'fun', 'san', 'joy', 'sriram'}
+Below are common elements in {'abhi', 'praveen', 'besant', 'fun', 'sunil', 'san', 'ajay', 'joy', 'sriram', 'hemanth'} and {'sunil', 'abhi', 'hemanth', 'ajay'} is 
+{'sunil', 'abhi', 'hemanth', 'ajay'}
+{'sunil', 'abhi', 'hemanth', 'ajay'}
+False
+{'sunil', 'abhi', 'hemanth', 'ajay'}
+{'abhi', 'hemanth', 'ajay'}
+
+Variable_options.txt
+####################
+
+a="praveenkiranajay1223444"
+
+print (dir(a))
+print (len(a))
+print (type(a))
+print (a.count('a'))
+print (a.isalpha())
+print (a.isnumeric())
+print (a.isdigit())
+print (a.isalnum())
+print (a.isupper())
+print (a.islower())
+print (a.upper())
+upc=a.upper()
+print (upc)
+print (upc[0:4])
+print (a[-1:-4:-1])
+print (upc[0:4]+a[-1:-4:-1])
+print (len(upc[0:4]+a[-1:-4:-1]))
+sliem=upc[0:4]+a[-1:-4:-1]
+len_sle=len(sliem)
+print ("combination of sliced eement is {0} and its length is {1}".format(sliem,len_sle))
+
+b="ajaykiranAJA"
+print (b.swapcase())
+print (b.replace('a','_'))
+print (b)
+repl_h=b.replace('a','__')
+print (repl_h)
+print ("Orginal word is {0},Post replacing a with __ , final word is {1}".format(b,repl_h))
+print (b)
+ex_ch=input("Enter the character to be replaced\n")
+new_ch=input("Enter the new character\n")
+print (b.replace(ex_ch,new_ch))
+print ("_".join(b))
+print ("_".join(b[0:4]))
+print (":".join(b[5::]))
+print ("_".join(b[0:4])+":".join(b[5::]))
+b="praveen:ajay:san:sriram vishwa"
+print (b.split(' '))
+c="praveenajaysansriarm"
+print (c.split('a'))
+o="  praveen  ajay   "
+print (o)
+print (len(o))
+print (o.strip())
+print (len(o.strip()))
+print (o.rstrip())
+print (len(o.rstrip()))
+print (o.lstrip())
+print (len(o.lstrip()))
+print (o.replace(' ',''))
+print (c)
+print (c.startswith('e'))
+print (c.endswith('z'))

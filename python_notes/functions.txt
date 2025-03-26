@@ -1,0 +1,614 @@
+###Functions
+
+'''
+
+inp=int(input("Enter the userinput\n"))
+if (inp == 3):
+    print ("True")
+elif (inp == 5):
+    print ("True")
+elif (inp == 6):
+    print ("False")
+elif (inp == 8):
+    print ("False")
+else:
+    print ("almost true")
+
+###lets convert above code to functions
+
+def f1():
+    print ("True")
+def f2():
+    print ("False")
+def f3():
+    print ("Almost true")
+
+
+inp=int(input("Enter the userinput\n"))
+if (inp == 3):
+    f1()
+elif (inp == 5):
+    f1()
+elif (inp == 6):
+    f2()
+elif (inp == 8):
+    f2()
+else:
+    f3()
+
+
+### Even, odd verification using function
+
+def even_find():
+    print ("Number {0} is even".format(inp1))
+
+def odd_find():
+    print ("Number {0} is odd".format(inp1))
+inp1=int(input("Enter the Number\n"))
+if (inp1%2 == 0):
+    even_find()
+elif (inp1%2 != 0):
+    odd_find()
+
+
+
+def even_find():
+    print ("Number {0} is even".format(inp1))
+    another_inp=int(input("Enter the Another input\n"))
+    sum_ou=inp1+another_inp
+    print ("Sum of {0} and {1} is {2}".format(inp1,another_inp,sum_ou))
+
+
+def odd_find():
+    print ("Number {0} is odd".format(inp1))
+    another_inp = int(input("Enter the Another input\n"))
+    mul_ou = inp1 * another_inp
+    print("product of {0} and {1} is {2}".format(inp1, another_inp, mul_ou))
+inp1=int(input("Enter the Number\n"))
+if (inp1%2 == 0):
+    even_find()
+elif (inp1%2 != 0):
+    odd_find()
+
+
+def alpha_f1():
+    print ("Input may be alphabet or _  and provided input is {0}".format(i))
+def num_f2():
+    print ("Input may be Number or -  and provided input is {0}".format(i))
+a="a_p1_2-q-f-l_"
+for i in a:
+    if (i.isalpha()):
+        alpha_f1()
+    elif (i == "_"):
+        alpha_f1()
+    elif (i.isnumeric()):
+        num_f2()
+    elif (i == "-"):
+        num_f2()
+
+
+k=['10','20','21','23','25','26']
+def f1():
+    anth_in=int(input("Enter the number\n"))
+    out_sum=int(k[i])+anth_in
+    k[i]=out_sum
+
+def f2():
+    anth_in=int(input("Enter the number\n"))
+    out_diff=int(k[i])-anth_in
+    k[i]=out_diff
+
+
+for i in range(0,len(k),1):
+    if (i%2 == 0):
+        print ("Position is {0} and its value is {1}".format(i,k[i]))
+        f1()
+    elif (i%2 != 0):
+        print ("Position is {0} and its value is {1}".format(i,k[i]))
+        f2()
+print (k)
+
+def add():
+    sum_out=i+inp1
+    print ("Performing Addition of {0} and {1} is {2}".format(i,inp1,sum_out))
+def sub():
+    diff_out=i-inp1
+    print ("Performing subtraction  of {0} and {1} is {2}".format(i,inp1,diff_out))
+def mul():
+    pro_ou=i*inp1
+    print ("Performing multiplication of {0} and {1} is {2}".format(i,inp1,pro_ou))
+def div():
+    divis_out=i/inp1
+    print ("Perfromainmg divisopn of {0} and {1} is {2}".format(i,inp1,divis_out))
+
+
+inp1=int(input("Enter the input\n"))
+for i in range(0,100,1):
+    if (i >0 and i<20):
+        add()
+    elif (i>21 and i<45):
+        sub()
+    elif (i>45 and i<70):
+        div()
+    elif (i>70 and i<90):
+        mul()
+    elif (i>90 and i<100):
+        add()
+        sub()
+        mul()
+        div()
+    print ("============================================================================")
+
+
+####PASSING ARGUMENTS TO THE FUNCTION
+
+def f1(a,b):
+    c=a+b
+    print ("Arguments passwed are {0} and {1} and output is {2}".format(a,b,c))
+f1('praveen','san')
+
+
+def f1(a,b):
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+f1(10,20)
+
+
+def alpha(a,b):
+    c=a+b
+    print ("Both inputs are alphabet {0} and {1} and output is {2}".format(a,b,c))
+def numer(a,b):
+    c=int(a)+int(b)
+    print ("Both inputs are numbers {0} and {1} and output is {2}".format(a,b,c))
+
+
+def strin_con(a,b):
+    c=str(a)+str(b)
+    print ("One input is strinf and another is number , both got converted ti string {0} {1}  and output is {2}".format(a,b,c))
+
+a=input("Enter the inp1\n")
+b=input("Enter the inp2\n")
+if (a.isalpha() and b.isalpha()):
+    alpha(a,b)
+elif (a.isnumeric() and b.isnumeric()):
+    numer(a,b)
+elif (a.isalpha() and b.isnumeric()):
+    strin_con(a,b)
+
+
+###Next class need to do another example on passing argument to check on string , numbre, whether its even odd  and call respective function
+##Passing multiple arguments
+###global varibale
+### return the function
+
+## Argument passing to function
+def p1(a,b):
+    c=a+b
+    print (c)
+
+p1(10,20)
+
+
+def p1(a,b):
+    c=a+b
+    print (c)
+p1(10) ##This will fail since 2 inputs required for function
+
+
+
+
+def add_func(a,b):
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+def sub_fun(a,b):
+    c=a-b
+    print ("Difference of {0} and {1} is {2}".format(a,b,c))
+def mul_fun(a,b):
+    c=a*b
+    print ("Product of {0} and {1} is {2}".format(a,b,c))
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+add_func(n1,n2)
+sub_fun(n1,n2)
+mul_fun(n1,n2)
+
+
+
+
+def add_func(a,b):
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+def sub_fun(a,b):
+    c=a-b
+    print ("Difference of {0} and {1} is {2}".format(a,b,c))
+def mul_fun(a,b):
+    c=a*b
+    print ("Product of {0} and {1} is {2}".format(a,b,c))
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+usrop=input("Enter '1' for addition\n'2' for subtraction\n'3' for multiplication\n'4' for all operation")
+if (usrop == "1"):
+    add_func(n1,n2)
+elif (usrop == "2"):
+    sub_fun(n1,n2)
+elif (usrop == "3"):
+    mul_fun(n1,n2)
+elif (usrop == "4"):
+    add_func(n1,n2)
+    sub_fun(n1,n2)
+    mul_fun(n1,n2)
+
+
+def add_func(a,b):
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+def sub_fun(a,b):
+    c=a-b
+    print ("Difference of {0} and {1} is {2}".format(a,b,c))
+def mul_fun(a,b):
+    c=a*b
+    print ("Product of {0} and {1} is {2}".format(a,b,c))
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+usrop=input("Enter '1' for addition\n'2' for subtraction\n'3' for multiplication\n'4' for all operation")
+if (usrop == "1"):
+    add_func(n1,n2)
+elif (usrop == "2"):
+    sub_fun(n1,n2)
+elif (usrop == "3"):
+    mul_fun(n1,n2)
+elif (usrop == "4"):
+    n3=int(input("Enter the number\n"))
+    n4=int(input("Enter the number\n"))
+    add_func(n3,n4)
+    sub_fun(n3,n4)
+    mul_fun(n3,n4)
+
+
+def alphcall():
+    alphlist.append(listexample[i])
+    usrinp=input("Enter the input\n")
+    c=usrinp+listexample[i]
+    listexample.append(c)
+    print (listexample)
+def numcall():
+
+    numberlist.append(listexample[i])
+    if (int(listexample[i])%2 == 0):
+        evennum.append(listexample[i])
+    else:
+        oddnumb.append(listexample[i])
+
+def alphnumcall():
+
+    alphnumlist.append(listexample[i])
+    for j in listexample[i]:
+        if j.isalpha():
+            print ("{0} is alphabet in {1}".format(j,listexample[i]))
+        elif j.isnumeric():
+            print ("{0} is number in {1}".format(j,listexample[i]))
+evennum=[]
+oddnumb=[]
+numberlist=[]
+alphnumlist = []
+alphlist = []
+
+listexample=['praveen','ajay','san','22','33','35','44','53','praveen12344','12pra34he56sun78sri']
+for i in range(0,len(listexample),1):
+    if (listexample[i].isalpha()):
+        #print ("Calling function {0}".format(alphcall()))
+        alphcall()
+    elif (listexample[i].isnumeric()):
+        #print ("Calling function {0}".format(numcall()))
+        numcall()
+    elif (listexample[i].isalnum()):
+        #print ("Calling function {0}".format(alphnumcall()))
+        alphnumcall()
+
+print ("alphabet list is  {0}\nNumbericlist is {1}\nevennumberlist is {2}\noddnumber list is {3}\nalphanumericlist is {4}\n".format(alphlist,numberlist,evennum,oddnumb,alphnumlist))
+
+
+## How to assign value while declaring function itself
+##In below example we declared default a value is 10, b=0 even nothig  passed  while calling function it will take default value
+def p1(a=10,b=0):
+    c=a+b
+    print (c)
+p1()
+
+##In below example already default 10,0 is assigned a and b but we over riding default value by 30,40
+def p1(a=10,b=0):
+    c=a+b
+    print (c)
+p1(30,40)
+
+
+##Below example taking user input and passing to func
+def p1(a=10,b=0):
+    c=a+b
+    print (c)
+n1=int(input("Enter the number\n"))
+p1(n1)
+
+
+## Below example failing since we declared 2 arguments but passwed 3 arguments
+def p1(a=10,b=0):
+    c=a+b
+    print (c)
+n1=int(input("Enter the number\n"))
+p1(n1,'100','praveen')
+
+
+###How to pass multiple arguments
+
+def p1(*args):
+    for i in args:
+        print ("Value is {0}".format(i))
+p1(10,20,30,50,6)
+
+
+##Below example for adding the arguments
+def p1(*args):
+    sum=0
+    for i in args:
+        sum=sum+i
+    print ("sum of all arguments passed is {0}".format(sum))
+
+p1(10,20,30,50,6)
+
+
+def p1(*args):
+    for i in args:
+        if (i.isalpha()):
+            print ("{0} is alphabet".format(i))
+        else:
+            print ("{0} is number".format(i))
+
+
+
+p1('10','2','pravee','ajay','san')
+
+
+##How to handle error, if error occurs also script shuld continue  and it should not fail
+
+a=int(input("Enter the input1\n"))
+b=input("Enter the input2\n")
+c=a+b
+print (c)
+
+##above script will fail since both inputs are different types, How to handle  we can achieve try and except block
+#try:
+#    <block>
+#except:
+#    pass
+
+##Below example try section all commands executed successfully so it wont go to except
+try:
+    a = int(input("Enter the input1\n"))
+    b = int(input("Enter the input2\n"))
+    c=a+b
+
+    print ("Try section is success and output is {0}".format(c))
+except:
+    pass
+    print ("Some erro occured in try section")
+
+
+### Below example In try section will failed since both are different type and it will except block since try is getting failed
+
+try:
+    a = int(input("Enter the input1\n"))
+    b = input("Enter the input2\n")
+    c=a+b
+
+    print ("Try section is success and output is {0}".format(c))
+except:
+    pass
+    print ("Some erro occured in try section")
+
+
+
+try:
+    a = int(input("Enter the input1\n"))
+    b = input("Enter the input2\n")
+    c=a+b
+
+    print ("Try section is success and output is {0}".format(c))
+except Exception as error:
+    pass
+    print ("Error occured  in try section and below is error\n {0}".format(error))
+
+
+
+try:
+    a = int(input("Enter the input1\n"))
+    b = input("Enter the input2\n")
+    c=a+b
+
+    print ("Try section is success and output is {0}".format(c))
+except Exception as error:
+    pass
+    print ("Error occured  in try section and below is error\n {0}".format(error))
+    b=int(input("Enter the digit input2\n"))
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+
+
+try:
+    n1=int(input("ENTER THE NUMBER INPUT1\n"))
+except Exception as e:
+    print ("Try section got failed since input is passed not digit and error is {0}".format(e))
+    n1=int(input("Enter the number input1\n"))
+
+try:
+    n2=int(input("ENTER THE NUMBER INPUT2\n"))
+except Exception as e:
+    print ("Try section got failed since input is passed not digit and error is {0}".format(e))
+    n2=int(input("Enter the number input2\n"))
+
+out=n1+n2
+print ("Sum of {0}  and {1} is {2}".format(n1,n2,out))
+
+
+### Giving user 5 times chance to enter digit in except block   
+try:
+    n1=int(input("Enter the numbber\n"))
+except:
+    for i in range(0,5,1):
+        try:
+            print ("attempt number is {0}".format(i))
+            n1=int(input("Enter the number"))
+            break
+        except Exception as e:
+            print ("User not enetered digit , so it will prompting again to enter input and error is {0}".format(e))
+
+nao=int(input("enter the another number\n"))
+c=n1+nao
+print (c)
+
+
+#### Try and except block on function
+
+def p1(a,b):
+    c=a+b
+    print (c)
+try:
+    n1=int(input("Enter the input1\n"))
+    n2=int(input("Enter the input2\n"))
+    p1(n1,n2)
+except Exception as e:
+    print ("error occured in try statement and error is {0}".format(e))
+
+
+
+def p1(a,b):
+    c=a+b
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+
+userattempt=int(input("Enter the userattempt value\n"))
+for i in range(0,userattempt,1):
+    print ("Attempt number is {0}".format(i))
+    print ("Number  of attempts remaining is {0}".format((userattempt-1)-i))
+    try:
+        n1=int(input("Enter the number1\n"))
+        n2=int(input("Enter the number2\n"))
+        p1(n1,n2)
+        break
+    except Exception as e:
+        print ("ERROR OCCURED IN TRY STATEMENT AND ERROR IS {0}".format(e))
+
+#### Rturn   call of the Function
+
+def p1(a,b):
+    c=a+b
+    d=a-b
+    print("Sum of {0} and {1} is {2}".format(a,b,c))
+    print ("Difference of {0} and {1} is {2}".format(a,b,d))
+    return c ##Heere we are returning "c" Which can be used for next step  of programming
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number1\n"))
+ou_fun=p1(n1,n2) ### value which got returned from function stored in variable ou_fun
+print ("Value got returned from function is {0}".format(ou_fun))
+
+
+###
+def p1(a,b):
+    c=a+b
+    d=a-b
+    print("Sum of {0} and {1} is {2}".format(a,b,c))
+    return c  ##Heere we are returning "c" Which can be used for next step  of programming
+    print ("Difference of {0} and {1} is {2}".format(a,b,d)) ### This statement wont execute we already  returned the function in previous statement , when return is mentioned it will be the endof function execution
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number1\n"))
+ou_fun=p1(n1,n2) ### value which got returned from function stored in variable ou_fun
+print ("Value got returned from function is {0}".format(ou_fun))
+
+
+##Multiple return variable of the function
+
+def p1(a,b):
+    c=a+b
+    d=a-b
+    e=a*b
+    f=a/b
+    g=a%2
+    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+    print ("Difference of {0} and {1} is {2}".format(a,b,d))
+    print ("Product of {0} and {1} is {2}".format(a,b,e))
+    print ("Division of {0}  and {1} is {2}".format(a,b,f))
+    print ("Modulas of {0} and {1} is {2}".format(a,b,g))
+    return c,d,e,f,g
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+returnout=p1(n1,n2)
+print ("Returned output is {0}".format(returnout))  ##Multiple return value will be always in tuple
+if (type(returnout) is tuple): ##Here we are extracting values of all indexes of Tuple
+    sum=returnout[0]
+    sub=returnout[1]
+    mul=returnout[2]
+    divis=returnout[3]
+    modulass=returnout[4]
+    print ("Sum is {0}\nDifference is {1}\nproduct is {2}\nDivisipn is {3}\nREMAINDER is {4}".format(sum,sub,mul,divis,modulass))
+
+
+def p1(a,b):
+    c=a+b
+    d=a-b
+    e=a*b
+    f=a/b
+    g=a%2
+#    print ("Sum of {0} and {1} is {2}".format(a,b,c))
+#    print ("Difference of {0} and {1} is {2}".format(a,b,d))
+#    print ("Product of {0} and {1} is {2}".format(a,b,e))
+#    print ("Division of {0}  and {1} is {2}".format(a,b,f))
+#    print ("Modulas of {0} and {1} is {2}".format(a,b,g))
+    return c,d,e,f,g
+
+n1=int(input("Enter the number1\n"))
+n2=int(input("Enter the number2\n"))
+sum,sub,mul,divis,modules=p1(n1,n2)
+print ("Sum is {0}\nDifference is {1}\nproduct is {2}\nDivisipn is {3}\nREMAINDER is {4}".format(sum,sub,mul,divis,modules))
+
+
+### Global Variable ====> Value declared inside function need to be used out side of the function too with same value what assigned inside function
+##Local variable ===> Value assigned inside inside function its valid only insdie the function
+## Below example here we assigned 'a' globally  to 10 . Value of 'a' will be 10 outside and inside function too
+def p1():
+    print ("Value of a is {0} inside function".format(a))
+
+a=10
+print ("Value of a is  {0} Before calling the function".format(a))
+p1()
+
+### Value of 'a' outside of function is 10
+##we declared value of 'a' to '20' inside function since its locally available inside function only
+##value assigned inside function is valid only inside function until it delcared as global
+##Below example we are using value locally inside function only('a'='20')
+def p1():
+    a=20
+    print ("Value of a is {0} inside function".format(a))
+
+a=10
+print ("Value of a is  {0} Before calling the function".format(a))
+p1()
+print ("Value of a is {0} after calling of function".format(a))
+
+'''
+
+###Below example show global variable
+def p1():
+    global a
+    a=20
+    print ("Value of a is {0} inside function".format(a))
+
+a=10
+print ("Value of a is  {0} Before calling the function".format(a))
+p1()
+print ("Value of a is {0} after calling of function".format(a))
+
+
+

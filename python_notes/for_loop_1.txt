@@ -1,0 +1,74 @@
+
+
+
+a=[10,20,30,40]
+b=[30,40,10,50]
+for i in range(0,len(a),1):
+    if a[i] in b:
+        print ("{0} is present in position {1} in list {2}".format(a[i],i,a))
+        print ("{0} is present in postion {1} in list{2}".format(a[i],b.index(a[i]),b))
+    else:
+        print ("{0} is present in position {1} in list {2}".format(a[i],i,a))
+        print ("{0} not present in list {1}".format(a[i],b))
+
+a=[10,20,30,40]
+b=[30,40,10,50]
+for i in range(0,len(a),1):
+    if a[i] in b:
+        for j in range(0,len(b),1):
+            if (a[i] == b[j]):
+                print("{0} is present in position {1} in list {2}".format(a[i], i, a))
+                print("{0} is present in postion {1} in list{2}".format(a[i],b[j], b))
+    else:
+        print("{0} is present in position {1} in list {2}".format(a[i], i, a))
+        print("{0} is not present in list{1} and we adding {0} to list {1}".format(a[i],b))
+        b.append(a[i])
+        print (b)
+
+
+a=['10','20','30','40']
+b=['30','40','10','50']
+
+inp=input("Enter the Input\n")
+if inp in a and inp in b:
+    a.remove(inp)
+    b.remove(inp)
+    print (a)
+    print (b)
+elif (inp in a) and (inp not in b):
+    b.extend(a)
+    print (b)
+elif (inp not in a) and (inp not in b):
+    c=[]
+    if (type(a) is list) and (type(b) is list):
+        c=a+b
+        print (c)
+    else:
+        print ("Both {0} and {1} are different types so it cant be added".format(a,b))
+
+
+a=['a','b','c']
+b=['10','20','30']
+cdict={}
+for i in range(0,len(a),1):
+    cdict[a[i]]=b[i]
+print (cdict)
+
+
+adict={'a':'10','b':'20','c':'30','d':'40'}
+alist=['10','20','50','60']
+for i in adict.keys():
+    print ("Key is {0} and value is {1}".format(i,adict[i]))
+    if adict[i] in alist:
+        post=alist.index(adict[i])
+        print ("{0} is presnet in position {1} in the list {2}".format(adict[i],post,alist))
+    else:
+        alist.append(adict[i])
+print (alist)
+
+adict={'a':'10','b':'20','c':'30'}
+bdict={'a1':'10','b1':'20','c1':'40','d1':'30'}
+for i in adict.keys():
+    for j in bdict.keys():
+        if (adict[i] == bdict[j]):
+            print ("{0} is key and value is {1} for dict {2}\n{3} is key and value is {4} for dict {5}".format(i,adict[i],adict,j,bdict[j],bdict))

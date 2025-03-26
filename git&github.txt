@@ -1,0 +1,364 @@
+
+
+**************************git&github***********************************
+
+
+******************access methods********************
+
+two types
+
+---->https
+---->ssh
+----------SSH_KEY---------------------
+to create a ssh key in local repo using 
+
+ssh-keygen -t rsa
+
+to copy the public key in
+/.ssh/id_rsa.pub
+
+to paste in github 
+settings/ssh and gpg keys  
+
+To create a new key and paste the pub_key
+
+use git clone ssh_url
+
+then use all actions
+
+-------------HTTPS----------------------
+
+to create in github
+
+settings/developer settings/personal access tokens
+
+to create a token and give permission then copy the  token
+
+you done clone using https url then git add and git commit its asks a username and passswd
+
+username : to give a username of github
+passwd :to paste the access token  
+
+-----------------------------------------------
+
+#### how to create a git and github repo in cmdline:
+
+mkdir <folder_name>
+
+cd <folder_name>
+
+git init
+
+echo "anything" >>readme.md
+
+git add *
+
+git clean -n  ----------->to show file which are working section
+
+git clean -f ------------>to remove permanently that files in this directory 
+
+git commit -m "commit_message"
+
+then to create a empty repository in github
+
+git remote add origin(alias_name) git@github.com:sathishyadava143/<folder_name>.git
+
+git remote -v ------------->to saw to connected reposity 
+
+git branch
+
+git push origin <branch_name>
+
+#### (i.e)if switch many repos in local some times not push is perform that time
+
+git push --set-upstream origin master
+
+(or) git push -u origin(alias_name) <branch_name>
+
+
+#### first set the username and mail for local git: 
+
+git add --help (or) git add commit --help 
+
+git config --global user.name "name_of_user"
+
+git config --global user.email "email_of_user"
+
+git config --list --show-origin ------------------->to show the user and email  
+
+git config --global core.editor nano -------------------------->to settup a editer for git
+
+git config --list ----------->to list the all user and repo details
+
+git init <repo-name> ---------------->to create a repository
+
+git clone <repopathof github> ====================>from GitHub clone the repo to the local repo using git
+
+git add <filename> ==============>to add a unknown file to tracked git file
+
+If you run the “git status -s” or “git status --short”, you get a far more simplified output.
+?? : Files are not tracked.
+A : Files have been added to the staging area.
+M : Files that are modified.
+MM : Files that are staged and modified.
+
+
+nano .gitignore
+*.[oa]
+*~
+The 1st line tells git to ignore any files ending with “.o” or “.a”
+The second line tells git to ignore all files whose name end with a tilde.
+
+
+
+git status ---------------->to check the git repo files status red for untracked file 
+
+git commit -m(message) "first commit"------------->after git add this commit all to save the file in local repo
+
+git commit -m "message" <file_name> ------------>to commit a single file only
+
+git commit -a(all)m(message) "commit_message" -------------->directly to  add all modified and save all file with message its not work new file commit
+
+git push --------------->git push to upload a local repo to central repo git to GitHub
+
+git log ------------------>to fetch list the no of commits and commit id and details mentioned
+
+git log -p(patch) -2 --------------------->here last two commits should be shown output
+
+git log --stat --------------------->it tolds a list no of modification and commit messages and etc with details
+
+git log --pretty=oneline ------------>to show commit-id,commit msg in one line
+
+git log --pretty=format:”%h-%an,%ar:%s” ----------> %h (commit hash) %an (author name) %ar (suthor name,relative) %s (subject) to format the log details
+
+git log --since=2.days ----------------------->to display the last two days commits
+
+git commit --amend ------------------>after commit to edit commit msg 
+
+git show <commit_id> ------------------>to show the commited file content and with beif details
+
+git show --pretty="" --name-only <commit_id> ----------->show the name of file only of that commit
+
+git log <file_name> -----------------> to show the file commits
+
+git reset --soft HEAD~4 --------------->to go back the before 4th  commit but files couldnot delete
+
+***********git conflicts**************
+
+##### git conflicts :
+	git have to modified commit using local git  and GitHub also having new modified commit throw Github not a git commit after to pull the repo to local repo to having a git conflict
+
+ example for :
+
+	the local commit is:
+		a=24
+		b=22
+	the directly GitHub modified commit is:
+		a=25
+		b=22
+	
+	using git pull command to had a conflict:
+		>>>>HEAD
+		a=24  -------------->its a local commit
+		=====
+		a=25  -------------->its a GitHub commit
+		>>>>8f8595(comit id)
+
+you  resolve the confliect issue
+		to remove that "head,=====,comit id" then having value only should add
+
+then git commit -am "modified_commit"
+
+git push
+
+***********git reset*****************
+
+git reset for previous perticular commit change from the present commit
+
+example for :
+You having a bug issue in this commit u want to go previous commit this command will be use
+
+git reset ----------->in local git add to staging area files are to rollback to untracked files
+
+git reset --hard <commitid>
+
+git push --force origin master ---------->to push the commit force
+
+*******git revert*********************
+
+git revert <commit_id> ------------------->git revert is a perticular commit to be remove  in the git then execute this command to be effect in github git push --force origin master
+
+note:if u want see commit id in GitHub corner of the file to no of commits to copy the commit id which you want
+
+************git branch*************
+
+git branch ------------>to list the branches except remote branch
+
+git branch -a ----------->list all branches
+
+git branch -r ------------>only show remote brances
+
+git branch -v ----------> show all branch with last commitid and message
+
+git branch -d <branch name> ------->to delete a branch
+
+git branch -M <new_name of branch> --------------->to change current  branch name
+
+git branch -m <old_name> <new_name> ------------>to change particular branch name
+
+git checkout -b(newbranch) "branch_name" ------------->to create a new branch and to swith a branch
+
+git checkout <existing_branch_name> ----------> to swith the current branch to existing brach
+
+(i.e)
+	if I want push I am in another branch but I want to push the file into master or main branch 
+
+git push origin master(or)main`
+
+git diff master <other_branch_name> ------------>to list out the differece of commited files that branches
+
+git merge <branch_name> -------------------->to merge a branch content to master branch
+
+git push <alias_name> --all ----------->to push all file in all branches to central repo
+
+git push origin --delete <branch_name> ------------>to delete a branch in central repo
+
+
+
+****************git recover commit*************
+
+if i reset the the till initial commit how recover the till last end commit
+
+git reflog -------------->to list the commits
+ 
+6eaf985 HEAD@{5}: reset: moving to 6eaf98512cdd0d5175719802b2e47a3f138f45da ------------->this is a reset commit
+c859c18 (HEAD -> master, origin/master) HEAD@{6}: commit: its a new file  ----------------->this is a last end commit
+46c006c HEAD@{7}: commit: its a new file
+9897254 HEAD@{8}: commit: adding a new ram.txt file
+8d6ebd8 HEAD@{9}: commit: new files adding
+b822f9a HEAD@{10}: commit: adding a instruction in readme.md file
+7785cc9 HEAD@{11}: commit: this commit is adding readme file
+15bee94 HEAD@{12}: commit: this commit is add readme file
+6eaf985 HEAD@{13}: commit (initial): First comit
+root@FlyingDuchman:/var/github/test1#
+
+git reset --hard c859c18(its a hash for last end commit)----------------->to recovered a commits
+
+git push --force origin master ------------> it effects github repo also
+
+
+******************git_tags*****************
+
+git tag ---------->to list the tags
+
+git tag <tag_name> ---------->to set a tag (ex) version and etc..
+
+git push <alias_name> --tags ---------------->to push all tags local repo into central repo 
+
+git push <alias_name> tag <tag_name> --------------->to push a new tag-name to centralrepo directly to push
+
+git tag -d <tag_name> ------------>to delete a tag in local
+
+*********************git_stash***************
+
+git stash list ------------------>to list the stash_backups
+
+i.e
+	if u commited all file and then u modified one file that time u want a back_up of  file to take a backup of that file using stash
+	
+git stash ------------->to take a backup the modified file (that file should not be commited) then only to tack backup that file
+
+git stash apply stash@{0} ----------->to apply the backup to original to specify the backup {0}
+
+git stash apply -------------->to apply latest backup file
+
+
+i.e
+	stash@{0}
+	stash@{1}-------> here stash@{1} is the latest file
+
+git stash show ------------>to show stash applied changes
+git stash show -p  ----------> to show differevc
+
+git stash drop ---------->to delete a stash backup latest 
+
+git stash drop stash@{2} ----------->to delete specfied stash
+
+git stash pop ------------>to apply a latest stash then autometically delete
+
+
+*****************git_cherry_pick**********************
+
+i.e 
+A new_branch perticulay commit only i want to implement in master branch using cherry-pick command
+to copy perticular commitid commit you want
+
+git checkout <master>(or) <another_branch> ------------------->to switch that branch 
+
+git cherry-pick <new_branch_perticular_commit_id> --------------------->to implement perticular commit on other brech to master branch or another branch 
+
+
+**************git fetch v/s git pull*****************
+
+git fetch <alias_name> <branch_name> ----------------->to fetch a centeral repo to local repo then its merge a file into  your existing work file
+
+git pull <alias_name> <branch_name> ---------------->to pull a central updated file directly overwrite your local working file
+
+i.e 
+	if you have started to work in local repo you want to update your repo using git fecth because of your code is dont be overwrite
+	but you use git pull command to lose your worked edits in workstage
+	
+	you in starting before woking stage only you use git pull command 
+	
+*******************git_pull_request_branch_to branch*******************
+
+PR ----------->pull request
+
+central repository(github) in organisation one option show git-pull
+use that option to merge a two branches in central repo
+
+here have reviewrs options to check the pull request are to review to add members at a time you create a pull-requst 
+that member to review the pull request then the reviewer to merge the branches (https://github.com/dev-ops-aug2024/test2/pull/1)
+
+you didn't give reviewer to directly the who is give pull request they will merge the branches 
+
+***************git_api_automation***********************
+
+CURL \
+	-X POST \
+	-u new_auth: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 \
+	-H "Accept: application/vnd.github.v3+json" \
+	https://api.github.com/orgs/dev-ops-aug2024/repos \
+	-d '{"name":"new_repo"}' 
+	
+****************git_fork****************
+
+git forck is used for one organizations repo to copy to other organizations 
+
+this fork option only give a copy and sync only to dont have write access
+it use for ci/cd pipelines
+
+*************git_rebase*******************
+
+git merge --->if i am in master branch i commited multiple times in some commits after to create a another new_branch in that branch to done n number of commits the new_branch commits are combined a single object commit in master i.e (in this which commit who was done and confusions occured)
+
+git rebase <new_branch> ---------->master mc1 mc2 mc3 	- nbc1 nbc2 nbc3 nbc4
+				     		    |		    ^
+				      		    |		    |
+				       	    |		    |
+				      		    V       -----------------    
+				      		new_branch nbc1 nbc2 nbc3 nbc4
+i.e (here the new_branch commits are applied in master branch like master branch commits its resolve the confusions of which one is done this commit and etc...)
+
+**************diff between git and github**************
+
+git is version control system (vcs) particularly- Distributed Version control System (DVCS) 
+
+and 
+
+github is a hosting service for git...
+
+**************************THE END*********************************************************
+
+
+

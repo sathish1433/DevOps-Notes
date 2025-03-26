@@ -1,0 +1,19 @@
+---
+- name: package versions check
+  hosts: client
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: version check
+    shell: "'{{ item }}' --version 2>&1"
+    register: version
+    with_items:
+      - git
+      - java
+      - python3
+  - name: display the stdout
+    debug:
+      msg: "version:{{ item.stdout }}"
+    loop: "{{version.results}}"
+...
+

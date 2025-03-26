@@ -1,0 +1,558 @@
+os module ======>used to run the system commands
+
+
+
+
+#!/usr/bin/python
+import os
+cmd="uptime;who"
+print (os.system(cmd))
+
+
+output
+
+[root@localhost ~]# python osscript.py
+ 23:58:33 up  1:24, 12 users,  load average: 0.02, 0.02, 0.00
+root     tty1         2023-06-16 20:47 (:0)
+root     pts/0        2023-06-16 20:47 (:0.0)
+root     pts/1        2023-06-16 20:48 (192.168.209.1)
+praveen  pts/2        2023-06-16 20:51 (192.168.209.1)
+ajay     pts/3        2023-06-16 20:52 (192.168.209.1)
+ajay     pts/4        2023-06-16 21:08 (192.168.209.1)
+san      pts/5        2023-06-16 21:08 (192.168.209.1)
+kkk      pts/6        2023-06-16 21:08 (192.168.209.1)
+ajay     pts/7        2023-06-16 21:29 (192.168.209.1)
+ajay     pts/8        2023-06-16 21:39 (192.168.209.1)
+kkk      pts/9        2023-06-16 21:45 (192.168.209.1)
+root     pts/10       2023-06-16 23:48 (192.168.209.1)
+=======================================================================
+a.script shpuld ask for user input for username
+b. check for user present or not
+c. if user is present it shold display details of user
+d. if user not present it should create user
+
+
+#!/usr/bin/python
+import os
+usrinput=raw_input("Enter the username\n")
+fopen=open('/etc/passwd','r')
+userlist=[]
+for i in fopen:
+        if usrinput.strip() in i:
+                print ("User {0} is present in server".format(usrinput))
+                userlist.append('present')
+fopen.close()
+
+if (len(userlist) == 0):
+        print ("User {0} not present in server".format(usrinput))
+        cmd="useradd {0}".format(usrinput)
+        os.system(cmd)
+
+        fopen=open('/etc/passwd','r')
+        for i in fopen:
+                if usrinput.strip() in i:
+                        print ("User {0} is created succcessfully in server,Below are details of user".format(usrinput))
+        fopen.close()
+        cmd="getent passwd  {0};chage -l {0}".format(usrinput)
+        os.system(cmd)
+
+
+
+output
+
+[root@localhost ~]# python osscript.py
+Enter the username
+bhaskar4
+User bhaskar4 not present in server
+User bhaskar4 is created succcessfully in server,Below are details of user
+bhaskar4:x:508:510::/home/bhaskar4:/bin/bash
+Last password change                                    : Jun 17, 2023
+Password expires                                        : never
+Password inactive                                       : never
+Account expires                                         : never
+Minimum number of days between password change          : 0
+Maximum number of days between password change          : 99999
+Number of days of warning before password expires       : 7
+
+
+
+==================================================================
+
+#!/usr/bin/python
+import subprocess
+import os
+usrinput=raw_input("Enter the userinput\n")
+cmd="cat /etc/passwd |grep {0}|wc -l".format(usrinput)
+comm_call=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()
+userexsist_check=comm_call[0]
+print (userexsist_check)
+if (int(userexsist_check) == 0):
+        print ("User {0} doesnt exsists in server".format(usrinput))
+        cmd2="useradd {0}".format(usrinput)
+        os.system(cmd2)
+        cmd="cat /etc/passwd |grep {0}|wc -l".format(usrinput)
+        comm_call=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()
+        userexsist_check=comm_call[0]
+        if (int(userexsist_check) != 0):
+                print ("User {0} is sucessfully created".format(usrinput))
+                cmd_pass="getent passwd {0};chage -l {0}".format(usrinput)
+                os.system(cmd_pass)
+
+        else:
+                print ("User {0} not created successfully".format(usrinput))
+
+
+else:
+        print ("User {0} exsists in the server".format(usrinput))
+
+        cmd_pass="getent passwd {0};chage -l {0}".format(usrinput)
+        os.system(cmd_pass)
+
+
+
+output
+
+[root@localhost ~]# python osscript_2.py
+Enter the userinput
+bhaskar7e86r8t68
+0
+
+User bhaskar7e86r8t68 doesnt exsists in server
+User bhaskar7e86r8t68 is sucessfully created
+bhaskar7e86r8t68:x:513:515::/home/bhaskar7e86r8t68:/bin/bash
+Last password change                                    : Jun 17, 2023
+Password expires                                        : never
+Password inactive                                       : never
+Account expires                                         : never
+Minimum number of days between password change          : 0
+Maximum number of days between password change          : 99999
+Number of days of warning before password expires       : 7
+
+
+==========================================================================
+
+
+a.script shpuld ask for user input for username
+b. check for user present or not
+c. if user is present it shold display details of user
+d. if user not present it should create user
+e. if user exsists  if we enter '1' it should add user to group  and if we enter '2' it shuld dleete user
+
+
+
+#!/usr/bin/python
+import subprocess
+import os
+usrinput=raw_input("Enter the userinput\n")
+cmd="cat /etc/passwd |grep {0}|wc -l".format(usrinput)
+comm_call=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()
+userexsist_check=comm_call[0]
+print (userexsist_check)
+if (int(userexsist_check) == 0):
+        print ("User {0} doesnt exsists in server".format(usrinput))
+        cmd2="useradd {0}".format(usrinput)
+        os.system(cmd2)
+        cmd="cat /etc/passwd |grep {0}|wc -l".format(usrinput)
+        comm_call=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()
+        userexsist_check=comm_call[0]
+        if (int(userexsist_check) != 0):
+                print ("User {0} is sucessfully created".format(usrinput))
+                cmd_pass="getent passwd {0};chage -l {0}".format(usrinput)
+                os.system(cmd_pass)
+
+        else:
+                print ("User {0} not created successfully".format(usrinput))
+elif (usrinput.strip() == "bhaskar2"):
+        cmd_up="uptime"
+        os.system(cmd_up)
+
+else:
+        print ("User {0} exsists in the server".format(usrinput))
+
+        cmd_pass="getent passwd {0};chage -l {0};who".format(usrinput)
+        os.system(cmd_pass)
+        useroption=input("Enter '1' to add user to group\n'2' to delete user ")
+        if (str(useroption) == "1"):
+                grpname=raw_input("Enter the Groupname\n")
+                cmd_grp="usermod -G {0} {1}".format(grpname,usrinput)
+                os.system(cmd_grp)
+                print ("Below are Group name where user {0} is part of it".format(usrinput))
+                cmd_user_grp="groups {0}".format(usrinput)
+                os.system(cmd_user_grp)
+        elif (str(useroption) == "2"):
+                cmd_delet="userdel -r {0}".format(usrinput)
+                os.system(cmd_delet)
+                cmd="cat /etc/passwd |grep {0}|wc -l".format(usrinput)
+                comm_call=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True).communicate()
+                userexsist_check=comm_call[0]
+                if (int(userexsist_check) == 0):
+                        print ("User {0} sucessfully deleted".format(usrinput))
+
+
+
+
+
+output
+
+Enter the userinput
+bhaskar1
+1
+
+User bhaskar1 exsists in the server
+bhaskar1:x:505:507::/home/bhaskar1:/bin/bash
+Last password change                                    : Jun 17, 2023
+Password expires                                        : never
+Password inactive                                       : never
+Account expires                                         : never
+Minimum number of days between password change          : 0
+Maximum number of days between password change          : 99999
+Number of days of warning before password expires       : 7
+root     tty1         2023-06-16 20:47 (:0)
+root     pts/0        2023-06-16 20:47 (:0.0)
+root     pts/1        2023-06-16 20:48 (192.168.209.1)
+praveen  pts/2        2023-06-16 20:51 (192.168.209.1)
+root     pts/10       2023-06-16 23:48 (192.168.209.1)
+Enter '1' to add user to group
+'2' to delete user 2
+User bhaskar1 sucessfully deleted
+=================================================================
+
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+
+
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+
+
+
+output
+
+[root@localhost ~]# python fileexsistence_check.py
+Enter the full path of file
+/tmp/fg.txt
+File /tmp/fg.txt exsists in the server
+[root@localhost ~]# python fileexsistence_check.py
+Enter the full path of file
+/tmp/wer.txt
+File /tmp/wer.txt doesnt exsists in the server
+
+=====================================================================
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+
+
+d.Display all lines where content is present in beginning of line
+
+[root@localhost ~]# vim fileexsistence_check.py
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        contentcompile=re.compile(r'^{0}'.format(contentsearch))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+
+
+
+output
+
+[root@localhost ~]# python fileexsistence_check.py
+Enter the full path of file
+/tmp/wer.txt
+File /tmp/wer.txt exsists in the server
+Enter the content to be checked
+praveen
+Below are lines where content praveen exssists in file praveen
+praveen
+praveen san
+praveen1
+praveen12
+praveen_
+
+
+==============================================================
+
+DISPLAY All lines where next to praveen atleast 2 digit should be there
+
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        contentcompile=re.compile(r'{0}[0-9][0-9]'.format(contentsearch))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+
+
+
+
+Display all files which contains atleast 3 digit next to praveen
+
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        #o="{0}[0-9]{4}".format(contentsearch)
+        contentcompile=re.compile(r'praveen[0-9]{3}')
+        #contentcompile=re.compile(r'{0}'.format(o))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+
+
+output
+
+
+[root@localhost ~]# python fileexsistence_check.py
+Enter the full path of file
+/tmp/wer.txt
+File /tmp/wer.txt exsists in the server
+Enter the content to be checked
+praveen
+Below are lines where content praveen exssists in file praveen
+ajay praveen123
+kiran praveen12345566
+===========================================================
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add content
+
+
+d.Display all lines where content is present in beginning of line
+
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        #o="{0}[0-9]{4}".format(contentsearch)
+        contentcompile=re.compile(r'praveen[0-9]{3}')
+        #contentcompile=re.compile(r'{0}'.format(o))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+        cmd_file="touch {0}".format(filepath)
+        os.system(cmd_file)
+        if (os.path.isfile(filepath)):
+                print ("File {0} got creted successfully".format(filepath))
+                writing_content=raw_input("Enter the content to be added\n")
+                op=open(filepath,'w')
+                op.write(writing_content)
+                op.write('\n')
+                op.close()
+                print ("Below are the content of file {0}".format(filepath))
+                op=open(filepath,'r')
+                for j in op:
+                        print (j)
+
+
+
+
+[root@localhost ~]# python fileexsistence_check.py
+Enter the full path of file
+/tmp/bhaskar55888
+File /tmp/bhaskar55888 doesnt exsists in the server
+File /tmp/bhaskar55888 got creted successfully
+Enter the content to be added
+iiiii
+Below are the content of file /tmp/bhaskar55888
+iiiii
+===================================================================
+a. Check file exsists or not
+b. if file exsists check particulat content exsists or not
+c. if file doesnt exsists then it should create file and add multiple content to file
+d.Display all lines where content is present in beginning of line
+
+
+root@localhost ~]# cat fileexsistence_check.py
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        #o="{0}[0-9]{4}".format(contentsearch)
+        contentcompile=re.compile(r'praveen[0-9]{3}')
+        #contentcompile=re.compile(r'{0}'.format(o))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+        cmd_file="touch {0}".format(filepath)
+        os.system(cmd_file)
+        if (os.path.isfile(filepath)):
+                print ("File {0} got creted successfully".format(filepath))
+                for q in range(0,5,1):
+                        writing_content=raw_input("Enter the content to be added\n")
+                        op=open(filepath,'a')
+                        op.write(writing_content)
+                        op.write('\n')
+                        op.close()
+                print ("Below are the content of file {0}".format(filepath))
+                op=open(filepath,'r')
+                for j in op:
+                        print (j)
+
+
+
+output
+
+Enter the full path of file
+/tmp/bhaskar55888888222333
+File /tmp/bhaskar55888888222333 doesnt exsists in the server
+File /tmp/bhaskar55888888222333 got creted successfully
+Enter the content to be added
+10
+Enter the content to be added
+
+Enter the content to be added
+20
+Enter the content to be added
+30
+Enter the content to be added
+40
+Below are the content of file /tmp/bhaskar55888888222333
+10
+
+
+
+20
+
+30
+
+40
+
+=========================================
+
+
+#!/usr/bin/python
+import os
+import subprocess
+import re
+filepath=raw_input("Enter the full path of file\n")
+#print (dir(os.path))
+if (os.path.isfile(filepath)):
+        print ("File {0} exsists in the server".format(filepath))
+        contentsearch=raw_input("Enter the content to be checked\n")
+        #o="{0}[0-9]{4}".format(contentsearch)
+        contentcompile=re.compile(r'praveen[0-9]{3}')
+        #contentcompile=re.compile(r'{0}'.format(o))
+        op=open(filepath,'r')
+        print ("Below are lines where content {0} exssists in file {0}".format(contentsearch,filepath))
+        for i in op:
+                if re.search(contentcompile,i):
+                        print (i.strip())
+else:
+        print ("File {0} doesnt exsists in the server".format(filepath))
+        cmd_file="touch {0}".format(filepath)
+        os.system(cmd_file)
+        if (os.path.isfile(filepath)):
+                print ("File {0} got creted successfully".format(filepath))
+                num_lines=int(raw_input("Enter the count of lines\n"))
+                for q in range(0,num_lines,1):
+                        writing_content=raw_input("Enter the content to be added\n")
+                        op=open(filepath,'a')
+                        op.write(writing_content)
+                        op.write('\n')
+                        op.close()
+                print ("Below are the content of file {0}".format(filepath))
+                op=open(filepath,'r')
+                for j in op:
+                        print (j)
+
+
+
+output
+
+
+Enter the full path of file
+/tmp/qqqqrrrrr.txt
+File /tmp/qqqqrrrrr.txt doesnt exsists in the server
+File /tmp/qqqqrrrrr.txt got creted successfully
+Enter the count of lines
+8
+Enter the content to be added
+10
+Enter the content to be added
+20
+Enter the content to be added
+30
+Enter the content to be added
+30^[[3~
+Enter the content to be added
+45
+Enter the content to be added
+67
+Enter the content to be added
+67
+Enter the content to be added
+22
+Below are the content of file /tmp/qqqqrrrrr.txt
+10
+
+20
+
+30
+
+30
+
+45
+
+67
+
+67
+
+22

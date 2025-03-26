@@ -1,0 +1,169 @@
+###datetime module examples
+
+##Below example used to print today's date
+
+'''
+import datetime
+from datetime import date
+to=date.today()
+print (to)
+
+##Below script used to Capture Date,Month,Seperately
+from datetime import date
+k=date.today()
+print (k)
+year=k.year
+month=k.month
+to_date=k.day
+print (year,month,to_date)
+print ("Today date is {0}_{1}_{2}\ncurrent year is {0}\nCurrent Month is {1}\nCurrent date is {2}".format(year,month,to_date))
+
+###Below script to display iso format
+from datetime import date
+k=date.today()
+print (k.isoweekday())
+print (k.isoformat())
+print (k.isocalendar())
+
+
+### Below script to capture current date and 10 days back date
+from datetime import date
+from datetime import timedelta
+k=date.today()
+bac=k-timedelta(days=10)
+print ("Current date is {0} and 10 days backward date is {1}".format(k,bac))
+
+### To print forward and back ward date based on user input
+
+from datetime import date as da
+from datetime import timedelta
+cure=da.today()
+usr=int(input("Enter the Number of days for forward"))
+forr=cure+timedelta(days=usr)
+usr_bac=int(input("Enter the Number of days for backward"))
+bac=cure-timedelta(days=usr_bac)
+print ("Current date is {0}\n{1} days backward date is {2}\n{3} days forward date is {4}".format(cure,usr_bac,bac,usr,forr))
+
+##
+#%Y=== Complete year
+# %y ==> Last 2 digits of year
+# %m ===> Month number
+# %b ===> first 3 charcters of month name
+# %B ===> Complete month name
+# %H ===> hour
+# %M ===> minutes
+# %S  === > seconds
+# %T ===> only time
+
+
+### Formatting the date with current date and back ward date with complete month name, year
+from datetime import date as da
+from datetime import timedelta
+cu=da.today()
+cu_d=cu.strftime("%Y-%m-%d")
+cu_d_m=cu.strftime("%Y-%b-%d")
+cu_d_cm=cu.strftime("%Y-%B-%d")
+us=int(input("Enter the days for forward/backward\n"))
+ba=cu-timedelta(days=us)
+back_form=ba.strftime("%Y-%m-%d")
+back_for_monname=ba.strftime("%Y-%b-%d")
+back_complete_montname=ba.strftime("%Y-%B-%d")
+print ("Current date is {0}\nCurrent date with monthname is {1}\nCurrent date with complete monthname {2}\nBakcward date is {3}\nbackward with month name is {4}\nBackward date with complete month name is {5}".format(cu_d,cu_d_m,cu_d_cm,ba,back_for_monname,back_complete_montname))
+
+### Fecthing date, month, year,Hour, Min, seconds
+
+from datetime import datetime
+currtime=datetime.now()
+print (currtime)
+print (dir(currtime))
+dat=currtime.day
+mon=currtime.month
+yr=currtime.year
+c_hr=currtime.hour
+c_min=currtime.minute
+c_secon=currtime.second
+print ("Current date is {0}\nCurrent Month is {1}\nCurrent Year is {2}\nCurrent Hour is {3}\nCurrent Minute is {4}\nCurrent seconds is {5}".format(dat,mon,yr,c_hr,c_min,c_secon))
+
+### Script for check forward back hours and minutes
+from datetime import datetime
+from datetime import timedelta
+currtime=datetime.now()
+print (currtime)
+usr=int(input("Enter the number to check forward hour,back ward hour, forward minute and backward second"))
+for_hr=currtime+timedelta(hours=usr)
+back_hr=currtime-timedelta(hours=usr)
+for_min=currtime+timedelta(minutes=usr)
+back_min=currtime-timedelta(minutes=usr)
+print ("Current date and time is {0}\nForward {1} hour is {2}\nbackward {1} hour is {3}\nForward {1} minut is {4}\nBackward {1} minute is {5}".format(currtime,usr,for_hr,back_hr,for_min,back_min))
+
+### Formatting date  and time
+
+from datetime import datetime
+from datetime import timedelta
+cu_d=datetime.now()
+back=cu_d-timedelta(hours=20)
+print ("Hour is ",back.strftime("%H"))
+print ("Minute is ",back.strftime("%M"))
+print ("Second is ",back.strftime("%S"))
+print ("Year is ",back.strftime("%Y"))
+print ("Time is ",back.strftime("%T"))
+
+
+
+## press '1' to display current date (year-month-date)
+# user should enter  forward date /backward date number
+# press '2' to display forward date(year-monthname-date)
+# press '3' to display foeard date (date-completemonthname-last 2digirs of year)
+# press '4' to display back ward date(monthname-year-date)
+#press '5' to display current date, back ward, forward date
+import datetime
+from datetime import date
+from datetime import timedelta
+cu=date.today()
+usrin=int(input("Enter the Number of days for forward  or back ward\n"))
+opt=input("press '1' to display current date (year-month-date)\npress '2' to display forward date(year-monthname-date)\npress '3' to display foeard date (date-completemonthname-last 2digirs of year)\npress '4' to display back ward date(monthname-year-date)\npress '5' to display current date, back ward, forward date")
+if (opt == "1"):
+    print (cu.strftime("%Y-%m-%d"))
+elif (opt == "2"):
+    print (cu.strftime("%Y-%b-%d"))
+elif (opt=="3"):
+    forwa=cu+timedelta(days=usrin)
+    print (forwa.strftime("%d-%B-%y"))
+elif (opt == "4"):
+    back=cu-timedelta(days=usrin)
+    print (back.strftime("%b-%Y-%d"))
+elif (opt == "5"):
+    print(cu.strftime("%Y-%m-%d"))
+    forwa=cu+timedelta(days=usrin)
+    print (forwa.strftime("%d-%B-%y"))
+    back=cu-timedelta(days=usrin)
+    print (back.strftime("%b-%Y-%d"))
+
+
+def forwarad():
+    forwa=cu+timedelta(days=usrin)
+    print (forwa.strftime("%d-%B-%y"))
+def backward():
+    back=cu-timedelta(days=usrin)
+    print (back.strftime("%b-%Y-%d"))
+
+import datetime
+from datetime import date
+from datetime import timedelta
+cu=date.today()
+usrin=int(input("Enter the Number of days for forward  or back ward\n"))
+opt=input("press '1' to display current date (year-month-date)\npress '2' to display forward date(year-monthname-date)\npress '3' to display foeard date (date-completemonthname-last 2digirs of year)\npress '4' to display back ward date(monthname-year-date)\npress '5' to display current date, back ward, forward date")
+if (opt == "1"):
+    print (cu.strftime("%Y-%m-%d"))
+elif (opt == "2"):
+    print (cu.strftime("%Y-%b-%d"))
+elif (opt=="3"):
+    forwarad()
+
+elif (opt == "4"):
+    backward()
+elif (opt == "5"):
+    print(cu.strftime("%Y-%m-%d"))
+    forwarad()
+    backward()
+'''

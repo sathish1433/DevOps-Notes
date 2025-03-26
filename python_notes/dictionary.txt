@@ -1,0 +1,208 @@
+Dictionary
+
+
+Variablename={'key1':'value1','key2':'value2','key3':'value3'}
+
+a={'praveen':'10','ajay':'20','datta':'30','kavya':'40','nanda':'50','besant':'100'}
+print (type(a))
+print (dir(a))
+print (a.keys())
+keys=a.keys()
+print (keys)
+print (a.values())
+values=a.values()
+print (values)
+print (a['praveen'])
+print (a['ajay'])
+print (a.items())
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\test.py 
+<class 'dict'>
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+dict_keys(['praveen', 'ajay', 'datta', 'kavya', 'nanda', 'besant'])
+dict_keys(['praveen', 'ajay', 'datta', 'kavya', 'nanda', 'besant'])
+dict_values(['10', '20', '30', '40', '50', '100'])
+dict_values(['10', '20', '30', '40', '50', '100'])
+10
+20
+dict_items([('praveen', '10'), ('ajay', '20'), ('datta', '30'), ('kavya', '40'), ('nanda', '50'), ('besant', '100')])
+
+
+
+a={'praveen':'10','ajay':'20','datta':'30','kavya':'40','nanda':'50','besant':'100'}
+print (len(a))
+print (a['praveen'])
+keys=list(a.keys())
+print (keys)
+print (type(keys))
+values=list(a.values())
+print (values)
+print (type(values))
+print (a['praveen'])
+a['praveen']="100"
+print (a)
+print (a['praveen'])
+a['naveen']='200'
+print (a)
+itemslist=list(a.items())
+print (len(itemslist))
+print (itemslist[0])
+
+output
+
+6
+10
+['praveen', 'ajay', 'datta', 'kavya', 'nanda', 'besant']
+<class 'list'>
+['10', '20', '30', '40', '50', '100']
+<class 'list'>
+10
+{'praveen': '100', 'ajay': '20', 'datta': '30', 'kavya': '40', 'nanda': '50', 'besant': '100'}
+100
+{'praveen': '100', 'ajay': '20', 'datta': '30', 'kavya': '40', 'nanda': '50', 'besant': '100', 'naveen': '200'}
+7
+('praveen', '100')
+
+Process finished with exit code 0
+
+
+
+----------------------------------
+
+a={'praveen':'10','ajay':'20','datta':'30','kavya':'40','nanda':'50','besant':'100'}
+print (len(a))
+print (dir(a))
+print (a.keys())
+keylist=list(a.keys())
+print (a.values())
+valuelist=list(a.values())
+print
+print (keylist)
+print (valuelist)
+print (a.items())
+itemlist=list(a.items())
+print (itemlist)
+u=(itemlist[1:4])
+print (a['datta'])
+a.pop('datta')
+print (a)
+a['kavya']=100
+print (a)
+a['nanda']=200
+print (a)
+a['navveem']=300
+print (a)
+test={'p1':'10','p2':'30','p3':'40'}
+a.update(test)
+print (a)
+a.popitem()
+print (a)
+a.pop('praveen')
+print (a)
+copydis=a.copy()
+print (copydis)
+a.clear()
+print (a)
+
+
+output
+
+6
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+dict_keys(['praveen', 'ajay', 'datta', 'kavya', 'nanda', 'besant'])
+dict_values(['10', '20', '30', '40', '50', '100'])
+['praveen', 'ajay', 'datta', 'kavya', 'nanda', 'besant']
+['10', '20', '30', '40', '50', '100']
+dict_items([('praveen', '10'), ('ajay', '20'), ('datta', '30'), ('kavya', '40'), ('nanda', '50'), ('besant', '100')])
+[('praveen', '10'), ('ajay', '20'), ('datta', '30'), ('kavya', '40'), ('nanda', '50'), ('besant', '100')]
+30
+{'praveen': '10', 'ajay': '20', 'kavya': '40', 'nanda': '50', 'besant': '100'}
+{'praveen': '10', 'ajay': '20', 'kavya': 100, 'nanda': '50', 'besant': '100'}
+{'praveen': '10', 'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100'}
+{'praveen': '10', 'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100', 'navveem': 300}
+{'praveen': '10', 'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100', 'navveem': 300, 'p1': '10', 'p2': '30', 'p3': '40'}
+{'praveen': '10', 'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100', 'navveem': 300, 'p1': '10', 'p2': '30'}
+{'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100', 'navveem': 300, 'p1': '10', 'p2': '30'}
+{'ajay': '20', 'kavya': 100, 'nanda': 200, 'besant': '100', 'navveem': 300, 'p1': '10', 'p2': '30'}
+{}
+
+Process finished with exit code 0
+
+
+Converting 2 lists into dictionary
+
+
+a=['praveen','ajay','san'] #Keylist
+b=[10,20,30] #valuelist
+g={}
+g[a[0]]=b[0]
+g[a[1]]=b[1]
+g[a[2]]=b[2]
+print (g)
+print (type(g))
+
+output
+
+{'praveen': 10, 'ajay': 20, 'san': 30}
+<class 'dict'>
+
+Process finished with exit code 0
+===================================================
+
+CLASS EXAMPLES
+
+mydict={'ajay':'10','abhi':'20','san':'40','sunil':'88','sriram':'44','darshan':'77'}
+print (type(mydict))
+print (mydict.keys())
+print (mydict.values())
+print (len(mydict))
+print (mydict.items())
+print (mydict['ajay'])
+print (mydict['san'])
+print (mydict.keys())
+keylist=list(mydict.keys())
+print (keylist)
+keyvalues=list(mydict.values())
+print (keyvalues)
+itemlist=list(mydict.items())
+print (itemlist)
+print (type(itemlist))
+print (itemlist[0])
+print (itemlist[0][0])
+print (itemlist[3][1])
+print (mydict)
+mydict['sunil']='120'
+print (mydict)
+rdict={'b1':'33','c1':'44'}
+mydict.update(rdict)
+print (mydict)
+mydict['besant']='555'
+print (mydict)
+alist=['a','b','c']
+blist=['100','22','33']
+cdict={}
+cdict[alist[0]]=blist[0]
+cdict[alist[1]]=blist[1]
+cdict[alist[2]]=blist[2]
+print (cdict)
+print (dir(mydict))
+bcopy=mydict.copy()
+print (bcopy)
+bcopy.pop('abhi')
+
+print (bcopy.get('ajay'))
+print (bcopy['ajay'])
+
+###ACESS ELEMENTS DICT,TUPLES INSIDE LIST
+final=[{'a':'10','b':'44','c':'66'},('10','20','30'),[66,{'joy':'fun'}]]
+print (type(final))
+print (final[0]['c']) ## Access first element of list and inside list access value of key 'c' which is inside dict
+print (final[1][2]) ##Access 2 element of list and accessing 3 element whose value is "30" which is indide tuple
+print (final[2][1]['joy']) ##Access 3rd element if list and access 2element which is list and inside that we have dictionary access the key 'joy'
+
+mydict.clear()
+print (mydict)

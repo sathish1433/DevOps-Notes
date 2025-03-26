@@ -1,0 +1,564 @@
+Regular expression
+
+
+
+re module
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+
+Process finished with exit code 0
+
+
+import re
+o="praveen"
+w=re.compile(r'p') =====> preparing pattern which need to searched
+e=re.search(w,o) ===> we searched "p" in string "praveen"
+print (dir(e))
+print (e.group())  ===> this will show only the matched content which is searched
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p
+
+Process finished with exit code 0
+
+================================================================
+import re
+o="praveen"
+w=re.compile(r'q')
+e=re.search(w,o)
+print (dir(e))
+print (e.group())
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+Traceback (most recent call last):
+  File "C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py", line 6, in <module>
+    print (e.group())  =====> script failed since "q" is not in "praveen"
+AttributeError: 'NoneType' object has no attribute 'group'
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+
+Process finished with exit code 1
+
+
+To handle error if its occurs we include in try and except in below script
+
+
+import re
+o="praveen"
+w=re.compile(r'q')
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched string not found in {0}".format(o)) #it will execute when script fails or pattern doesnt exsists in searched string
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched string not found in praveen
+
+Process finished with exit code 0
+
+
+=============================================
+In below script "p" exsists 3 times but in out put we will be getting only one "p" since search will exits after first match
+
+import re
+o="praveen ajayp  besapn"
+w=re.compile(r'p')
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p  ====> matched string
+
+Process finished with exit code 0
+
+
+
+==================================================
+
+import re
+o="praveen ajayp  besapn praveen ajay san"
+w=re.compile(r'son|besant')  =========> here we searched whether son or besant exists
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+
+import re
+o="praveen ajayp  besapn praveen ajay san"
+w=re.compile(r'son|besant|praveen')  ========> Here we are searching son or besant or praveen exsists
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+praveen
+
+Process finished with exit code 0
+
+
+import re
+o="praveen ajayp  besapn praveen ajay san"
+w=re.compile(r'praveen') and re.compile(r'san1') ====>here we are searching praveen and san1 both should exsists
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched pattern doesnt exsist in string
+
+Process finished with exit code 0
+
+
+
+import re
+o="praveen ajayp  besapn praveen ajay san"
+w=re.compile(r'praveen') and re.compile(r'san') #we are searching both praveen and san exsists
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+san
+
+Process finished with exit code 0
+
+
+
+import re
+o="praveen ajayp  besapn praveen ajay san"
+w=re.compile(r'praveen') and re.compile(r'abhi') #we are searching for both praveen and abhi should exsists
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched pattern doesnt exsist in string
+
+Process finished with exit code 0
+
+
+import re
+o="praveen12prrrr"
+w=re.compile(r'[0-9]') and re.compile(r'[a-z]')  ===> pattern should contain atleast one number and one alphabet(smaller case)
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p
+
+Process finished with exit code 0
+
+
+
+
+import re
+o="praveen12prrrr"
+w=re.compile(r'[0-9]') and re.compile(r'[A-Z]') ===> ===> pattern should contain atleast one number and one alphabet(Uppercase)
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched pattern doesnt exsist in string
+
+Process finished with exit code 0
+
+
+
+
+import re
+o="praveen12prrrr"
+w=re.compile(r'[0-9]') and re.compile(r'[A-Za-z]') ===> pattern should contain atleast one number and one alphabet(uppercase or lowercase)
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p
+
+Process finished with exit code 0
+
+====================================================================
+
+import re
+o="praveen12prrrr"
+w=re.compile(r'[0-9][0-9][0-9][0-9]')
+g=re.compile(r'[a-z]')
+try:
+    e=re.search(w,o) and re.search(g,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched pattern doesnt exsist in string
+
+Process finished with exit code 0
+
+
+========================================================
+import re
+o="praveen12prrrr"
+w=re.compile(r'[0-9][0-9]')
+g=re.compile(r'[a-z]')
+try:
+    e=re.search(w,o) and re.search(g,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p
+
+Process finished with exit code 0
+
+=========================================================
+
+. ======> single character
+* ======> zero or more matches
++ ====> one or more occurences
+{} =====> range of occurrences
+? ====> may exsists or may not exists
+
+\s ====> space,emptyline, tab
+^ ====> beginning of line/string
+$====> end of line/string
+
+
+
+============================================================
+
+
+
+
+
+import re
+o="praveen123prrrr"
+w=re.compile(r'[0-9]{3}')
+g=re.compile(r'[a-z]')
+try:
+    e=re.search(w,o) and re.search(g,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+p
+
+Process finished with exit code 0
+
+
+
+import re
+o="praveen1234rrrr"
+w=re.compile(r'[0-9]{5}[a-z]')
+
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+output
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__bool__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+Searched pattern doesnt exsist in string
+
+Process finished with exit code 0
+
+
+
+import re
+o="praveen1234rrrr"
+w=re.compile(r'[0-9]{3}[a-z]')
+
+try:
+    e=re.search(w,o)
+    print (dir(e))
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['__class__', '__copy__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'end', 'endpos', 'expand', 'group', 'groupdict', 'groups', 'lastgroup', 'lastindex', 'pos', 're', 'regs', 'span', 'start', 'string']
+234r
+
+Process finished with exit code 0
+
+
+==============================
+
+import re
+o="praveen1234rrrr123za"
+w=re.compile(r'[0-9]{3}[a-z]')
+
+try:
+    e=re.search(w,o)
+    print (e.group())
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+234r
+
+Process finished with exit code 0
+=========================================================================
+
+
+re.findall ====> it will return all matches where pattern is matched
+
+
+import re
+o="praveen1234rrrr123za"
+w=re.compile(r'[0-9]{3}[a-z]')
+
+try:
+    e=re.findall(w,o)
+    print (e)
+except:
+    print ("Searched pattern doesnt exsist in string")
+
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+['234r', '123z']
+
+Process finished with exit code 0
+=========================================================
+Below script is used display where pattern is matched
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'praveen')
+for i in k:
+    if re.search(pater,i):
+        print (i.strip())
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen is trainer
+praveen1a
+praveenajay  working in hcl
+praveen12a
+praveen34b
+praveen1_
+
+Process finished with exit code 0
+
+
+
+========================================================
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'praveen')
+for i in k:
+    if not re.search(pater,i):
+        print (i.strip())
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+ajay
+
+
+
+Process finished with exit code 0
+===========================================================
+
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'praveen[0-9]')
+for i in k:
+    if  re.search(pater,i):
+        print (i.strip())
+
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen1a
+praveen12a
+praveen34b
+praveen1_
+
+Process finished with exit code 0
+===================================================
+
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'praveen[0-9][a-z]')
+for i in k:
+    if  re.search(pater,i):
+        print (i.strip())
+
+
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen1a
+kiran praveen3a ajay san
+
+Process finished with exit code 0
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'^praveen[0-9][a-z]')
+for i in k:
+    if  re.search(pater,i):
+        print (i.strip())
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen1a
+praveen2a ajay san
+
+Process finished with exit code 0
+
+
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'^praveen[0-9][a-z]$')
+for i in k:
+    if  re.search(pater,i):
+        print (i.strip())
+
+
+output
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+praveen1a
+
+Process finished with exit code 0
+
+================================================
+Below script used to fetch only 3 didgit IPS
+import re
+k=open('D:\pythontest\\test.txt','r')
+pater=re.compile(r'^[0-9]{3}.[0-9]{3}.[0-9]{3}.[0-9]{3}$')
+for i in k:
+    if  re.search(pater,i):
+        print (i.strip())
+
+
+
+C:\Users\praveenkumar\PycharmProjects\pythonProject\venv\Scripts\python.exe C:\Users\praveenkumar\PycharmProjects\pythonProject\main.py 
+
+10.20.30.40
+192.168.209.132
+67.23.12.89
+123.45.56.128
+
+Process finished with exit code 0
+
+
