@@ -84,7 +84,7 @@ git config --global user.name "name_of_user"
 
 git config --global user.email "email_of_user"
 
-git config --list --show-origin ------------------->to show the user and email  
+git config --list ------------------->to show the user and email  
 
 git config --global core.editor nano -------------------------->to settup a editer for git
 
@@ -259,6 +259,8 @@ git push <alias_name> tag <tag_name> --------------->to push a new tag-name to c
 
 git tag -d <tag_name> ------------>to delete a tag in local
 
+git push <alias_name> :refs/tags/<tag_name>   ----------->here the tag should be deleted in loacal then only delete in remote repo .why beacuse the tag refers the local tags entries.
+
 *********************git_stash***************
 
 git stash list ------------------>to list the stash_backups
@@ -277,14 +279,14 @@ i.e
 	stash@{0}
 	stash@{1}-------> here stash@{1} is the latest file
 
-git stash show ------------>to show stash applied changes
-git stash show -p  ----------> to show differevc
+git stash show <stash@{1}> ------------>to show stash applied changes with files
+git stash show -p  or --patch ----------> to show differevc
 
 git stash drop ---------->to delete a stash backup latest 
 
 git stash drop stash@{2} ----------->to delete specfied stash
 
-git stash pop ------------>to apply a latest stash then autometically delete
+git stash pop <stash@{3}> or git stash pop ------------>to apply a latest stash then autometically delete if u mention specfic stash to apply then the stash should be delete autometically
 
 
 *****************git_cherry_pick**********************
@@ -300,15 +302,19 @@ git cherry-pick <new_branch_perticular_commit_id> --------------------->to imple
 
 **************git fetch v/s git pull*****************
 
-git fetch <alias_name> <branch_name> ----------------->to fetch a centeral repo to local repo then its merge a file into  your existing work file
+git fetch <alias_name> <branch_name> ----------------->to fetch a centeral repo  in local but it did not merge if u want to merge it
 
-git pull <alias_name> <branch_name> ---------------->to pull a central updated file directly overwrite your local working file
+note:
+ fetch command to fetch the centeral repo  in local but it did not merge if you diff the files using 
+git diff <alias>/<remote_branch>
+then git merge <alias>/<branch>
 
-i.e 
-	if you have started to work in local repo you want to update your repo using git fecth because of your code is dont be overwrite
-	but you use git pull command to lose your worked edits in workstage
-	
-	you in starting before woking stage only you use git pull command 
+git pull <alias_name> <branch_name> ---------------->to pull a central updated file directly merge local working files
+
+
+note:
+
+git pull == git fetch + git merge
 	
 *******************git_pull_request_branch_to branch*******************
 
@@ -333,7 +339,7 @@ CURL \
 	
 ****************git_fork****************
 
-git forck is used for one organizations repo to copy to other organizations 
+git fork is used for one organizations repo to copy to other organizations 
 
 this fork option only give a copy and sync only to dont have write access
 it use for ci/cd pipelines
@@ -350,6 +356,19 @@ git rebase <new_branch> ---------->master mc1 mc2 mc3 	- nbc1 nbc2 nbc3 nbc4
 				      		new_branch nbc1 nbc2 nbc3 nbc4
 i.e (here the new_branch commits are applied in master branch like master branch commits its resolve the confusions of which one is done this commit and etc...)
 
+while rebasing any merge conlflicts occurs :
+
+[root@master apr_12]# git branch -a
+* (no branch, rebasing test1)
+  New1
+  master
+  test1
+  remotes/new/New1
+  remotes/new/master
+  remotes/new/test1
+
+this situation happened this is an you still in rebasing phase you clear the conflict then git add that file then hit "git rebase --continue"
+
 **************diff between git and github**************
 
 git is version control system (vcs) particularly- Distributed Version control System (DVCS) 
@@ -359,6 +378,5 @@ and
 github is a hosting service for git...
 
 **************************THE END*********************************************************
-
 
 
