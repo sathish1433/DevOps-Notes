@@ -1,0 +1,33 @@
+Git
+Latest Stable Version: 2.44.0
+Released: March 2025
+Official Git Downloads​
+
+Jenkins
+Latest LTS (Long-Term Support) Version: 2.440.1
+Released: March 2025
+Jenkins LTS Releases​
+
+Docker Engine
+Latest Stable Version: 24.0.7
+Released: February 2025
+Docker Engine Release Notes​
+
+SonarQube
+Latest LTS Version: 9.9.2
+Released: January 2025
+SonarQube Downloads​
+
+Apache Tomcat
+Latest Stable Version: 10.1.18
+Released: March 2025
+Apache Tomcat Downloads​
+
+Ansible
+Latest Stable Version: 9.1.0
+Released: February 2025
+Ansible Releases​
+
+Apache Maven
+Latest Stable Version: 3.9.5
+Released: March 2025
