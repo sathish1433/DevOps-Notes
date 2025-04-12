@@ -136,7 +136,7 @@ sudo systemctl isolate graphical.target ----> set sudden change of run-level
 
 
 root====>userid is alaways 0
-system===>userid is in rhel 6 1-499 in rhel 7 1-1000
+system===>userid is in rhel 6 1-499 in rhel 7 1-999
 normal===>user id 500-60000
 
 useradd <username> ===>create a user
@@ -145,9 +145,9 @@ cat /etc/passwd|grep <username> ===> find user entry
 cat /etc/shadow|grep <user name>  ==> to see password set or not (!! this symbol is not set password)
 passwd <username>===>change passwd
 passwd -d (delete)<username> ==> delete a passwd
-usermod -u <userid> <username> ===>change user id  exixting user
+usermod -u <userid> <username> ===>change user id  existing user
 usermod -c <caption> <username>  ===> caption for user
-usermod -d(diectory) <path> <username> ===> change a path of user directorythis only not login user to use mv command to move user files then only to login that user
+usermod -d(diectory) <path> <username> ===> change a path of user directory this only not login user to use mv command to move user files then only to login that user
 usermod -s(shell)  <path of shell> <username> ===>change a shell permanently by root ===usermod -s /bin/bash sakthi
 usermod -l <newusernme> <currentuser> ===>change a existing user to another user
 
@@ -170,7 +170,7 @@ in user terminal use ====>chsh===>to change shell
   
 
 ====when create a user the  creating entry store in 4 path ===
-/home
+/home/<user_name>
 /etc/passwd
 /etc/shadow
 /etc/skel
@@ -184,7 +184,7 @@ edit in .bashrc file to insert a commends the user should login diectly or indir
 ====.bash_history===
 list out the user executed command history
 
-=====.bash_logout====5
+=====.bash_logout====
 to edit  command in .bash_logout file  executing the commands when logout the user
 
 echo $PATH===>the user access paths
@@ -225,18 +225,32 @@ du -sh <filename>====>file size
 du -shk<kilo bytes> <directory/*>===>its directory size( in situation to to order the files based on file size to u
 se kilobytes )
 stat -c %i_%n * ---->it shows a inodewith file name
-du --inodes ------>it shows how much i nodes consume the file 
+du --inodes ------>it shows how much i nodes consume the file or dircextory
+
 ==================================================
+Data Streams:
+-------------
+Action				Syntax
+-------				---------
+Redirect stdout			command > file
+Redirect stderr			command 2> file
+Redirect both stdout & stderr	command > file 2>&1
+Shortcut for both		command &> file
+Append instead of overwrite	command >> file
+Use input from file		command < file
+
+
 1===>output
 2 ===>error
 0 ==>input
 /dev/null ===>to give any content to nullify that file
 ex
-uptime 1>/dev/null ===>to null the uptime log 
+uptime 1>/dev/null ===>to null t|tehe uptime log 
 lll /var/log 2>test.txt  -----> the error should not show the error should stored in the test.txt
 xyz 2>/dev/null ===>to didn,t show any error the commmand should null
 ls &>new.txt ========> if the output or error should be produced by the input both stored in this file
 echo "its newtxt file"|tee -a (append) new.txt  --->it show the ouput also and append the output in new.txt file also (tee) (i.e -a is not an mandatory)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 stat <filename> ===>it's a file details  'inode' is a id of that file 
 ls -li<inode>tr=====>list with inode
 df -i<inodes> ===> list dik partition  with inodes
@@ -265,13 +279,12 @@ service sshd restart====>restart the ssh remote then login in putty that user on
 
 any application/software
 
-"/etc ===>c ==> installation path ==>/etc/application
+"/etc" ==> installation path ==>/etc/application
 service ===>/etc/init.d/<service > ===>service will be created
 log ===>/var/log/application/access.log and error.log"
 
 service <servicename> start or stop ===> to start or stop  the service
 service <service name> status ==>status of  perticular service
-service --status-all
 service <service name> restart ==>restart a service
 service <service name> reload ==> without restart contiously update a service
 
@@ -280,9 +293,9 @@ systemctl list-unit-files --type=service|grep "enabled" ----> in redhat 7 and ot
 chkconfig --list |grep <servicename> ===>perticular service run automatically run or not various runlevels
 chkconfig --level 35(3&5are runlevels) <servicename> off (or) on ===>to set off or on the service on runlevels automatically
 
-alias <variable name>= "command"===> this command is to allocate another variale name for the commad
-hostname ===> hostname
-hostname <name> ==>temporaryly change hostname 
+alias <variable name>= "command"===> this command is to allocate another variable name for the command
+hostname ===> host name
+hostname <name> ==>temporarly change host name 
 bash ==>change hostname localhost to name
 
 
@@ -314,7 +327,7 @@ to edit this type
 
 service network reload
 
-to chage permanent  hostname need change in three places
+to change permanent  hostname need change in three places
 
 /etc/sysconfig/network-scripts/ifcfg-eth0
 /etc/sysconfig/network
@@ -557,6 +570,8 @@ echo "bash test.sh"|at -t(timeformat) 205003130100 ----------->to shedule a job 
 (or)
 echo "bash test.sh"|at 01:00 12/01/2050 --------->this also work
 
+at -c <job-num> ----->to see specfic job num
+
 atq  ------> list the at jobs
 
 atrm <job_number> ---------->to remove a job
@@ -698,8 +713,6 @@ chmod 640 autorized_keys======>for this file permission
 
 (or)
 ssh-copy-id user@ip  -------->its command to access passwd less authentication
-
-
 
 netstat -t ====>for how much server connected to this server  
 =====================find =========================
@@ -1331,6 +1344,8 @@ systemctl restart named.service or service named restart==========> to restart t
 step 6:
 to go client server 
 
+Install bind-utils for nslookup,and dig command
+
 to check hostname
 you configured in master server right or wrong
 
@@ -1451,7 +1466,7 @@ success
 
 in client server
 
-[root@abhi ~]# yum install samba-client cifs utils===========>packages
+[root@abhi ~]# yum install samba-client cifs-utils===========>packages
 
 [root@abhi ~]# smbclient -L 192.168.244.135
 Enter SAMBA\root's password:
@@ -1472,9 +1487,9 @@ Anonymous login successful
         Workgroup            Master
         ---------            -------
         WORKGROUP            SAKTHI
-[root@abhi ~]# mount -o guest //192.168.244.135/<sharename> <mountlocation>===================>public samba
+[root@abhi ~]# mount -t cifs -o guest //192.168.244.135/<sharename> <mountlocation>===================>public samba
 
-[root@abhi ~]# mount -o username=user1 //192.168.244.135/<sharename> smb===================>private samba
+[root@abhi ~]# mount -t cifs -o username=user1 //192.168.244.135/<sharename> smb===================>private samba
 Password for user1@//192.168.244.135/samba-private:  *****
 [root@abhi ~]# df -h
 Filesystem                       Size  Used Avail Use% Mounted on
@@ -1509,8 +1524,25 @@ fie_location: /usr/share/nginx/html/
 
 vim /etc/nginx/nginx.conf
 
+'''
+server {
+    listen 443 ssl;
+    server_name yourdomain.com;
 
-to umcomment the tls enable server for https connection
+    ssl_certificate     /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+}
+
+'''
+to add  the tls enable server for https connection
 save the file 
 
 step2:
@@ -1785,57 +1817,130 @@ openldap=389
 ldap over ssl=636
 
 
+************Booting_Process**********
+
+1) power-on self test
+2) detects the efi/mbr(partition_table)
+3) loads grub
+4) grub loads the kernal
+5) systemd
+6) target
 
 
+****************Kernel_external_modules_loading****************
+
+sudo apt update
+sudo apt install build-essential linux-headers-$(uname -r)   --------->install linux essential packages
+
+module.c
+
+#include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/init.h>
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Sathish");
+MODULE_DESCRIPTION("A simple Linux kernel module");
+
+static int __init mymodule_init(void) {
+    printk(KERN_INFO "Hello, Kernel!\n");
+    return 0;
+}
+
+static void __exit mymodule_exit(void) {
+    printk(KERN_INFO "Goodbye, Kernel!\n");
+}
+
+module_init(mymodule_init);
+module_exit(mymodule_exit);
+
+Makefile:
+---------
+
+obj-m += mymodule.o
+all:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+clean:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+    
+    
+>>> make    --------->this command crates a <module-name>.ko and some files
+
+>>> sudo modprobe mymodule.ko  --------->to load the module using modprobe
+
+>>> sudo lsmod | grep <mymodule>  -------->verify it loaded or not (lsmod --->list_modules)
+
+>>> dmesg |tail -10 ----->to display logs
+
+>>> sudo rmmod <mymodule>   ------->remove the module
+
+to store the additional or external modules stores in /lib/modules/$(uname -r)/
+
+if want load yoyr module at the system boot 
+
+cp mymodule.ko /lib/module/$(uname-r)/   --------->to store the modules at default path
+
+sudo depmod -a  --------------> update modules
+
+echo "mymodule" | sudo tee /etc/modules-load.d/mymodule.conf  ---------> to create a <file_name>.conf and add <modulename>
 
 
+********************* vmlinuz  and grub ***********
+
+vmlinuz → "Virtual Memory Linux zImage"
+
+this vmlinuz is the compressed format of kernel and essentional for booting modules should in compressed version
+
+/boot/vmlinuz ------->is the default path
+
+grub ( GNOME Grand Unified Boot Loader )
+----------------------------------------
+
+grub uses to  select  and load the kernal modules (vmlinuz) .
+
+grub have various default path in linux 
+
+if have BIOS (Lagacy Mode):
+/boot/grub/grub.cfg
+
+if have UEFI(Unified Extensible Firmware InterFace):
+/boot/efi/EFI/<os-name>/grubx64.efi 
+
+if your machine supports BIOS and UEFI you see both paths!.
+
+UEFI --->have GPT(GUID Partition Table) (supports 9.4 zetta bytes) (128 primary patitions in windows  and unlimited linux partitions) 
+
+BIOS ----> MBR(Master Boot Record) (supports 2 tb)(4 primary partitions)
+
+in UEFI have EFI partition (fat32) basically 100 -500 MB for  Stores EFI bootloaders and drivers for UEFI firmware.
 
 
+*******************************NMCLI-COMMAND**********************************
 
+nmcli general status  ---------------->to show  overall status of NetworkManager.
 
+nmcli connection show --------------> to show saved(configured) connections
 
+nmcli connection show --active ----->show configured active connections
 
+nmcli networking on/off ----------->to on or off networking
 
+nmcli radio wifi on/off  ---------->to on off wifi
 
+nmcli device wifi list  -------->to list all wifi
 
+nmcli device wifi connect "ssid" password "pass" ----->to connect a wifi
 
+nmcli connection add type ethernet ifname eth0 connection-name <name> -------->to add a connection
 
+nmcli connection modify <conn-name> ipv4.address <126.34.45.23/24> ------------> to modify the ip adress
 
+nmcli conn mod <conn-name> ipv4.gateway <192.168.1.1> -------->to modify the gateway
 
+nmcli conn mod <conn-name> ipv4.dns 8.8.8.8 8.8.4.4  --------->to modify the dns
 
+nmcli conn up <conn-name>  --------->to up the connection
 
+nmcli conn show "conn-name"  -------->to list specfic connection
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
- 
+nmcli conn delete <conn-name>  -----------> to delete a connection
