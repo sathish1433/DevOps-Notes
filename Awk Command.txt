@@ -1,0 +1,158 @@
+********************Awk_Command*********************
+
+Term	Meaning
+NR	Current line number (1, 2, 3...)
+$1	First field in the line
+$2	Second field
+$NF	Last field
+$NR	Field number same as line number
+
+Block	When it runs	                       Example Use
+BEGIN	Before reading any line	               Set variables, headers
+{...}	For every line (default block)	       Main processing
+END	After reading all lines	               Summary, totals, last line etc
+
+1) awk -F ':' '{print $NF}' /etc/passwd  -----------> here -F is an seperator $NF NF is an build in variable means no of fiels are there.
+
+example: fields have 5
+NF =5
+$NF = $5
+
+2) awk '{print $NR}' /etc/passwd --------> here $NR is an same row and same column
+
+if row is $5
+field  also is $5
+
+example:
+
+{{ [root@sakthitechnologies ~]# awk -F ':' '{print $NR}' /etc/passwd
+  root
+  x
+  2
+  4
+  lp
+  /sbin
+  /sbin/shutdown }}
+ 
+  root:x:0:0:root:/root:/bin/bash ====>here have 7 fields because 7 rows of   incremental value is printten 
+  
+  first row first field 'root' second row second field 'x' third row thired fiels is 2 etc..
+
+3) ls -ltr|awk 'END {print $0}' -------->here printing last line of first field
+
+Regular_Expression:
+-------------------
+
+4) awk '/nologin$/ {print} ' /etc/passwd  ------------> to search 'nologin' pattern in passwd  file
+
+5) awk 'BEGIN {print 10 * 20 }' --------------->awk as perform calculator 
+
+note:When you're not reading from a file, awk doesn't have any input lines to process — so we use BEGIN to run commands before reading input.
+
+6) awk 'BEGIN { a=569;b=4567; print a*b}' ---------->here assign a variable and performs an operation
+
+7) awk 'BEGIN {print "start"} {print} END {print "end"}' /etc/passwd  -------->to print begin "start"and end "end" thats all.
+
+8) awk -F ':' '{print NR NF $0}' /etc/passwd -------------> linenumber,numberof fields,and entire_line printing
+ 
+9) awk '{ print FILENAME, FNR, $0 }' file.txt   -----------> print Filename ,linenumber and entire line
+
+10) awk -F ':' '{ for (i=0;i<=NF;i++) print "field" i ":"  $i}' /etc/passwd  ------------> for loop  in awk
+explanation:
+i=1 (if mention 0 print full line)
+i<= NF field
+i++ incremental
+-F ':' seperator
+
+Field0:root:x:0:0:root:/root:/bin/bash
+Field1:root
+Field2:x
+Field3:0
+Field4:0
+Field5:root
+Field6:/root
+Field7:/bin/bash
+Field0:daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+Field1:daemon
+Field2:x
+Field3:1
+Field4:1
+Field5:daemon
+Field6:/usr/sbin
+Field7:/usr/sbin/nologin
+Field0:bin:x:2:2:bin:/bin:/usr/sbin/nologin
+Field1:bin
+Field2:x
+Field3:2
+Field4:2
+Field5:bin
+Field6:/bin
+Field7:/usr/sbin/nologin
+Field0:sys:x:3:3:sys:/dev:/usr/sbin/nologin
+Field1:sys
+Field2:x
+Field3:3
+Field4:3
+Field5:sys
+Field6:/dev
+Field7:/usr/sbin/nologin
+
+****************************************************
+
+AWK Command Cheat Sheet
+1. Basic Usage
+awk '{ print }' file.txt # Print entire line
+awk '{ print $1 }' file.txt # Print first field
+awk '{ print $1, $3 }' file.txt # Print first and third fields
+2. Field Separator (-F)
+awk -F ',' '{ print $1 }' file.csv # Comma-separated
+awk -F ':' '{ print $1, $NF }' /etc/passwd # Colon-separated
+3. Pattern Matching
+awk '/error/ { print }' logfile.txt # Match "error"
+awk '/^sathish/ { print }' names.txt # Start with "sathish"
+awk '/\.com$/ { print }' emails.txt # End with ".com"
+4. Calculations
+awk '{ sum += $2 } END { print sum }' data.txt # Sum column 2
+awk '{ total += $3; c++ } END { print total/c }' # Average column 3
+awk '$2 > 50' marks.txt # Where column 2 > 50
+5. Print Formatting
+awk '{ printf "Name: %s, Marks: %d\n", $1, $2 }' students.txt
+6. Built-in Variables
+awk '{ print NF }' file.txt # Number of fields
+awk '{ print NR, $0 }' file.txt # Line number and content
+awk '{ print FILENAME, FNR, $0 }' file.txt # Filename and line
+7. BEGIN and END
+awk 'BEGIN { print "Start" } { print $1 } END { print "End" }' file.txt
+8. String Operations
+awk '{ print tolower($0) }' file.txt # Lowercase
+awk '{ print toupper($0) }' file.txt # Uppercase
+awk '{ print substr($1, 1, 3) }' file.txt # Substring
+awk '{ gsub(/foo/, "bar"); print }' file.txt # Replace
+9. Arrays
+awk '{ for(i=1;i<=NF;i++) c[$i]++ } END { for(w in c) print w, c[w] }' file.txt
+10. Loops
+awk '{ for(i=1;i<=NF;i++) print "Field", i, ":", $i }' file.txt
+11. Pass Shell Vars
+word="hello"
+awk -v w="$word" '$0 ~ w' file.txt
+12. Conditionals
+awk '{ if ($2 >= 50) print $1, "Pass"; else print $1, "Fail" }' marks.txt
+13. Run Shell Commands
+awk '{ system("echo " $0) }' file.txt
+14. -f Option
+# script.awk contains: { print $1, $2 }
+awk -f script.awk file.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
